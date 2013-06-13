@@ -8,7 +8,7 @@ categories: flatironschool startups
 
 On Thursday, June 6th, 2013, me and my current classmates here at the Flatiron School were given the unique opportunity to hear from and be inspired by **Matt Hackett**.
 
-# Who is Matt Hackett?
+## Who is Matt Hackett?
 
 Who is Matt Hackett you ask? Here's a brief summary from his **[website](http://matthackett.net/ "Website of Matt Hackett")**:
 
@@ -26,10 +26,14 @@ And here's a picture of him at our very own campus here at the Flatiron Schoo1:
 
 -> {% img /images/posts/matthackett_pic1.png 300 450 %} <-
 
--> Look at how happy he looks. :) <-
+-> **You can almost taste the happy.** <-
 
-# A Simple Breakdown of Startup Phases
+Matt came to talk to us about his experiences with startup culture.
+
+He shared incredible insight, which will be shared in the next two sections.
+
+## A Simple Breakdown of Startup Phases
 
 
 
-# Q & A Session
+## Q & A Session
