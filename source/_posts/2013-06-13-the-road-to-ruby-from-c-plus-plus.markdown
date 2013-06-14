@@ -63,8 +63,8 @@ To analyze the code, I created six (6) criteria on which I'll be "judging" the l
 
 Understandably, all programming languages have their advantages and disadvantages. The embedded systems world loves C++ and its ability to easily access lower levels of the stack and hardware in general.  
 
-In terms of general ease of learning and forgiveness, it's **Ruby** all the way.
+In terms of general ease of learning and forgiveness, it's **Ruby** all the way. For those that also come from a C / C++ background, here's a **[cool website](http://www.ruby-lang.org/en/documentation/ruby-from-other-languages/to-ruby-from-c-and-c-/ "Transitioning from C / C++ --> Ruby")** that talks about transitioning from C / C++ --> Ruby.
 
--> 10 days of Ruby vs. 10 years of C++ ... <-
+-> **10 days of Ruby vs. 10 years of C++** <-
 
-Ruby, you've won over my <3 already, & we've only just begun getting to know each other.
+Ruby, you've won over my <3 already, & we've only just begun getting to know each other.  
