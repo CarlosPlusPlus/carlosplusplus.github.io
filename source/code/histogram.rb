@@ -1,4 +1,5 @@
 # Histogram with Ruby
+#//  {run}     --> ruby histogram.rb
 
 sentence    = "this test of is a a this test phrase of is a of a of a test";
 
@@ -16,4 +17,4 @@ puts "Frequency table of sentence is:\n\n"
 
 frequencies.each {|key,value| puts "#{key}, count = #{value}"}
 
-puts "\nRuby Program is DONE.\n\n"
+puts "\nRuby program is DONE.\n\n"

@@ -12,7 +12,7 @@ On Thursday, June 6th, 2013, me and my current classmates here at the Flatiron S
 
 Who is Matt Hackett you ask? Here's a brief summary from his **[website](http://matthackett.net/ "Website of Matt Hackett")**:
 
-> I obsess over the engineering and dissemination of technology for creative people. 
+>I obsess over the engineering and dissemination of technology for creative people. 
 
 ---
 

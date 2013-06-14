@@ -1,5 +1,6 @@
 // Histogram with C++
 //  {compile} --> g++ histogram.cpp -o histogram
+//  {run}     --> ./histogram
 
 #include <map>        // STD map
 #include <string>     // STD string
@@ -63,12 +64,3 @@ int main()
 
   return 0;
 }
-
-// Obviously, one is shorted and more compact than the other.
-
-// Table of:
-
-// Numbers of variables used
-// Unique data structures used
-// Unique libraries imported
-// "Actual lines of code"
