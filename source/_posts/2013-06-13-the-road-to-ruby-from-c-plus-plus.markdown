@@ -8,23 +8,32 @@ categories: flatironschool c++ ruby proglang
 
 ## My Life and C++
 
-[Talk about previous experience with C++]
+Since 10th grade of high school, I've been programming in C++. Whether in school or in my previous life as an engineer working for the DoD, it's the programming language I've grown to know the best. At this point, the structure and syntax just feels right, and although I've programmed in other languages, C++ has always been my strong point.
+
+Enter the Flatiron School, whose primary focus is to teach me to be a full stack web developer. The language of choice here is Ruby, one of the rising programming languages in the web development world. It's been a battle these past 2 weeks working with Ruby given my background in C++. Forcing yourself to detach from one mindset you've been used to for so long is always a challenge.
+
+While I could syntactically see the differences between C++ and Ruby, I thought it would be an awesome idea to pick a simple programming problem, implement the same solution with both programming languages, and quantify the results.
 
 ## A Wild "HISTOGRAM" Has Appeared!
 
-[Talk about the histogram approach.]
+The problem of choice was to develop a simple solution that calculates the **HISTOGRAM**, or frequency, of words that appear in a simple sting. I purposefully made the output from both programs identical so one can see that they do the same thing:
 
 -> {% img /images/posts/C++_v_Ruby.png 700 1000 %} <-
 
-[Talk about the histogram benchmark and how code is the same.]
+-> Great - the output from the programs is the same. But now, it's time to analyze the code. <-
 
 ## C++ vs. Ruby - Whose Code Cuisine Reigns Supreme?
 
-Preface to section.
+This analysis is predicated on a few assumptions:  
+
+    - Using basic C++ / Ruby structures (e.g. no classes).
+    - Using current knowledge of Ruby programming language (9 days worth).
+
+Here is my implementation of a histogram in C++:
 
 {% include_code Histogram function in C++ histogram.cpp %}
 
-Here is how Ruby does it.
+Here is my implementation of a histogram in Ruby:
 
 {% include_code Histogram function in Ruby histogram.rb %}
 
@@ -48,8 +57,14 @@ To analyze the code, I created six (6) criteria on which I'll be "judging" the l
 |READ|-1|**10**
 |VARS|08|**03**  
 
-The clear victor, under these set of criteria, is **RUBY**.
+-> The clear victor, under these set of criteria, is **RUBY**. <-
 
 ## Final Thoughts
 
-[Talk about final thoughts]
+Understandably, all programming languages have their advantages and disadvantages. The embedded systems world loves C++ and its ability to easily access lower levels of the stack and hardware in general.  
+
+In terms of general ease of learning and forgiveness, it's **Ruby** all the way.
+
+-> 10 days of Ruby vs. 10 years of C++ ... <-
+
+Ruby, you've won over my <3 already, & we've only just begun getting to know each other.
