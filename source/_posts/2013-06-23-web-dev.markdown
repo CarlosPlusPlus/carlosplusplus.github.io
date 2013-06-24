@@ -6,9 +6,28 @@ comments: true
 categories: 
 ---
 
+## Racks on Racks on Racks
+
 After three weeks of getting to know Ruby, me and my classmates have begun our conquest of the Web Dev world. Earlier this week, we were introduced to the basics of the Internet, learning about things like messaging structure and protocols.  
 
 The beginning of our exploration took us to **[Rack](http://whatcodecraves.com/articles/2012/07/23/ruby-on-rack "What is Rack?")**, a simple and flexible library for building Ruby web applications and web frameworks. Learning this framework and its basics was particularly important, as we are now better poised to tame the dragon known as Sinatra.
 
-## Sinatra (the Ruby framework, not the singer)
+## Sinatra (the Ruby framework, NOT the singer)
 
+While working at the lower levels of web dev may be a roaring good time, it turns out that there are other frameworks that exist which abstract functionality levels higher than Rack. Enter the Sinatra web framework, which is installed via the terminal:
+
+    gem install sinatra
+
+Many tutorials exist that discuss how Sinatra is to be used. Here are a few:
+
+->**[Beginner's tutorial for Sinatra](http://titusd.co.uk/2010/04/07/a-beginners-sinatra-tutorial/)**<-
+
+->**[General folder structure for Sinatra Apps](http://stackoverflow.com/questions/5015471/using-sinatra-for-larger-projects-via-multiple-files)**<-
+
+->**[Using Sinatra to start a simple Web App](http://blog.chrisblunt.com/lightweight-web-apps-getting-started-with-sinatra/)**<-
+
+The Sinatra framework allows for straightforward generation of content and webpages via ERB (Embedded Ruby) and for simple routing that connects and joins the dynamically generated website. In terms of how the an application is laid out, let's look at a real-world example - the **[Fracture.it](www.fracture.it)** website.
+
+## Sinatra Layout of Fracture.it Website
+
+[Text goes here.]
