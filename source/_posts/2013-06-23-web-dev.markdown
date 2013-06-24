@@ -26,11 +26,11 @@ Many tutorials exist that discuss how Sinatra is to be used. Here are a few:
 
 ->**[Using Sinatra to start a simple Web App](http://blog.chrisblunt.com/lightweight-web-apps-getting-started-with-sinatra/)**<-
 
-The Sinatra framework allows for straightforward generation of content and webpages via ERB (Embedded Ruby) and for simple routing that connects and joins the dynamically generated website. In terms of how the an application is laid out, let's look at a real-world example - the **[Fracture.it](www.fracture.it)** website.
+The Sinatra framework allows for straightforward generation of content and webpages via ERB (Embedded Ruby) and for simple routing that connects and joins the dynamically generated website. In terms of how the an application is laid out, let's look at a real-world example - the **[Fracture.it](http://fracture.it)** website.
 
 ## Sinatra Layout of Fracture.it Website
 
-By navigating to the **[Fracture.it](www.fracture.it)** website, one is brought to the index.html webpage, where the user can "fracture" a URL into a smaller URL. From this main website, one can fork the repository off which it was built and see the following layout:
+By navigating to the **[Fracture.it](http://fracture.it)** website, one is brought to the index.html webpage, where the user can "fracture" a URL into a smaller URL. From this main website, one can fork the repository off which it was built and see the following layout:
 
     config - configuration files for website (e.g. database storage).
     models - location to store classes and modules.
