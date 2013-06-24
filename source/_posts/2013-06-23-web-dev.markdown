@@ -3,7 +3,7 @@ layout: post
 title: "Web Dev, Sinatra, and Me"
 date: 2013-06-23 23:36
 comments: true
-categories: 
+categories: flatironschool ruby sinatra
 ---
 
 ## Racks on Racks on Racks
@@ -30,4 +30,19 @@ The Sinatra framework allows for straightforward generation of content and webpa
 
 ## Sinatra Layout of Fracture.it Website
 
-[Text goes here.]
+By navigating to the **[Fracture.it](www.fracture.it)** website, one is brought to the index.html webpage, where the user can "fracture" a URL into a smaller URL. From this main website, one can fork the repository off which it was built and see the following layout:
+
+    config - configuration files for website (e.g. database storage).
+    models - location to store classes and modules.
+    public - houses website details (e.g. fonts / images / css / js).
+    spec - area for testing (Rspec)
+    views - contains ERB templates for dynamic website viewing.
+    .gitignore - files that Git repo will ignore.
+    .rspec - contains .rspec file.
+    Gemfile - used with "rake bundle" to install all necessary gems. 
+    app.rb - contains the primary interface for the web application.
+    config.ru - allows you to run rackup command to launch web app.
+
+As you can see, the organization of this Github repository allows for one to see exactly and precisely the files that construct a Sinatra folder structure. In fact, most Sinatra repositories are laid out the same way, allowing for standardization and for easy reading.
+
+Looking forward to doing my own Sinatra development in the near future!
