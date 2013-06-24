@@ -1,0 +1,14 @@
+---
+layout: post
+title: "Web Dev, Sinatra, and Me"
+date: 2013-06-23 23:36
+comments: true
+categories: 
+---
+
+After three weeks of getting to know Ruby, me and my classmates have begun our conquest of the Web Dev world. Earlier this week, we were introduced to the basics of the Internet, learning about things like messaging structure and protocols.  
+
+The beginning of our exploration took us to **[Rack](http://whatcodecraves.com/articles/2012/07/23/ruby-on-rack "What is Rack?")**, a simple and flexible library for building Ruby web applications and web frameworks. Learning this framework and its basics was particularly important, as we are now better poised to tame the dragon known as Sinatra.
+
+## Sinatra (the Ruby framework, not the singer)
+

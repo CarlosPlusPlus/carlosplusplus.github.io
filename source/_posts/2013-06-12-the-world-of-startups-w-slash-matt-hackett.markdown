@@ -81,7 +81,7 @@ Matt was able to break down startups into five distinct phases:
 
 ## Closing Thoughts
 
-Matt's overall recommendation was for us Flatiron School students, future web developers here in New York City and elsewhere, is to target startups in the **Early Team** and **Growth** phases of development. This would give us all enough time to find our place, both learn new skills and hone currennt ones, and be part of something amazing.  
+Matt's overall recommendation was for us Flatiron School students, future web developers here in New York City and elsewhere, is to target startups in the **Early Team** and **Growth** phases of development. This would give us all enough time to find our place, both learn new skills and hone current ones, and be part of something amazing.  
 
 He also mentioned that as junior developers looking to work at startups, we need to find companies where we feel passionate about the product. Matt encourages us to never settle and to find the company that fits **our own** requirements for culture.
 
