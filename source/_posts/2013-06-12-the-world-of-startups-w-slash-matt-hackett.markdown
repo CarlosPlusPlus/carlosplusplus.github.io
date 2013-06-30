@@ -24,7 +24,7 @@ Who is Matt Hackett you ask? Here's a brief summary from his **[website](http://
 
 And here's a picture of him at our very own campus here at the Flatiron School:
 
--> {% img /images/posts/matthackett_pic1.png 300 450 %} <-
+-> {% img /images/posts/2013-06-12-the-world-of-startups-w-slash-matt-hackett/matthackett_pic1.png 300 450 %} <-
 
 -> **You can almost taste the happy.** <-
 
@@ -34,7 +34,7 @@ And here's a picture of him at our very own campus here at the Flatiron School:
 
 Matt was able to break down startups into five distinct phases:
 
--> {% img /images/posts/matthackett_pic2.png 300 450 %} <-
+-> {% img /images/posts/2013-06-12-the-world-of-startups-w-slash-matt-hackett/matthackett_pic2.png 300 450 %} <-
 
 ### 1 -> Pre-Funding
 
