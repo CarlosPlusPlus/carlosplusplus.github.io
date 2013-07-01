@@ -22,9 +22,9 @@ Coming from a computer engineering / hardware background, I've always had a grea
 
 ## Hacking the Microsoft Kinect
 
-I've owned a Microsoft Kinect since the day it was publicly released, and to this day, am continually impressed by its raw power and how it's changed the space of gaming. In doing some research, it appears like there are a few Ruby wrappers in existence that allow for direct interface with the hardware. Luckily, the only requirements for the software were a computer with USB ports and lots of time.  
+I've owned a Microsoft Kinect since the day it was publicly released, and to this day, am continually impressed by its raw power and how its changed the space of gaming. In doing some research, it appears like there are a few Ruby wrappers in existence that allow for direct interface with the hardware. Luckily, the only requirements for the software were a computer with USB ports and lots of time.  
 
-At the high level, here are some quick data points I discovered while analyzing two ruby gems - **Kinect-Ruby Processing** and **Ruby-Freenect**:
+At the high level, here are some quick data points I discovered while analyzing two ruby gems: **Kinect-Ruby Processing** and **Ruby-Freenect**.
 
     - Released as Ruby Gems with dependencies.
     - Interface directly with hardware via USB.
@@ -47,33 +47,46 @@ Here are images taken directly from the Kinect:
 
 -> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_rgb_depth.png 750 1250 %} <-
 
--> **Kinect-Ruby Processing: RGB with Depth Map.** <-
+-> **Kinect-Ruby Processing: RGB with Depth Map** <-
 
 -> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_ir_depth.png 750 1250 %} <-
 
--> **Kinect-Ruby Processing: Infrared with Depth Map.** <-
+-> **Kinect-Ruby Processing: Infrared with Depth Map** <-
 
 So... you're probably asking yourself, what does some of this code look like? Let's see:
 
 {% include_code Kinect-Ruby Processing: RGB Depth Test 2013-06-30-hci-the-possibilities-are-endless/rgb_depth_test.rb %}
 
-And this is the beauty of the Ruby programming language! Even without understanding a thing about structure, the code above is readable and easy to understand.
+And this is the beauty of the Ruby programming language! Even if you didn't know a thing about Ruby and the way it is structured, the code above is readable and easy to understand.  
+
+One thing to definitely note about this gem is its gracefully ungraceful way of crashing around 50% of the time when attempting to enable the IR mode:
 
 -> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_error.png 500 750 %} <-
 
----
-
+Understandably, I guess some bugs still need to be worked out.
+  
 ### Ruby-Freenect
 
-Information on Ruby-Freenect project.
+As is customary in the world today, there tend to be more than one way of doing things. Let's take a quick peek at some output from the Kinect via the **[Ruby-Freenect](https://github.com/troystribling/ruby-freenect "Github of Ruby-Freenect gem")** gem:
 
 -> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth_rgb.png 750 1250 %} <-
 
+-> **Ruby-Freenect: Depth Map with RGB ** <-
+
 -> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth_ir.png 750 1250 %} <-
 
--> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_3spectra.png 750 1250 %} <-
+-> **Ruby-Freenect: Depth Map with InfraRed (IR) ** <-
 
--> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_cmd.png 500 750 %} {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_img.png 500 750 %}<-
+As you may have noticed, this Ruby gem outputs the depth map in a colored format based on distance. As you can see in the next picture, objects that are closer to the camera appear in a 'hotter' color (black/red), while objects further away are a 'colder' color (green/blue):
+
+-> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth.png 750 1250 %} <-
+
+Engaging this library package is done via the 'opengl' command. I still have to do some exploration in order to find the code base. This gem also seems to lose packets, and does so in a more graceful "I don't crash the entire program way."
+
+-> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_cmd.png 500 750 %}
+{% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_img.png 500 750 %}<-
+
+It is a bit interesting though - sometimes, the video feed gets stuck, and you see a combination of the three video feeds. Constantly hitting the video button will eventually restore the connection, which is nice. Failure output, while never good to see, also tells me that an issue occurred, which is better than nothing.
 
 ## The Future is Now
 
