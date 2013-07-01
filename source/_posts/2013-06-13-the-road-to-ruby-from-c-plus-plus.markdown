@@ -18,7 +18,7 @@ While I could syntactically see the differences between C++ and Ruby, I thought 
 
 The problem of choice was to develop a simple solution that calculates the **HISTOGRAM**, or frequency, of words that appear in a simple sting. I purposefully made the output from both programs identical so one can see that they do the same thing:
 
--> {% img /images/posts/C++_v_Ruby.png 700 1000 %} <-
+-> {% img /images/posts/2013-06-13-the-road-to-ruby-from-c-plus-plus/C++_v_Ruby.png 700 1000 %} <-
 
 -> Great - the output from the programs is the same. But now, it's time to analyze the code. <-
 
@@ -31,11 +31,11 @@ This analysis is predicated on a few assumptions:
 
 Here is my implementation of a histogram in C++:
 
-{% include_code Histogram function in C++ histogram.cpp %}
+{% include_code Histogram function in C++ 2013-06-13-the-road-to-ruby-from-c-plus-plus/histogram.cpp %}
 
 Here is my implementation of a histogram in Ruby:
 
-{% include_code Histogram function in Ruby histogram.rb %}
+{% include_code Histogram function in Ruby 2013-06-13-the-road-to-ruby-from-c-plus-plus/histogram.rb %}
 
 To analyze the code, I created six (6) criteria on which I'll be "judging" the languages.
 

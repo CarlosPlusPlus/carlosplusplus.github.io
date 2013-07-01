@@ -37,9 +37,7 @@ At the high level, here are some quick data points I discovered while analyzing 
     - Average of about 30 Frames per Second (FPS).
     - Support of gem halted > 1yr ago! :(
 
-Now to see the contenders in a little more detail!  
-
----
+Now to see the contenders in a little more detail!
 
 ### Kinect-Ruby Processing
 
@@ -57,11 +55,9 @@ Here are images taken directly from the Kinect:
 
 So... you're probably asking yourself, what does some of this code look like? Let's see:
 
-```ruby
+{% include_code Kinect-Ruby Processing: RGB Depth Test 2013-06-30-hci-the-possibilities-are-endless/rgb_depth_test.rb %}
 
-```
-
-#### Celebrate Failure! Or not...?
+And this is the beauty of the Ruby programming language! Even without understanding a thing about structure, the code above is readable and easy to understand.
 
 -> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_error.png 500 750 %} <-
 
