@@ -24,15 +24,60 @@ Coming from a computer engineering / hardware background, I've always had a grea
 
 I've owned a Microsoft Kinect since the day it was publicly released, and to this day, am continually impressed by its raw power and how it's changed the space of gaming. In doing some research, it appears like there are a few Ruby wrappers in existence that allow for direct interface with the hardware. Luckily, the only requirements for the software were a computer with USB ports and lots of time.  
 
-Here is what I discovered from fiddling around with two (2) of these software wrappers:  
+At the high level, here are some quick data points I discovered while analyzing two ruby gems - **Kinect-Ruby Processing** and **Ruby-Freenect**:
+
+    - Released as Ruby Gems with dependencies.
+    - Interface directly with hardware via USB.
+    - Allow for control of image / video type.
+        > Allow for image capture.
+        > Allow for video capture.
+    - Allow for control of camera tilt mechanism.
+    - Allow for control of LED.
+    - Video feed in RGB / InfraRed (IR) / Depth provided.
+    - Average of about 30 Frames per Second (FPS).
+    - Support of gem halted > 1yr ago! :(
+
+Now to see the contenders in a little more detail!  
+
+---
 
 ### Kinect-Ruby Processing
 
-Information on Kinect-Ruby project.
+The **[Kinect-Ruby Processing](https://github.com/mudphone/Kinect-Ruby-Processing "Github of Kinect-Ruby Processing gem")** gem interfaces directly with the Ruby Processing (rp5) library. Using this raw power that many don't realize Ruby can handle, it interfaces directly with the hardware and can provide functionality as described in the previous section.  
+
+Here are images taken directly from the Kinect:
+
+-> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_rgb_depth.png 750 1250 %} <-
+
+-> **Kinect-Ruby Processing: RGB with Depth Map.** <-
+
+-> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_ir_depth.png 750 1250 %} <-
+
+-> **Kinect-Ruby Processing: Infrared with Depth Map.** <-
+
+So... you're probably asking yourself, what does some of this code look like? Let's see:
+
+```ruby
+
+```
+
+#### Celebrate Failure! Or not...?
+
+-> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_error.png 500 750 %} <-
+
+---
 
 ### Ruby-Freenect
 
 Information on Ruby-Freenect project.
+
+-> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth_rgb.png 750 1250 %} <-
+
+-> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth_ir.png 750 1250 %} <-
+
+-> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_3spectra.png 750 1250 %} <-
+
+-> {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_cmd.png 500 750 %} {% img ./images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_img.png 500 750 %}<-
 
 ## The Future is Now
 
