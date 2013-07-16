@@ -6,7 +6,7 @@ comments: true
 categories: ai flatironschool ruby
 ---
 
-<Intro Paragraph>
+In the past three weeks at Flatiron School, the focus has been on learning both the Sinatra and Rails web frameworks. Understanding the paradigms has been crucial in spinning up web applications in a correct and efficient manner.
 
 Basic AI principles
 
