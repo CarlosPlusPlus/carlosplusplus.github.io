@@ -28,12 +28,22 @@ Now with that background, onto **Ruby Warrior**.
 
 ## What is Ruby Warrior?
 
+The **Ruby Warrior** project (**[Github]()** and **[Ruby Gem]()**) was built as a vehicle to teach Ruby. How? Through the gamification of artificial intelligence.
+
 ## Climbing the Tower
 
-	Level 01
-	Level 02
-	Level 03
-	Level 04
+### Level 01
+
+
+### Level 02
+
+
+### Level 03
+
+
+### Level 04
+
+
 
 ## Future Considerations
 
