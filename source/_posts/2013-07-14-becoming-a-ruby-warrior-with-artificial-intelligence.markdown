@@ -61,6 +61,15 @@ Here is the representation of Level 01:
 
 -> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level01.png 175 175 %} <-
 
+This level is pretty straightforward. Having only one action available [`warrior.walk!`], the logic here is simple:
+
+{% include_code Ruby Warrior: Level 01 2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h01.rb %}
+
+Level 01 was completed and I achieved maximum points.  
+
+#### Lessons learned:
+
+* Model heuristic functionality based on immediate sufficiency.
 
 ### Level 02
 
