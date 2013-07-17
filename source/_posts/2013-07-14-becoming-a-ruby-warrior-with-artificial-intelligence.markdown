@@ -22,10 +22,9 @@ I've had the honor and pleasure of working with AI concepts in the Scheme progra
 
 Here's a cool image that will make these definitions clearer:
 
--> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence. 750 1250 %} <-
+-> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/AI_Agent.png 575 575 %} <-
 
-/Users/carloslazo/Development/Blog/cjlwired.github.io/source
-
+Now with that background, onto **Ruby Warrior**.
 
 ## What is Ruby Warrior?
 
