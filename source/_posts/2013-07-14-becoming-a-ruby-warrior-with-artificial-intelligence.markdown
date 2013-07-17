@@ -54,6 +54,7 @@ For this post, my goal is to share how I've applied my Ruby skills to the first 
 |Sludge|s|12|3
 |Thick Sludge|S|24|3
 |Archer|a|7|3
+|Stairs|>|-|-
 
 ### Level 01
 
@@ -72,6 +73,22 @@ Level 01 was completed and I achieved maximum points.
 * Model heuristic functionality based on immediate sufficiency.
 
 ### Level 02
+
+Here is the representation of Level 02:
+
+-> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level02.png 175 175 %} <-
+
+This level introduced the first monster. I realized I needed to add logic to check to see if a monster was in front of me based on my available actions. Still pretty straightforward.
+
+{% include_code Ruby Warrior: Level 02 2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h02.rb %}
+
+Level 02 was completed now completed.
+
+#### Lessons learned:
+
+* Decision logic is going to get completed quick.
+	* Probably worth refactoring and "setting the stage" in Level 03.
+* Able to make assumption that `Player` class is being initialized one time, with `play_turn` being called in a loop. Take advantage of the `initialize` method.
 
 
 ### Level 03
