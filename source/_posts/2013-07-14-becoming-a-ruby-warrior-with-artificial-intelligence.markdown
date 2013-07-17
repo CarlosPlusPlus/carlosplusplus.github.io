@@ -34,11 +34,12 @@ Here's a quick overview:
 
 * You (the player) are a Warrior in this world, with your primary objective being to scale levels of a tower.
 	* There is a beginner / intermediate tower, both with 'epic' modes.
-* Each level is laid out differently, and can have a variety of components: monsters, captives, bombs, etc. 
+* Each level is laid out differently, and can have a variety of components.
+	* Monsters, Captives, Bombs, Walls, etc.
 * Each level grants the warrior more abilities.
-	*	You get to perform one and only one action! per turn based on whatever logic you choose to define.
+	*	You get to perform one and only one action(!) per turn based on whatever logic you choose to define.
 	* More abilities lead to harder levels (e.g. more directions to move in).
-* More points are given per level based on different things: level clear speed, amount of action! used, captives rescued, etc.
+* A score is given per level based on different things: level clear speed, amount of action! used, captives rescued, etc.
 
 Every turn, the `play_turn` method is called in `player.rb` file - this and any other files can be used, as long as `play_turn` calls one and only one action.
 
@@ -114,7 +115,7 @@ Overall, I was really happy with my code - beat this level with no issues. Even 
 
 Given all the negatives, there was going to be some heavy-duty refactoring in Level 04. All in all though, I was fairly certain that the logic in the code was 'just going to work'.  
 
-I couldn't have been more wrong. :)
+I couldn't have been more wrong.
 
 ### Level 04
 
@@ -130,7 +131,7 @@ This now forced new state logic into my methods, along with some well-needed ref
 
 {% include_code Ruby Warrior: Level 04 2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h04.rb %}
 
-Awesome! This now gets around the 'distance attack issue'. If I'm being attacked from afar and the space in front of me is empty, **do not rest** and continue walking until you find and slay the offending monster.
+Awesome! This now gets around the 'distance attack' issue. If I'm being attacked from afar and the space in front of me is empty, **do not rest** and continue walking until you find and slay the offending monster.
 
 #### Lessons learned:
 
@@ -143,16 +144,18 @@ Interestingly enough, your Agent can always be "more intelligent".
 
 ## Shooting for the Top
 
-I have a long way to go to reach the top of the **Beginner** tower, but this has been a tremendous learning experience. I've been able to apply Ruby principles to a challenging yet fun problem space of Artificial Intelligence.  
+I have a long way to go to reach the top of the **Beginner** tower, but this has been a tremendous learning experience. I've been able to apply Ruby principles to the challenging yet fun problem space of Artificial Intelligence.  
 
-I have a lot of awesome things to think about going forward:
+A few things I'm thinking about going forward:
 
 #### Future considerations:
 
 * Classes and further simplification makes sense.
 * The levels are only going to get harder:
 	* Ability to move in different directions.
-	* 2-dimensional maps (how will I track movement?).
+	* 2-dimensional maps.
+		* How will I track movement?
+		* How will I deal when I hit a wall?
 	* Rescuing captives.
 	* Shooting ranged weapons.
 	* Commanding a 'golem' during my turn.
@@ -162,7 +165,9 @@ I'm convinced that my upfront work will help prevent the following from happenin
 
 {% include_code Ruby Warrior: Level 09 (HORRIBAD CODE) 2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/level09_example.rb %}
 
->->DON'T DO THIS. YOU WILL HAVE NO FRIENDS AND PEOPLE WILL HATE YOU.<-
+>->DON'T DO THIS!<-
+
+>->YOU WILL HAVE LESS FRIENDS THAN YOU PROBABLY ALREADY DO.<-
 
 Slowly but surely, I will become the Ruby Warrior I'm destined to be.  
 
