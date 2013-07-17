@@ -28,11 +28,38 @@ Now with that background, onto **Ruby Warrior**.
 
 ## What is Ruby Warrior?
 
-The **Ruby Warrior** project (**[Github]()** and **[Ruby Gem]()**) was built as a vehicle to teach Ruby. How? Through the gamification of artificial intelligence.
+The **Ruby Warrior** project (**[Github](https://github.com/ryanb/ruby-warrior)** and **[Ruby Gem](http://rubygems.org/gems/rubywarrior)**) was built as a vehicle to teach Ruby. How? Through the gamification of artificial intelligence.  
+
+Here's a quick overview:
+
+* You (the player) are a Warrior in this world, with your primary objective being to scale levels of a tower.
+	* There is a beginner / intermediate tower, both with 'epic' modes.
+* Each level is laid out differently, and can have a variety of components: monsters, captives, bombs, etc. 
+* Each level grants the warrior more abilities.
+	*	You get to perform one and only one action! per turn based on whatever logic you choose to define.
+	* More abilities lead to harder levels (e.g. more directions to move in).
+* More points are given per level based on different things: level clear speed, amount of action! used, captives rescued, etc.
+
+Every turn, the `play_turn` method is called in `player.rb` file - this and any other files can be used, as long as `play_turn` calls one and only one action.
 
 ## Climbing the Tower
 
+For this post, my goal is to share how I've applied my Ruby skills to the first 4 levels. Here's a quick legend regarding level layouts:
+
+-> **Legend: Tower Level Symbols** <-
+
+|`Name`|`Symbol`|`HP`|`Atk`|
+|:-:|:-:|:-:|:-:
+|Warrior|@|20|5
+|Sludge|s|12|3
+|Thick Sludge|S|24|3
+|Archer|a|7|3
+
 ### Level 01
+
+Here is the representation of Level 01:
+
+-> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level01.png 175 175 %} <-
 
 
 ### Level 02
