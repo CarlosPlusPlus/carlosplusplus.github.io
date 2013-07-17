@@ -112,14 +112,57 @@ Overall, I was really happy with my code - beat this level with no issues. Even 
 	* Can this be fixed with instance variables in Level 04?
 * (-) ALL actions are evaluated even if an action is already called.
 
-I knew that given all the negatives, there was going to be some heavy-duty refactoring in Level 04. All in all though, I was fairly certain that the logic in the code was 'just going to work'.  
+Given all the negatives, there was going to be some heavy-duty refactoring in Level 04. All in all though, I was fairly certain that the logic in the code was 'just going to work'.  
 
-Boy was I wrong. :)
+I couldn't have been more wrong. :)
 
 ### Level 04
 
+Here is the representation of Level 04:
 
+-> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level04.png 175 175 %} <-
 
-## Future Considerations
+Enter the dreaded **Archer** - umm... f*ck.  
+
+This unit can attack from multiple spaces away. With my current logic, I'd rest when the space in front of me was empty and I wasn't in combat. **BUT I WAS IN COMBAT**, since my health was decreasing by 1HP even though I was resting (rest = +2HP, attack = -3HP).  
+
+This now forced new state logic into my methods, along with some well-needed refactoring.
+
+{% include_code Ruby Warrior: Level 04 2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h04.rb %}
+
+Awesome! This now gets around the 'distance attack issue'. If I'm being attacked from afar and the space in front of me is empty, **do not rest** and continue walking until you find and slay the offending monster.
+
+#### Lessons learned:
+
+* (+) Building modular code makes it easy to add in edge cases.
+* (+) Constant refactoring makes for better flow.
+* (-) `class Player` is getting huge.
+	* Consider splitting things into separate classes?
+
+Interestingly enough, your Agent can always be "more intelligent".
+
+## Shooting for the Top
+
+I have a long way to go to reach the top of the **Beginner** tower, but this has been a tremendous learning experience. I've been able to apply Ruby principles to a challenging yet fun problem space of Artificial Intelligence.  
+
+I have a lot of awesome things to think about going forward:
+
+#### Future considerations:
+
+* Classes and further simplification makes sense.
+* The levels are only going to get harder:
+	* Ability to move in different directions.
+	* 2-dimensional maps (how will I track movement?).
+	* Rescuing captives.
+	* Shooting ranged weapons.
+	* Commanding a 'golem' during my turn.
+	* Avoiding bombs that detonate.
+
+I'm convinced that my upfront work will help prevent the following from happening:
+
+{% include_code Ruby Warrior: Level 09 (HORRIBAD CODE) 2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/level09_example.rb %}
+
+>->DON'T DO THIS. YOU WILL HAVE NO FRIENDS AND PEOPLE WILL HATE YOU.<-
+
 
 	Picture
