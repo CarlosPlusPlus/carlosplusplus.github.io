@@ -35,9 +35,9 @@ class Player
 			warrior.attack!
 
 			@action_taken = true
-			@in_combat 		= true
+			@in_combat = true
 		else
-			@in_combat			= false
+			@in_combat = false
 		end
 
 	end

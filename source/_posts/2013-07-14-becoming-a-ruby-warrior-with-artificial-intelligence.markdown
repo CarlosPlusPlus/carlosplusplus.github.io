@@ -62,7 +62,7 @@ Here is the representation of Level 01:
 
 -> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level01.png 175 175 %} <-
 
-This level is pretty straightforward. Having only one action available [`warrior.walk!`], the logic here is simple:
+This level is pretty straightforward. Having only one action available [`warrior.walk!`], the logic here is simple:  
 
 {% include_code Ruby Warrior: Level 01 2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h01.rb %}
 
@@ -78,7 +78,7 @@ Here is the representation of Level 02:
 
 -> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level02.png 175 175 %} <-
 
-This level introduced the first monster. I realized I needed to add logic to check to see if a monster was in front of me based on my available actions. Still pretty straightforward.
+This level introduced the first monster. I realized I needed to add logic to check to see if a monster was in front of me based on my available actions. Still pretty straightforward.  
 
 {% include_code Ruby Warrior: Level 02 2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h02.rb %}
 
@@ -90,9 +90,31 @@ Level 02 was completed now completed.
 	* Probably worth refactoring and "setting the stage" in Level 03.
 * Able to make assumption that `Player` class is being initialized one time, with `play_turn` being called in a loop. Take advantage of the `initialize` method.
 
-
 ### Level 03
 
+Here is the representation of Level 03:
+
+-> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level03.png 175 175 %} <-
+
+Four (4) monsters. **Oh snap son**.  
+
+As I began writing my code, I realized I didn't want to do annoying amounts of nested logic. Projecting into the future, I felt the need to begin splitting parts of the agent into logical methods in an organized structure. I also needed to figure out when was the right time to rest, to keep moving forward, and when to attack.  
+
+{% include_code Ruby Warrior: Level 03 2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h03.rb %}
+
+Overall, I was really happy with my code - beat this level with no issues. Even though it grew in size, the `play_turn` method is readable and tells me exactly what the Warrior is to do at any given point in time.
+
+#### Lessons learned:
+
+* (+) Breaking out logic into well-named functions was a great idea!
+* (-) Potential issues in the future with additional functionality (like more actions).
+* (-) Don't like how each function needs to have `warrior` as a parameter.
+	* Can this be fixed with instance variables in Level 04?
+* (-) ALL actions are evaluated even if an action is already called.
+
+I knew that given all the negatives, there was going to be some heavy-duty refactoring in Level 04. All in all though, I was fairly certain that the logic in the code was 'just going to work'.  
+
+Boy was I wrong. :)
 
 ### Level 04
 
