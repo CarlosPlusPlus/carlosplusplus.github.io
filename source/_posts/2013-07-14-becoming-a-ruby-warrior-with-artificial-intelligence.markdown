@@ -164,5 +164,8 @@ I'm convinced that my upfront work will help prevent the following from happenin
 
 >->DON'T DO THIS. YOU WILL HAVE NO FRIENDS AND PEOPLE WILL HATE YOU.<-
 
+Slowly but surely, I will become the Ruby Warrior I'm destined to be.  
 
-	Picture
+-> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/RubyWarrior.png 750 750 %} <-
+
+There's still much learning to do and more levels to conquer. Onward and upward!
