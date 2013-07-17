@@ -155,7 +155,7 @@ A few things I'm thinking about going forward:
 	* Ability to move in different directions.
 	* 2-dimensional maps.
 		* How will I track movement?
-		* How will I deal when I hit a wall?
+		* How will I behave when I hit a wall?
 	* Rescuing captives.
 	* Shooting ranged weapons.
 	* Commanding a 'golem' during my turn.
@@ -172,5 +172,7 @@ I'm convinced that my upfront work will help prevent the following from happenin
 Slowly but surely, I will become the Ruby Warrior I'm destined to be.  
 
 -> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/RubyWarrior.png 750 750 %} <-
+
+A shoutout to my boy [Dan Friedman](http://dfriedm.github.io/) for working on this with me.  
 
 There's still much learning to do and more levels to conquer. Onward and upward!
