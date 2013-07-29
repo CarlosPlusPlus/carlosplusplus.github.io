@@ -175,4 +175,6 @@ Slowly but surely, I will become the Ruby Warrior I'm destined to be.
 
 A shoutout to my boy [Dan Friedman](http://dfriedm.github.io/) for working on this with me.  
 
-There's still much learning to do and more levels to conquer. Onward and upward!
+There's still much learning to do and more levels to conquer. Onward and upward!  
+
+CJL

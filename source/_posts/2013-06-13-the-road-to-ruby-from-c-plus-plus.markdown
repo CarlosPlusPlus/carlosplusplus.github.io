@@ -68,3 +68,5 @@ In terms of general ease of learning and forgiveness, it's **Ruby** all the way.
 -> **10 days of Ruby vs. 10 years of C++** <-
 
 Ruby, you've won over my <3 already, & we've only just begun getting to know each other.  
+
+CJL

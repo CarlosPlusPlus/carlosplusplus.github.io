@@ -44,6 +44,6 @@ As programmers and as citizens of a diverse world, it's up to us to **respect** 
 
 >-> **どうもありがとうございました。** (Dōmo arigatōgozaimashita!)<-
 
-Check-out this awesome blog post, titled [Learning Japanese the Rubyist Way](http://blog.new-bamboo.co.uk/2010/12/17/learning-japanese-the-rubyist-way) for more info.
+Check-out this awesome blog post, titled [Learning Japanese the Rubyist Way](http://blog.new-bamboo.co.uk/2010/12/17/learning-japanese-the-rubyist-way) for more info.  
 
 CJL

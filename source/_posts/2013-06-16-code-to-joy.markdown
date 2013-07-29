@@ -98,4 +98,6 @@ The remainder of the technical topics went over my head, as my level of Ruby kno
 
 >->Practice joyful coding.<-
 
-All in all, there is no rubric to tell you what is considered "joyful coding" in this world. Spread knowledge to those around you, always. Inspire through example and by teaching what you know. Cherish those "A-HA" moments, both when you have them and when you witness them in others. The world of coding, and the world in general, will be a better place for it.
+All in all, there is no rubric to tell you what is considered "joyful coding" in this world. Spread knowledge to those around you, always. Inspire through example and by teaching what you know. Cherish those "A-HA" moments, both when you have them and when you witness them in others. The world of coding, and the world in general, will be a better place for it.  
+
+CJL

@@ -96,4 +96,6 @@ Simply stated:
 
 >->**The possibilities are endless.**<-
 
-Stay tuned for more information on the Kinect.
+Stay tuned for more information on the Kinect.  
+
+CJL

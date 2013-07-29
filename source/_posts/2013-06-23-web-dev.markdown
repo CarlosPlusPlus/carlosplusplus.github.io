@@ -45,4 +45,6 @@ By navigating to the **[Fracture.it](http://fracture.it)** website, one is broug
 
 As you can see, the organization of this Github repository allows for one to see exactly and precisely the files that construct a Sinatra folder structure. In fact, most Sinatra repositories are laid out the same way, allowing for standardization and for easy reading.
 
-Looking forward to doing my own Sinatra development in the near future!
+Looking forward to doing my own Sinatra development in the near future!  
+
+CJL

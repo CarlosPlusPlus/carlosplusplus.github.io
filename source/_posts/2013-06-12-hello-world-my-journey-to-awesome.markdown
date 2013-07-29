@@ -6,4 +6,6 @@ comments: true
 categories: 
 ---
 
-Flatiron School Week 1 reflection coming soon to a blog near you.
+On Monday, June 3rd, my life changes again for the best. I've begun my 12 week journey at the Flatiron School. Can't wait to see me before / after this glorious code retreat of sorts. Stay tuned for some awesome blog posts on a variety of topics going forward.  
+
+CJL

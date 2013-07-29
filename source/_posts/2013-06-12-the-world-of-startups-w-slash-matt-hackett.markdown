@@ -88,3 +88,5 @@ He also mentioned that as junior developers looking to work at startups, we need
 Taking a position at a more mature company also isn't a bad idea, as you can "learn the ropes" before you dive into the deep end of startup culture.  
 
 -> **Thank you for imparting your wisdom, Matt!** <-
+  
+CJL
