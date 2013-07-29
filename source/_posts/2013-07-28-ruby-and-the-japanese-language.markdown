@@ -6,7 +6,7 @@ comments: true
 categories: flatironschool japanese languages ruby
 ---
 
-## こんにちは世界 (Kon'nichiwa sekai!)
+## **こんにちは世界** (Kon'nichiwa sekai!)
 
 The inspiration for this blog post comes from a few places:
 
@@ -26,21 +26,24 @@ Why yes, yes there is - let's take a look at **Ruby and the Japanese Language**.
 
 ## Insight into the Japanese Language
 
-! How does this compare to Ruby
+## How does this compare to Ruby
 
 ## Ruby in Japanese
 
 ## Embracing Language Diversity in the World
 
-Too often, I overhear people argue over 'Which language is:'
-* Better.
-* Faster.
-* Stronger.
-* More Robust.
-* More Semantically Correct.
+Too often, I overhear people argue over which language is:  
 
-As programmers and as citizens of a diverse world, it's up to us to respect language in general, whether programming or spoken. It should come as no surprise that programming and spoken languages are so similar, as one is used to _express_ the other. 
+- Better.
+- Faster.
+- Stronger.
+- More Robust.
+- More Semantically Correct.
 
-For additional reference, please check-out this awesome blog post, titled [Learning Japanese the Rubyist Way](http://blog.new-bamboo.co.uk/2010/12/17/learning-japanese-the-rubyist-way).
+As programmers and as citizens of a diverse world, it's up to us to **respect** language in general, whether programming or spoken. It should come as no surprise that programming and spoken languages are so similar, _as one is used to express_ the other.  
 
-	> Domo Arigatoo Gozaiimasu.
+>-> **どうもありがとうございました。** (Dōmo arigatōgozaimashita!)<-
+
+Check-out this awesome blog post, titled [Learning Japanese the Rubyist Way](http://blog.new-bamboo.co.uk/2010/12/17/learning-japanese-the-rubyist-way) for more info.
+
+CJL
