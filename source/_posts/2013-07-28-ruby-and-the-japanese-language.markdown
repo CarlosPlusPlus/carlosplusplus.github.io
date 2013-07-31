@@ -26,6 +26,21 @@ Why yes, yes there is - let's take a look at **Ruby and the Japanese Language**.
 
 ## Insight into the Japanese Language
 
+The Japanese language has a total of three (3) different alphabets, all of which serve their own purpose:
+
+1. **Hiragana** - syllabic alphabet for domestic use.
+2. **Katakana** - syllabic alphabet used for "borrowed" / new words.
+3. **Kanji**	  - symbolic alphabet used to import Chinese words.
+
+
+Most students learn the syllabic alphabets first through memorization and mnemonics, using charts like this one to assist in the memorization:
+
+-> {% img /images/posts/2013-07-28-ruby-and-the-japanese-language/alphabet_chart.png 750 750 %} <-
+
+Thousands of Kanji characters are in existence today - an individual in Japanese is considered fluent when they have mastery of the base 2000 characters. These are generally learned through memorization and constant practice.  
+
+Cool - so how does the Japanese language relate to the Ruby programming language?
+
 ## How does this compare to Ruby
 
 ## Ruby in Japanese
