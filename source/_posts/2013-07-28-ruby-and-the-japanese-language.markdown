@@ -26,7 +26,7 @@ Why yes, yes there is - let's take a look at **Ruby and the Japanese Language**.
 
 ## Insight into the Japanese Language
 
-The Japanese language has a total of three (3) different alphabets, all of which serve their own purpose:
+Japanese has a total of three (3) different alphabets, all of which serve their own purpose:
 
 1. **Hiragana** - syllabic alphabet for domestic use.
 2. **Katakana** - syllabic alphabet used for "borrowed" / new words.
@@ -52,15 +52,13 @@ Based on the definitions of the alphabets, we can see the following comparisons 
 3. **Kanji**	  - symbolic alphabet used to import Chinese words.
 > In Ruby: merge (**import**) concepts of Object Orientated / Functional programming.
 
-So, how then can the Japanese language be considered object oriented and functional?
+Furthermore, parts of the Japanese language can be seen as both object oriented (OO) and functional in nature.
 
 ### Object Oriented Comparison
 
 Thinking back to when we were learning English, our teachers taught us that sentences are formed in the following order: Subject - Verb - **Object** (SVO). It's fair to state that English is an "Object-Oriented Language," where context revolves around the object in question.  
 
-Japanese is quite similar, with the exception of the normal form of expressions being in the following form: Subject - **Object** - Verb (SOV).  
-
-For example, take the following sentence:
+Japanese is quite similar, with the "normal" form of expressions being in the following form: Subject - **Object** - Verb (SOV). For example, take the following sentence:
 
 |`English`|`Japanese`|`Pronunciation`|`Structure`|`Literal English`
 |:-:|:-:|:-:|:-:|:-:
@@ -89,7 +87,7 @@ These _post-positional_ words are used to decide the role of the noun which it s
 
 Here are some examples:
 
--> {% img /images/posts/2013-07-28-ruby-and-the-japanese-language/functional_japanese.png 750 750 %} <-
+-> {% img /images/posts/2013-07-28-ruby-and-the-japanese-language/functional_japanese.png 500 500 %} <-
 
 |`English`|`Japanese`|`Pronunciation`|`Structure`|`Literal English`
 |:-:|:-:|:-:|:-:|:-:
@@ -148,11 +146,50 @@ File.open("foo.txt")
 File.open("foo.txt").each do |line|
 	puts line
 end
+
+######################
+# Implicative Nature #
+######################
+
+# Explicit self used in instance method.
+class Dog
+	def initialize(name)
+		@name = name
+		self.bark(@name)	# => SVO
+	end
+
+	def bark(name)
+		puts "'WOOF!' barks #{name}."
+	end
+end
+
+# Implicit call to instance method without self.
+class Dog
+	def initialize(name)
+		@name = name
+		bark(@name)		# => VO
+	end
+
+	def bark(name)
+		puts "'WOOF!' barks #{name}."
+	end
+end
+
 ```
 
 Functional programming in Ruby allows for hard-core abstraction and meta-programming, which is something that other programming languages do not support as easily.
 
 ## Ruby in Japanese
+
+One example of a gem that allows you to evaluate Japanese characters and expressions in the Ruby programming language is the [japanize](https://github.com/makoto/japanize) gem.  
+
+Here's output to what a command line might look like, along with a test that was written in order to test the interpreter:
+
+-> {% img /images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_output.png 500 500 %} <-
+
+-> {% img /images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_test.png 500 500 %} <-
+
+Note that this gem is outdated (3 years old), and that other gems exist that establish the morphemes (translation patterns) between English and Japanese for Ruby. 
 
 ## Embracing Language Diversity in the World
 
@@ -167,7 +204,5 @@ Too often, I overhear people argue over which language is:
 As programmers and as citizens of a diverse world, it's up to us to **respect** language in general, whether programming or spoken. It should come as no surprise that programming and spoken languages are so similar, _as one is used to express_ the other.  
 
 >-> **どうもありがとうございました。** (Dōmo arigatōgozaimashita!)<-
-
-Check-out this awesome blog post, titled [Learning Japanese the Rubyist Way](http://blog.new-bamboo.co.uk/2010/12/17/learning-japanese-the-rubyist-way) for more info.  
 
 CJL
