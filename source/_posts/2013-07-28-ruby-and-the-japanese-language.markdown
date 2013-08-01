@@ -70,7 +70,7 @@ In terms of code, Ruby also allows us to define functionality in both object ori
 
 ```ruby
 # Object Oriented
-File.open("foo.txt")	# => SVO (Japanese)
+File.open("foo.txt")
 
 # Procedural
 open("file","foo.txt)
