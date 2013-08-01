@@ -81,6 +81,77 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 ### Functional Comparison
 
+Japanese grammar is different in that it is _post-positional_:
+
+> postposition - a word placed after the word it governs (e.g. the 'ward' in homeward). 
+
+These _post-positional_ words are used to decide the role of the noun which it supports. This would allow a Japanese speaker to change the order of the grammar pretty easily, *chaining as many sentences as desired*, and even *omitting the subject* altogether.
+
+Here are some examples:
+
+-> {% img /images/posts/2013-07-28-ruby-and-the-japanese-language/functional_japanese.png 750 750 %} <-
+
+|`English`|`Japanese`|`Pronunciation`|`Structure`|`Literal English`
+|:-:|:-:|:-:|:-:|:-:
+|I eat bacon.|私はベーコンを食べます。|Watashi ha bacon wo tabemasu.|SOV|"I bacon eat."
+|I eat bacon.|ベーコンを私は食べます。|Bacon wo watashi ha tabemasu.|OSV|"Bacon I eat."
+|I eat bacon.|ベーコンを食べます。|Bacon wo tabemasu.|OV|"Bacon eat."
+
+Where do we see this sort of behavior in Ruby?
+
+```ruby
+
+##########################
+# Expressively Iterative #
+##########################
+
+# .times enumerator	=> 5x
+5.times do
+	# => Perform action here.
+end
+
+i = 0
+c = 5
+
+# while loop => 5x
+while i < c do
+	# Perform action here.
+	c += 1
+end
+
+# for loop => 5x
+for i in 0..5
+	# Perform action here.
+end
+
+##########################
+# Functional Flexibility #
+##########################
+
+str  = "Hello World!"
+
+expr1 = str.upcase.delete('o').gsub('O','X')	
+	# => "HELLX WXRLD!"
+expr2 = str.delete('o').upcase.gsub('O','X')
+	# => "HELL WRLD!"
+expr3 = str.gsub('O','X').upcase.delete('o')
+	# => "HELLO WORLD!"
+
+#########################
+# Contextual Evaluation #
+#########################
+
+# Opens a file.
+File.open("foo.txt")
+
+# Open a file and then yield to a block.
+File.open("foo.txt").each do |line|
+	puts line
+end
+```
+
+Functional programming in Ruby allows for hard-core abstraction and meta-programming, which is something that other programming languages do not support as easily.
+
 ## Ruby in Japanese
 
 ## Embracing Language Diversity in the World
