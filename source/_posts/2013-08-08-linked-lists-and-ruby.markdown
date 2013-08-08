@@ -22,7 +22,7 @@ In the simplest implementation of a LinkedList, each node has the following:
 
 > **next** = pointer to the next value in the sequence.
 
-TEXT HERE
+In addition, 
 
 ## Ruby Implementation
 
