@@ -8,7 +8,6 @@ class Node
 	def initialize(value)
 		@value = value
 	end
-
 end
 
 # Define a LinkedList class the holds the following:
