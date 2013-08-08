@@ -167,8 +167,6 @@ I'm convinced that my upfront work will help prevent the following from happenin
 
 >->DON'T DO THIS!<-
 
->->YOU WILL HAVE LESS FRIENDS THAN YOU PROBABLY ALREADY DO.<-
-
 Slowly but surely, I will become the Ruby Warrior I'm destined to be.  
 
 -> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/RubyWarrior.png 750 750 %} <-
