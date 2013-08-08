@@ -6,6 +6,8 @@ comments: true
 categories: datastructures flatironschool oop ruby
 ---
 
+One of the most talked about data structures in the world of computer science 
+
 - Introduction
 
 - What is a Linked List?

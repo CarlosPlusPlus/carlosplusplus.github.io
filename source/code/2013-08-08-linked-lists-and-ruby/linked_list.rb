@@ -18,76 +18,74 @@ end
 class LinkedList
 	attr_accessor :head, :tail
 
+	# Initialize head and tail to same initial Node.
 	def initialize (head)
+		raise "LinkedList must be initialized with a Node." unless head.is_a?(Node)
+			
 		@head = head
 		@tail = head
 	end
 
+	# Insert Node after the tail of the LinkedList.
 	def insert(node)
-		raise "shit" unless node.is_a?(Node)
 		@tail.next = node
 		@tail 		 = @tail.next
 	end
 
+	# Print out all the values of the LinkedList in order.
 	def print
 		current_node = @head
 		
 		while current_node != nil
-			puts "LL Node Value = #{current_node.value}"
+			puts "\tLL Node Value = #{current_node.value}"
 			current_node = current_node.next
 		end
 	end
 
+	# Iterate through LinkedList and perform block actions.
 	def iterate
-		current_node = @head
+		if block_given?
+			current_node = @head
 
-		while current_node != nil
-			if block_given?
+			while current_node != nil
 				yield current_node.value
-			else
-				puts "LL Node Value = #{current_node.value}"
+				current_node = current_node.next
 			end
-			current_node = current_node.next
+		else
+			print
 		end
 	end
-
 end
-
-
-# def optional
-# 	puts 'A code block isn\'t required, but it\'s nice.'
-# 	yield if block_given?
-# 	puts 'I\'m happy either way, really.'
-# end
 
 #############
 # TESTBENCH #
 #############
 
-a = Node.new(1)
-b = Node.new(2)
-c = Node.new(3)
-d = Node.new(4)
-e = Node.new(5)
+puts "\nCreating LinkedList of 5 Node elements with values 1-5.\n"
 
-list = LinkedList.new(a)
+h 	 = Node.new(1)
+list = LinkedList.new(h)
 
-list.insert(b)
-list.insert(c)
-list.insert(d)
-list.insert(e)
+(2..5).each {|n| list.insert(Node.new(n)) }
+
+puts "\nCurrent values contained in LinkedList:\n"
 
 list.print
 
 puts "\n"
+puts "Values of head and tail of LinkedList:\n"
 
-puts "Value of LL Head = #{list.head.value}"
-puts "Value of LL Tail = #{list.tail.value}"
+puts "\tValue of LL Head = #{list.head.value}"
+puts "\tValue of LL Tail = #{list.tail.value}"
 
 puts "\n"
+puts "Iterating through LinkedList without a block prints the list.\n"
 
 list.iterate
 
 puts "\n"
+puts "Iterating through the LinkedList with a block runs the block on each element.\n"
 
-list.iterate {|n| puts "LL Node Value squared = #{n ** 2}"}
+list.iterate {|n| puts "\tLL Node Value squared = #{n ** 2}"}
+
+puts "\n"
