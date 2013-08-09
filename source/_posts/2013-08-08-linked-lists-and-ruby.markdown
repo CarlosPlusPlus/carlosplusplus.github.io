@@ -95,7 +95,7 @@ class LinkedList
 		end
 	end
 
-	# Iterate through LinkedList and perform block actions.
+	# Iterate through LinkedList and yield values to block.
 	def iterate
 		if block_given?
 			current_node = @head
