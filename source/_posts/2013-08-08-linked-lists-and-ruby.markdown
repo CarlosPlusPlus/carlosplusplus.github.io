@@ -22,11 +22,21 @@ In the simplest implementation of a LinkedList, each node has the following:
 
 > **next** = pointer to the next value in the sequence.
 
-In addition, 
+In most implementations, you also have a head and a tail pointer:
 
-## Ruby Implementation
+> **head** = points to the first Node in the linked list.
 
-TEXT HERE
+> **tail** = points to the last Node in the linked list.
+
+For the visual learners, here's a picture that shows the structure:
+
+-> {% img /images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_layout.png 750 750 %} <-
+
+Awesome - so, how can we build this in Ruby?
+
+## Ruby Implementation of a Linked List
+
+Two classes are needed in order to build a Linked List: `Node` and `LinkedList`
 
 ### Node Class
 
@@ -141,7 +151,9 @@ puts "\n"
 
 Here is the output from the test bench:
 
-IMAGE from TESTBENCH
+-> {% img /images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_output.png 750 750 %} <-
+
+Take a look at the methods I defined for printing the list (in order) and for iteration (that can take in a block).
 
 ## More with Linked Lists
 
