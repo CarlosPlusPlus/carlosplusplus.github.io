@@ -30,7 +30,7 @@ In most implementations, you also have a head and a tail pointer:
 
 For the visual learners, here's a picture that shows the structure:
 
--> {% img /images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_layout.png 750 750 %} <-
+-> {% img /images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_layout.png 500 500 %} <-
 
 Awesome - so, how can we build this in Ruby?
 
@@ -82,7 +82,7 @@ class LinkedList
 	# Insert Node after the tail of the LinkedList.
 	def insert(node)
 		@tail.next = node
-		@tail 		 = @tail.next
+		@tail = @tail.next
 	end
 
 	# Print out all the values of the LinkedList in order.
@@ -153,15 +153,28 @@ Here is the output from the test bench:
 
 -> {% img /images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_output.png 750 750 %} <-
 
-Take a look at the methods I defined for printing the list (in order) and for iteration (that can take in a block).
+Take a look at the methods I defined for:
+
+* List insertion (using the `tail`) => O(1) operation.
+* Printing the list (in order).
+* List iteration (with block capability). 
 
 ## More with Linked Lists
 
 The fun doesn't end here!  
 
-Check out these other implementations of Linked Lists:
+Check out these other types of Linked Lists:
 
-IMAGE 1  
-IMAGE 2  
-IMAGE 3  
+-> {% img /images/posts/2013-08-08-linked-lists-and-ruby/Doubly-linked-list.png 750 750 %} <-
 
+-> **Doubly Linked Lists** <-
+
+-> {% img /images/posts/2013-08-08-linked-lists-and-ruby/Circularly-linked-list.png 425 425 %} <-
+
+-> **Circular Linked Lists** <-
+
+Would you ever use a Linked List in practice, you ask?  
+
+It depends on your domain model. If you get the chance, look up a [sparse matrix](http://en.wikipedia.org/wiki/Sparse_matrix). This problem would be perfect for a linked list.  
+
+CJL
