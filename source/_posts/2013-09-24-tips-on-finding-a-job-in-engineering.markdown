@@ -121,8 +121,8 @@ One of my favorite ways of expanding my network is through attending programming
 
 ## Closing Thoughts
 
-Contrary to what many say, job hunting is a full time job in of itself. It takes a lot of time, energy, dedication, and determination. Hopefully, these resources will help you on your conquest.
+Contrary to what many say, job hunting is a full time job in of itself. It takes a lot of time, energy, dedication, & determination. Hopefully, these resources will help on your conquest.
 
->->Good luck and all the best in your search!<-
+>->Good luck and all the best in your job search!<-
 
 CJL
