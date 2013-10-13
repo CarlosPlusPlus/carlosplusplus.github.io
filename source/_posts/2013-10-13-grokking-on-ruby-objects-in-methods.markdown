@@ -36,6 +36,9 @@ This method takes in two strings and performs modifications. It turns out that t
 
 Take a look at this code - it checks Object ID and values at different stages of the example to reinforce the fact that the original objects are being modified:  
 
--> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level04.png 175 175 %} <-
+{% include_code Object Modifcations in Ruby Methods 2013-10-13-grokking-on-ruby-objects-in-methods/object_mods_in_ruby.rb %}
 
-{% include_code Ruby Warrior: Level 04 2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h04.rb %}
+Here is the output from the program:
+
+-> {% img /images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level04.png 300 300 %} <-
+
