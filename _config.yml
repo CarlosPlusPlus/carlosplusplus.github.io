@@ -63,6 +63,8 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 #   3rd Party Settings    #
 # ----------------------- #
 
+linkedin_user: carlosjlazo
+
 # Github repositories
 github_user: cjlwired
 github_repo_count: 0
