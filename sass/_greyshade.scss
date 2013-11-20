@@ -109,7 +109,7 @@ body {
 					.entry-content {
 						margin-left: 0px;
 						line-height: 1.4em;
-						font-size: 1.5em;
+						font-size: 1.3em;
 						p {
 							margin-top: 30px;
 						}
@@ -209,19 +209,30 @@ body {
 		transition: all .2s ease-in;
 		height: 100%;
 		.intrude-less {
-			width: 80%;
+			width: 100%;
 		}
 		#header {
 			width: 100%;
-			padding: 20% 0% 0% 15%;
+			padding: 10% 0% 0% 0%;
 			#main-nav {
 				margin-top: 10px;
+				text-align: center;
+				ul li {
+					font-size: 16px;
+				}
+				.about {
+					padding: 5% 0% 0% 0%;
+					font-variant: small-caps;
+					font-size: 16px;
+					color: $color-gray05;
+				}
 			}
 			.profilepic {
+				text-align: center;
 				img {
-					border-radius: 50%;
-					-moz-border-radius: 50%;
-					-webkit-border-radius: 50%;
+					border-radius: 100%;
+					-moz-border-radius: 100%;
+					-webkit-border-radius: 100%;
 				}
 			}
 			a {
@@ -232,12 +243,14 @@ body {
 				color: $greyshade;
 			}
 			#sub-nav {
-				margin-top: 10px;
+				text-align: center;
+				padding: 10% 0% 0% 0%;
 				.search::before {
-				left: 10px;
 				}
 				.social {
-					margin-bottom: 10px;
+					margin-right: 0px;
+					padding: 0% 10% 0% 10%;
+					
 				}
 			}
 		}
@@ -282,7 +295,7 @@ body {
 			width: 100%;
 			opacity: 1;
 			.intrude-less {
-				margin: auto auto;
+				margin: 0px 0px;
 			}
 			#header {
 				padding: 40px 0px;

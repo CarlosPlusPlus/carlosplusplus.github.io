@@ -6,8 +6,8 @@ url: http://cjlwired.github.io
 title: Changing the World - One Line of Code at a Time
 subtitle: A blogging framework for hackers.
 author: Carlos Lazo
-simple_search: http://google.com/search
-description:
+simple_search: 
+description: Changing the World ; One Line of Code At A Time. You Must Construct Additional Pylons.
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
