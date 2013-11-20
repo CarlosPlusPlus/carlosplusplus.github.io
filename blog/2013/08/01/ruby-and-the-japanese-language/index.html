@@ -1,0 +1,531 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Ruby and the Japanese Language - Changing the World - One Line of Code at a Time</title>
+	<meta name="author" content="Carlos Lazo">
+
+	
+	<meta name="description" content="Ruby and the Japanese Language こんにちは世界 (Kon&#8217;nichiwa sekai!) The inspiration for this blog post comes from a few places: My love of languages &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Changing the World - One Line of Code at a Time" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-45780764-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("carlos.jose.lazo@gmail.com") + "?s=200' alt='Profile Picture' style='width: 200px;' />");
+		});
+	</script>
+	
+</div>
+
+<nav id="main-nav"><!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+        
+</ul>
+
+<section class="about">
+  <div>Changing the World</dev>
+  <div>One Line of Code at a Time</div>
+  <div style="color: #0099FF">You Must Construct Additional Pylons</div>
+</section></nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+			<a class="email" href="mailto:carlos.jose.lazo@gmail.com" title="Email">Email</a>
+		
+		
+			<a class="facebook" href="http://www.facebook.com/carlosjoselazo" title="Facebook">Facebook</a>
+		
+		
+		
+			<a class="twitter" href="http://twitter.com/cjlwired" title="Twitter">Twitter</a>
+		
+		
+			<a class="github" href="https://github.com/cjlwired" title="GitHub">GitHub</a>
+		
+		
+			<a class="coderwall" href="https://coderwall.com/cjlwired" title="Coderwall">Coderwall</a>
+		
+		
+		
+			<a class="linkedin" href="http://www.linkedin.com/in/carlosjlazo" title="LinkedIn">LinkedIn</a>
+		
+		
+		
+		
+		
+		
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Ruby and the Japanese Language</h1>
+	<div class="entry-content" itemprop="articleBody"><h2><strong>こんにちは世界</strong> (Kon&#8217;nichiwa sekai!)</h2>
+
+<p>The inspiration for this blog post comes from a few places:</p>
+
+<ol>
+<li>My love of languages and world-wide celebration of culture.</li>
+<li>This <a href="http://www.slideshare.net/inouemak/ruby-and-japanesepdf">slide deck</a> by <a href="https://twitter.com/makoto_inoue">Makoto Inoue</a> on <strong>Ruby and Japanese</strong>.</li>
+<li>General curiosity on the topic.</li>
+</ol>
+
+
+<p>Growing up, my first <strong>spoken</strong> language was Spanish, followed shortly there after by English and French, all three of which I&rsquo;m fluent in. In the present, I split my time between learning 5 other languages &ndash; Japanese, Mandarin Chinese, German, Italian, and Russian.</p>
+
+<p>Interestingly enough, during this same time period, I&rsquo;ve also worked with a variety of different <strong>programming</strong> languages &ndash; C, C++, C#, Java, Python, Scheme, and MATLAB. I continue to learn languages, like Ruby, JavaScript, and HTML/CSS.</p>
+
+<p>That begs me to ask the question:</p>
+
+<blockquote><p style="text-align:center;"> <strong>Is there a link between programming languages and spoken languages?</strong></p></blockquote>
+
+<p>Why yes, yes there is &ndash; let&rsquo;s take a look at <strong>Ruby and the Japanese Language</strong>.</p>
+
+<h2>Insight into the Japanese Language</h2>
+
+<p>Japanese has a total of three (3) different alphabets, all of which serve their own purpose:</p>
+
+<ol>
+<li><strong>Hiragana</strong> &ndash; syllabic alphabet for domestic use.</li>
+<li><strong>Katakana</strong> &ndash; syllabic alphabet used for &ldquo;borrowed&rdquo; / new words.</li>
+<li><strong>Kanji</strong>      &ndash; symbolic alphabet used to import Chinese words.</li>
+</ol>
+
+
+<p>Most students learn the syllabic alphabets first through memorization and mnemonics, using charts like this one to assist in the memorization:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/alphabet_chart.png" width="750" height="750"></p>
+
+<p>Thousands of Kanji characters are in existence today &ndash; an individual in Japanese is considered fluent when they have mastery of the base 2000 characters. These are generally learned through memorization and constant practice.</p>
+
+<p>Cool &ndash; so how does the Japanese language relate to the Ruby programming language?</p>
+
+<h2>Japanese &lt;=> Ruby &ndash; What&rsquo;s the Deal?</h2>
+
+<p>Based on the definitions of the alphabets, we can see the following comparisons between the Japanese spoken language and the Ruby programming language:</p>
+
+<ol>
+<li><strong>Hiragana</strong> &ndash; syllabic alphabet for domestic use.
+
+<blockquote><p>In Ruby: built for <strong>domestic</strong> ease-of-use (focus on programmer happiness).</p></blockquote></li>
+<li><strong>Katakana</strong> &ndash; syllabic alphabet used for &ldquo;borrowed&rdquo; / new words.
+
+<blockquote><p>In Ruby: continually evolving and adapting <strong>new</strong> functionality.</p></blockquote></li>
+<li><strong>Kanji</strong>      &ndash; symbolic alphabet used to import Chinese words.
+
+<blockquote><p>In Ruby: merge (<strong>import</strong>) concepts of Object Orientated / Functional programming.</p></blockquote></li>
+</ol>
+
+
+<p>Furthermore, parts of the Japanese language can be seen as both object oriented (OO) and functional in nature.</p>
+
+<h3>Object Oriented Comparison</h3>
+
+<p>Thinking back to when we were learning English, our teachers taught us that sentences are formed in the following order: Subject &ndash; Verb &ndash; <strong>Object</strong> (SVO). It&rsquo;s fair to state that English is an &ldquo;Object-Oriented Language,&rdquo; where context revolves around the object in question.</p>
+
+<p>Japanese is quite similar, with the &ldquo;normal&rdquo; form of expressions being in the following form: Subject &ndash; <strong>Object</strong> &ndash; Verb (SOV). For example, take the following sentence:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center"><code>English</code></th>
+<th align="center"><code>Japanese</code></th>
+<th align="center"><code>Pronunciation</code></th>
+<th align="center"><code>Structure</code></th>
+<th align="center"><code>Literal English</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">私はベーコンを食べます。</td>
+<td align="center">Watashi ha bacon wo tabemasu.</td>
+<td align="center">SOV</td>
+<td align="center">&ldquo;I bacon eat.&rdquo;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Ruby&rsquo;s primary focus, much like the Japanese language, targets the object as the center of attention. Although the grammatical structure may be different, the intention remains the absolute same.</p>
+
+<p>In terms of code, Ruby also allows us to define functionality in both object oriented and procedural ways:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Object Oriented</span>
+</span><span class='line'><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;foo.txt&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Procedural</span>
+</span><span class='line'><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">,</span><span class="s2">&quot;foo.txt)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+The example above shows the flexibility of Ruby to implement the same solution using two different grammatical orders. In most cases, when dealing with a complex problem, functionality is encapsulated within a class. Object Orientation proves to be a great aspect of the Ruby language.</p>
+
+<h3>Functional Comparison</h3>
+
+<p>Japanese grammar is different in that it is <em>post-positional</em>:</p>
+
+<blockquote><p>postposition &ndash; a word placed after the word it governs (e.g. the &lsquo;ward&rsquo; in homeward).</p></blockquote>
+
+<p>These <em>post-positional</em> words are used to decide the role of the noun which it supports. This would allow a Japanese speaker to change the order of the grammar pretty easily, <em>chaining as many sentences as desired</em>, and even <em>omitting the subject</em> altogether.</p>
+
+<p>Here are some examples:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/functional_japanese.png" width="500" height="500"></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center"><code>English</code></th>
+<th align="center"><code>Japanese</code></th>
+<th align="center"><code>Pronunciation</code></th>
+<th align="center"><code>Structure</code></th>
+<th align="center"><code>Literal English</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">私はベーコンを食べます。</td>
+<td align="center">Watashi ha bacon wo tabemasu.</td>
+<td align="center">SOV</td>
+<td align="center">&ldquo;I bacon eat.&rdquo;</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">ベーコンを私は食べます。</td>
+<td align="center">Bacon wo watashi ha tabemasu.</td>
+<td align="center">OSV</td>
+<td align="center">&ldquo;Bacon I eat.&rdquo;</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">ベーコンを食べます。</td>
+<td align="center">Bacon wo tabemasu.</td>
+<td align="center">OV</td>
+<td align="center">&ldquo;Bacon eat.&rdquo;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Where do we see this sort of behavior in Ruby?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">##########################</span>
+</span><span class='line'><span class="c1"># Expressively Iterative #</span>
+</span><span class='line'><span class="c1">##########################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># .times enumerator  =&gt; 5x</span>
+</span><span class='line'><span class="mi">5</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+</span><span class='line'>  <span class="c1"># =&gt; Perform action here.</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># while loop =&gt; 5x</span>
+</span><span class='line'><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">c</span> <span class="k">do</span>
+</span><span class='line'>  <span class="c1"># Perform action here.</span>
+</span><span class='line'>  <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># for loop =&gt; 5x</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span>
+</span><span class='line'>  <span class="c1"># Perform action here.</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">##########################</span>
+</span><span class='line'><span class="c1"># Functional Flexibility #</span>
+</span><span class='line'><span class="c1">##########################</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">str</span>  <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">expr1</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="n">upcase</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>    
+</span><span class='line'>  <span class="c1"># =&gt; &quot;HELLX WXRLD!&quot;</span>
+</span><span class='line'><span class="n">expr2</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">upcase</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1"># =&gt; &quot;HELL WRLD!&quot;</span>
+</span><span class='line'><span class="n">expr3</span> <span class="o">=</span> <span class="n">str</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">,</span><span class="s1">&#39;X&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">upcase</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="c1"># =&gt; &quot;HELLO WORLD!&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#########################</span>
+</span><span class='line'><span class="c1"># Contextual Evaluation #</span>
+</span><span class='line'><span class="c1">#########################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Opens a file.</span>
+</span><span class='line'><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;foo.txt&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Open a file and then yield to a block.</span>
+</span><span class='line'><span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;foo.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">line</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">######################</span>
+</span><span class='line'><span class="c1"># Implicative Nature #</span>
+</span><span class='line'><span class="c1">######################</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Explicit self used in instance method.</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Dog</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+</span><span class='line'>      <span class="nb">self</span><span class="o">.</span><span class="n">bark</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>    <span class="c1"># =&gt; SVO</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">bark</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;&#39;WOOF!&#39; barks </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">.&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Implicit call to instance method without self.</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Dog</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@name</span> <span class="o">=</span> <span class="nb">name</span>
+</span><span class='line'>      <span class="n">bark</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>        <span class="c1"># =&gt; VO</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">bark</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+</span><span class='line'>      <span class="nb">puts</span> <span class="s2">&quot;&#39;WOOF!&#39; barks </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">.&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Functional programming in Ruby allows for hard-core abstraction and meta-programming, which is something that other programming languages do not support as easily.</p>
+
+<h2>Ruby in Japanese</h2>
+
+<p>One example of a gem that allows you to evaluate Japanese characters and expressions in the Ruby programming language is the <a href="https://github.com/makoto/japanize">japanize</a> gem.</p>
+
+<p>Here&rsquo;s output to what a command line might look like, along with a test that was written in order to test the interpreter:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_output.png" width="500" height="500"></p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_test.png" width="500" height="500"></p>
+
+<p>Note that this gem is outdated (3 years old), and that other gems exist that establish the morphemes (translation patterns) between English and Japanese for Ruby.</p>
+
+<h2>Embracing Language Diversity in the World</h2>
+
+<p>Too often, I overhear people argue over which language is:</p>
+
+<ul>
+<li>Better.</li>
+<li>Faster.</li>
+<li>Stronger.</li>
+<li>More Robust.</li>
+<li>More Semantically Correct.</li>
+</ul>
+
+
+<p>As programmers and as citizens of a diverse world, it&rsquo;s up to us to <strong>respect</strong> language in general, whether programming or spoken. It should come as no surprise that programming and spoken languages are so similar, <em>as one is used to express</em> the other.</p>
+
+<blockquote><p style="text-align:center;"> <strong>どうもありがとうございました。</strong> (Dōmo arigatōgozaimashita!)</p></blockquote>
+
+<p>CJL</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><div style="display:inline">
+    Copyright &copy; 2013
+
+    Carlos Lazo
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/fabric.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'cjlwired';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language/';
+        var disqus_url = 'http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

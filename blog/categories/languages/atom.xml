@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: languages | Changing the World - One Line of Code at a Time]]></title>
+  <link href="http://cjlwired.github.io/blog/categories/languages/atom.xml" rel="self"/>
+  <link href="http://cjlwired.github.io/"/>
+  <updated>2013-11-20T01:12:11-05:00</updated>
+  <id>http://cjlwired.github.io/</id>
+  <author>
+    <name><![CDATA[Carlos Lazo]]></name>
+    <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby and the Japanese Language]]></title>
+    <link href="http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language/"/>
+    <updated>2013-08-01T08:00:00-04:00</updated>
+    <id>http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language</id>
+    <content type="html"><![CDATA[<h2><strong>こんにちは世界</strong> (Kon'nichiwa sekai!)</h2>
+
+<p>The inspiration for this blog post comes from a few places:</p>
+
+<ol>
+<li>My love of languages and world-wide celebration of culture.</li>
+<li>This <a href="http://www.slideshare.net/inouemak/ruby-and-japanesepdf">slide deck</a> by <a href="https://twitter.com/makoto_inoue">Makoto Inoue</a> on <strong>Ruby and Japanese</strong>.</li>
+<li>General curiosity on the topic.</li>
+</ol>
+
+
+<p>Growing up, my first <strong>spoken</strong> language was Spanish, followed shortly there after by English and French, all three of which I&rsquo;m fluent in. In the present, I split my time between learning 5 other languages &ndash; Japanese, Mandarin Chinese, German, Italian, and Russian.</p>
+
+<p>Interestingly enough, during this same time period, I&rsquo;ve also worked with a variety of different <strong>programming</strong> languages &ndash; C, C++, C#, Java, Python, Scheme, and MATLAB. I continue to learn languages, like Ruby, JavaScript, and HTML/CSS.</p>
+
+<p>That begs me to ask the question:</p>
+
+<blockquote><p style="text-align:center;"> <strong>Is there a link between programming languages and spoken languages?</strong></p></blockquote>
+
+<p>Why yes, yes there is &ndash; let&rsquo;s take a look at <strong>Ruby and the Japanese Language</strong>.</p>
+
+<h2>Insight into the Japanese Language</h2>
+
+<p>Japanese has a total of three (3) different alphabets, all of which serve their own purpose:</p>
+
+<ol>
+<li><strong>Hiragana</strong> &ndash; syllabic alphabet for domestic use.</li>
+<li><strong>Katakana</strong> &ndash; syllabic alphabet used for &ldquo;borrowed&rdquo; / new words.</li>
+<li><strong>Kanji</strong>      &ndash; symbolic alphabet used to import Chinese words.</li>
+</ol>
+
+
+<p>Most students learn the syllabic alphabets first through memorization and mnemonics, using charts like this one to assist in the memorization:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/alphabet_chart.png" width="750" height="750"></p>
+
+<p>Thousands of Kanji characters are in existence today &ndash; an individual in Japanese is considered fluent when they have mastery of the base 2000 characters. These are generally learned through memorization and constant practice.</p>
+
+<p>Cool &ndash; so how does the Japanese language relate to the Ruby programming language?</p>
+
+<h2>Japanese &lt;=> Ruby &ndash; What&rsquo;s the Deal?</h2>
+
+<p>Based on the definitions of the alphabets, we can see the following comparisons between the Japanese spoken language and the Ruby programming language:</p>
+
+<ol>
+<li><strong>Hiragana</strong> &ndash; syllabic alphabet for domestic use.
+
+<blockquote><p>In Ruby: built for <strong>domestic</strong> ease-of-use (focus on programmer happiness).</p></blockquote></li>
+<li><strong>Katakana</strong> &ndash; syllabic alphabet used for &ldquo;borrowed&rdquo; / new words.
+
+<blockquote><p>In Ruby: continually evolving and adapting <strong>new</strong> functionality.</p></blockquote></li>
+<li><strong>Kanji</strong>      &ndash; symbolic alphabet used to import Chinese words.
+
+<blockquote><p>In Ruby: merge (<strong>import</strong>) concepts of Object Orientated / Functional programming.</p></blockquote></li>
+</ol>
+
+
+<p>Furthermore, parts of the Japanese language can be seen as both object oriented (OO) and functional in nature.</p>
+
+<h3>Object Oriented Comparison</h3>
+
+<p>Thinking back to when we were learning English, our teachers taught us that sentences are formed in the following order: Subject &ndash; Verb &ndash; <strong>Object</strong> (SVO). It&rsquo;s fair to state that English is an &ldquo;Object-Oriented Language,&rdquo; where context revolves around the object in question.</p>
+
+<p>Japanese is quite similar, with the &ldquo;normal&rdquo; form of expressions being in the following form: Subject &ndash; <strong>Object</strong> &ndash; Verb (SOV). For example, take the following sentence:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center"><code>English</code></th>
+<th align="center"><code>Japanese</code></th>
+<th align="center"><code>Pronunciation</code></th>
+<th align="center"><code>Structure</code></th>
+<th align="center"><code>Literal English</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">私はベーコンを食べます。</td>
+<td align="center">Watashi ha bacon wo tabemasu.</td>
+<td align="center">SOV</td>
+<td align="center">&ldquo;I bacon eat.&rdquo;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Ruby&rsquo;s primary focus, much like the Japanese language, targets the object as the center of attention. Although the grammatical structure may be different, the intention remains the absolute same.</p>
+
+<p>In terms of code, Ruby also allows us to define functionality in both object oriented and procedural ways:</p>
+
+<p>```ruby</p>
+
+<h1>Object Oriented</h1>
+
+<p>File.open(&ldquo;foo.txt&rdquo;)</p>
+
+<h1>Procedural</h1>
+
+<p>open(&ldquo;file&rdquo;,&ldquo;foo.txt)
+```
+The example above shows the flexibility of Ruby to implement the same solution using two different grammatical orders. In most cases, when dealing with a complex problem, functionality is encapsulated within a class. Object Orientation proves to be a great aspect of the Ruby language.</p>
+
+<h3>Functional Comparison</h3>
+
+<p>Japanese grammar is different in that it is <em>post-positional</em>:</p>
+
+<blockquote><p>postposition &ndash; a word placed after the word it governs (e.g. the &lsquo;ward&rsquo; in homeward).</p></blockquote>
+
+<p>These <em>post-positional</em> words are used to decide the role of the noun which it supports. This would allow a Japanese speaker to change the order of the grammar pretty easily, <em>chaining as many sentences as desired</em>, and even <em>omitting the subject</em> altogether.</p>
+
+<p>Here are some examples:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/functional_japanese.png" width="500" height="500"></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center"><code>English</code></th>
+<th align="center"><code>Japanese</code></th>
+<th align="center"><code>Pronunciation</code></th>
+<th align="center"><code>Structure</code></th>
+<th align="center"><code>Literal English</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">私はベーコンを食べます。</td>
+<td align="center">Watashi ha bacon wo tabemasu.</td>
+<td align="center">SOV</td>
+<td align="center">&ldquo;I bacon eat.&rdquo;</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">ベーコンを私は食べます。</td>
+<td align="center">Bacon wo watashi ha tabemasu.</td>
+<td align="center">OSV</td>
+<td align="center">&ldquo;Bacon I eat.&rdquo;</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">ベーコンを食べます。</td>
+<td align="center">Bacon wo tabemasu.</td>
+<td align="center">OV</td>
+<td align="center">&ldquo;Bacon eat.&rdquo;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Where do we see this sort of behavior in Ruby?</p>
+
+<p>```ruby</p>
+
+<h6>#</h6>
+
+<h1>Expressively Iterative</h1>
+
+<h6>#</h6>
+
+<h1>.times enumerator => 5x</h1>
+
+<p>5.times do</p>
+
+<pre><code># =&gt; Perform action here.
+</code></pre>
+
+<p>end</p>
+
+<p>i = 0
+c = 5</p>
+
+<h1>while loop => 5x</h1>
+
+<p>while i &lt; c do</p>
+
+<pre><code># Perform action here.
+c += 1
+</code></pre>
+
+<p>end</p>
+
+<h1>for loop => 5x</h1>
+
+<p>for i in 0..5</p>
+
+<pre><code># Perform action here.
+</code></pre>
+
+<p>end</p>
+
+<h6>#</h6>
+
+<h1>Functional Flexibility</h1>
+
+<h6>#</h6>
+
+<p>str  = &ldquo;Hello World!&rdquo;</p>
+
+<p>expr1 = str.upcase.delete(&lsquo;o&rsquo;).gsub(&lsquo;O&rsquo;,&lsquo;X&rsquo;)</p>
+
+<pre><code># =&gt; "HELLX WXRLD!"
+</code></pre>
+
+<p>expr2 = str.delete(&lsquo;o&rsquo;).upcase.gsub(&lsquo;O&rsquo;,&lsquo;X&rsquo;)</p>
+
+<pre><code># =&gt; "HELL WRLD!"
+</code></pre>
+
+<p>expr3 = str.gsub(&lsquo;O&rsquo;,&lsquo;X&rsquo;).upcase.delete(&lsquo;o&rsquo;)</p>
+
+<pre><code># =&gt; "HELLO WORLD!"
+</code></pre>
+
+<h6>#</h6>
+
+<h1>Contextual Evaluation</h1>
+
+<h6>#</h6>
+
+<h1>Opens a file.</h1>
+
+<p>File.open(&ldquo;foo.txt&rdquo;)</p>
+
+<h1>Open a file and then yield to a block.</h1>
+
+<p>File.open(&ldquo;foo.txt&rdquo;).each do |line|</p>
+
+<pre><code>puts line
+</code></pre>
+
+<p>end</p>
+
+<h6>#</h6>
+
+<h1>Implicative Nature</h1>
+
+<h6>#</h6>
+
+<h1>Explicit self used in instance method.</h1>
+
+<p>class Dog</p>
+
+<pre><code>def initialize(name)
+    @name = name
+    self.bark(@name)    # =&gt; SVO
+end
+
+def bark(name)
+    puts "'WOOF!' barks #{name}."
+end
+</code></pre>
+
+<p>end</p>
+
+<h1>Implicit call to instance method without self.</h1>
+
+<p>class Dog</p>
+
+<pre><code>def initialize(name)
+    @name = name
+    bark(@name)     # =&gt; VO
+end
+
+def bark(name)
+    puts "'WOOF!' barks #{name}."
+end
+</code></pre>
+
+<p>end</p>
+
+<p>```</p>
+
+<p>Functional programming in Ruby allows for hard-core abstraction and meta-programming, which is something that other programming languages do not support as easily.</p>
+
+<h2>Ruby in Japanese</h2>
+
+<p>One example of a gem that allows you to evaluate Japanese characters and expressions in the Ruby programming language is the <a href="https://github.com/makoto/japanize">japanize</a> gem.</p>
+
+<p>Here&rsquo;s output to what a command line might look like, along with a test that was written in order to test the interpreter:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_output.png" width="500" height="500"></p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_test.png" width="500" height="500"></p>
+
+<p>Note that this gem is outdated (3 years old), and that other gems exist that establish the morphemes (translation patterns) between English and Japanese for Ruby.</p>
+
+<h2>Embracing Language Diversity in the World</h2>
+
+<p>Too often, I overhear people argue over which language is:</p>
+
+<ul>
+<li>Better.</li>
+<li>Faster.</li>
+<li>Stronger.</li>
+<li>More Robust.</li>
+<li>More Semantically Correct.</li>
+</ul>
+
+
+<p>As programmers and as citizens of a diverse world, it&rsquo;s up to us to <strong>respect</strong> language in general, whether programming or spoken. It should come as no surprise that programming and spoken languages are so similar, <em>as one is used to express</em> the other.</p>
+
+<blockquote><p style="text-align:center;"> <strong>どうもありがとうございました。</strong> (Dōmo arigatōgozaimashita!)</p></blockquote>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+</feed>

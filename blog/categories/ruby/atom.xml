@@ -1,0 +1,1872 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby | Changing the World - One Line of Code at a Time]]></title>
+  <link href="http://cjlwired.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://cjlwired.github.io/"/>
+  <updated>2013-11-20T01:12:11-05:00</updated>
+  <id>http://cjlwired.github.io/</id>
+  <author>
+    <name><![CDATA[Carlos Lazo]]></name>
+    <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Grokking on Ruby: Object Modifications in Methods]]></title>
+    <link href="http://cjlwired.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods/"/>
+    <updated>2013-10-13T10:04:00-04:00</updated>
+    <id>http://cjlwired.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods</id>
+    <content type="html"><![CDATA[<p>In a concerted effort to start posting more content to my blog, I&rsquo;ve decided to start a new recurring segment called <strong>Grokking on Ruby</strong>. Every now and then, I&rsquo;ll post some cool tips and tricks I find awesome or important to know as you&rsquo;re learning the Ruby programming language. There&rsquo;s a ton out there to share, so let&rsquo;s get to it.</p>
+
+<h2>Pass Parameters by &lsquo;Value&rsquo; or &lsquo;Reference&rsquo;</h2>
+
+<p>Prior to learning about Ruby, my primary programming language was C++. When passing arguments to methods, most statically typed programming languages require you to <em>explicitly</em> declare variables as <strong>value</strong> or <strong>reference</strong> parameters when passed into methods.</p>
+
+<ul>
+<li>Pass by <strong>value</strong>: a <em>copy</em> of the parameter is passed into method.</li>
+<li>Pass by <strong>reference</strong>: the <em>actual</em> parameter passed into method.</li>
+</ul>
+
+
+<p>In other words, when passed by value, the original parameter passed into the method is not changed, whereas when passing by reference, the original object may actually be changed.</p>
+
+<h2>Object Behavior in Ruby Methods</h2>
+
+<p>Ruby is powerful in that it is a dynamically typed language which is good for duck-typing and meta-programming. This means that you (1) don&rsquo;t have to explicitly define variable types or (2) distinguish between value / reference parameters.</p>
+
+<p>In order to illustrate this, check out the code below:</p>
+
+<p>```ruby
+def modifyStrings(aString,anotherString)
+  aString.capitalize!
+  anotherString.reverse!.capitalize!</p>
+
+<pre><code>aString.swapcase +  " " + anotherString.swapcase!
+</code></pre>
+
+<p>end
+```</p>
+
+<p>This method takes in two strings and performs modifications. It turns out that the original objects passed into this method <em>will be changed</em> as a result of the bang (!) methods performed in the strings, regardless of them being in this method scope.</p>
+
+<p>Take a look at this code &ndash; it checks Object ID and values at different stages of the example to reinforce the fact that the original objects are being modified:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Object Modifcations in Ruby Methods (object_mods_in_ruby.rb)</span> <a href='/code/2013-10-13-grokking-on-ruby-objects-in-methods/object_mods_in_ruby.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">def</span> <span class="nf">modifyStrings</span><span class="p">(</span><span class="n">aString</span><span class="p">,</span><span class="n">anotherString</span><span class="p">)</span>
+</span><span class='line'>	<span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">aString gets capitalized(!).&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">aString</span><span class="o">.</span><span class="n">capitalize!</span>
+</span><span class='line'>  <span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;aString =&gt;</span><span class="se">\n\t</span><span class="s2">Address: </span><span class="si">#{</span><span class="n">aString</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">aString</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">anotherString gets reversed(!) and capitalized(!)&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">anotherString</span><span class="o">.</span><span class="n">reverse!</span><span class="o">.</span><span class="n">capitalize!</span>
+</span><span class='line'>  <span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;anotherString =&gt;</span><span class="se">\n\t</span><span class="s2">Address: </span><span class="si">#{</span><span class="n">anotherString</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">anotherString</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Return ::: aString swap-cased + </span><span class="se">\&quot;</span><span class="s2"> </span><span class="se">\&quot;</span><span class="s2"> + anotherString swap-cased(!)&quot;</span><span class="p">)</span>
+</span><span class='line'>	<span class="n">aString</span><span class="o">.</span><span class="n">swapcase</span> <span class="o">+</span>  <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">anotherString</span><span class="o">.</span><span class="n">swapcase!</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">str1</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+</span><span class='line'><span class="n">str2</span> <span class="o">=</span> <span class="s2">&quot;world&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Original Ruby Objects can be modified in Methods</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">upcase</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;Str1 =&gt; Address: </span><span class="si">#{</span><span class="n">str1</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">str1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;Str2 =&gt; Address: </span><span class="si">#{</span><span class="n">str2</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">str2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#############################################</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="n">str3</span> <span class="o">=</span> <span class="n">modifyStrings</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span><span class="n">str2</span><span class="p">)</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#############################################</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;Str1 =&gt; Address: </span><span class="si">#{</span><span class="n">str1</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">str1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;Str2 =&gt; Address: </span><span class="si">#{</span><span class="n">str2</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">str2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;Str3 =&gt; Address: </span><span class="si">#{</span><span class="n">str3</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">str3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Here is the output from the program:</p>
+
+<p><img src="/images/posts/2013-10-13-grokking-on-ruby-objects-in-methods/ruby_obj_output.png" width="1000" height="750"></p>
+
+<p>Following the method and the requisite output, you&rsquo;ll notice how the bang(!) methods changed the original objects (Object IDs are still the same).</p>
+
+<h2>Summary</h2>
+
+<p>Understanding the implications and importance of object modifications in Ruby methods is <em>critical</em> to understanding how Ruby works and will help you avoid issues in the future.</p>
+
+<p>Happy coding!</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linked Lists and Ruby]]></title>
+    <link href="http://cjlwired.github.io/blog/2013/08/08/linked-lists-and-ruby/"/>
+    <updated>2013-08-08T15:24:00-04:00</updated>
+    <id>http://cjlwired.github.io/blog/2013/08/08/linked-lists-and-ruby</id>
+    <content type="html"><![CDATA[<p>One of the most talked about data structures in Computer Science is the <strong>Linked List</strong>.</p>
+
+<p>So, what is a <strong>Linked List</strong> and how can we implement it in Ruby?</p>
+
+<h2>What is a Linked List?</h2>
+
+<p>As defined by <strong><a href="https://en.wikipedia.org/wiki/Linked_list">Wikipedia</a></strong>, a <strong>Linked List</strong> (LL) is:</p>
+
+<blockquote><p>Data structure consisting of a group of nodes which together represent a sequence.</p></blockquote>
+
+<p>In the simplest implementation of a LinkedList, each node has the following:</p>
+
+<blockquote><p><strong>value</strong> = represents the value of the node (e.g. integer, Class, etc.)</p>
+
+<p><strong>next</strong> = pointer to the next value in the sequence.</p></blockquote>
+
+<p>In most implementations, you also have a head and a tail pointer:</p>
+
+<blockquote><p><strong>head</strong> = points to the first Node in the linked list.</p>
+
+<p><strong>tail</strong> = points to the last Node in the linked list.</p></blockquote>
+
+<p>For the visual learners, here&rsquo;s a picture that shows the structure:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_layout.png" width="500" height="500"></p>
+
+<p>Awesome &ndash; so, how can we build this in Ruby?</p>
+
+<h2>Ruby Implementation of a Linked List</h2>
+
+<p>Two classes are needed in order to build a Linked List: <code>Node</code> and <code>LinkedList</code></p>
+
+<h3>Node Class</h3>
+
+<p>Here is my implementation of the <code>Node</code> class:</p>
+
+<p>```ruby</p>
+
+<h1>Define a Node class that holds the following:</h1>
+
+<h1>=> next : stores the next Node in the Linked List.</h1>
+
+<h1>=> value: stores the value of the current list element.</h1>
+
+<p>class Node</p>
+
+<pre><code>attr_accessor :value, :next
+
+def initialize(value)
+    @value = value
+end
+</code></pre>
+
+<p>end</p>
+
+<p>```</p>
+
+<h3>LinkedList Class</h3>
+
+<p>Here is my implementation of the <code>LinkedList</code> class:</p>
+
+<p>```ruby</p>
+
+<h1>Define a LinkedList class the holds the following:</h1>
+
+<h1>=> head : pointer to the head of the Linked List.</h1>
+
+<h1>=> tail : pointer to the tail of the Linked List.</h1>
+
+<p>class LinkedList</p>
+
+<pre><code>attr_accessor :head, :tail
+
+# Initialize head and tail to same initial Node.
+def initialize (head)
+    raise "LinkedList must be initialized with a Node." unless head.is_a?(Node)
+
+    @head = head
+    @tail = head
+end
+
+# Insert Node after the tail of the LinkedList.
+def insert(node)
+    @tail.next = node
+    @tail = @tail.next
+end
+
+# Print out all the values of the LinkedList in order.
+def print
+    current_node = @head
+
+    while current_node != nil
+        puts "\tLL Node Value = #{current_node.value}"
+        current_node = current_node.next
+    end
+end
+
+# Iterate through LinkedList and yield values to block.
+def iterate
+    if block_given?
+        current_node = @head
+
+        while current_node != nil
+            yield current_node.value
+            current_node = current_node.next
+        end
+    else
+        print
+    end
+end
+</code></pre>
+
+<p>end</p>
+
+<p>```</p>
+
+<h3>TestBench</h3>
+
+<p>Here is a quick test bench I wrote to test functionality:</p>
+
+<p>```ruby</p>
+
+<p>puts &ldquo;\nCreating LinkedList of 5 Node elements with values 1-5.\n&rdquo;</p>
+
+<p>h    = Node.new(1)
+list = LinkedList.new(h)</p>
+
+<p>(2..5).each {|n| list.insert(Node.new(n)) }</p>
+
+<p>puts &ldquo;\nCurrent values contained in LinkedList:\n&rdquo;</p>
+
+<p>list.print</p>
+
+<p>puts &ldquo;\n&rdquo;
+puts &ldquo;Values of head and tail of LinkedList:\n&rdquo;</p>
+
+<p>puts &ldquo;\tValue of LL Head = #{list.head.value}&rdquo;
+puts &ldquo;\tValue of LL Tail = #{list.tail.value}&rdquo;</p>
+
+<p>puts &ldquo;\n&rdquo;
+puts &ldquo;Iterating through LinkedList without a block prints the list.\n&rdquo;</p>
+
+<p>list.iterate</p>
+
+<p>puts &ldquo;\n&rdquo;
+puts &ldquo;Iterating through the LinkedList with a block runs the block on each element.\n&rdquo;</p>
+
+<p>list.iterate {|n| puts &ldquo;\tLL Node Value squared = #{n ** 2}&rdquo;}</p>
+
+<p>puts &ldquo;\n&rdquo;</p>
+
+<p>```</p>
+
+<p>Here is the output from the test bench:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_output.png" width="750" height="750"></p>
+
+<p>Take a look at the methods I defined for:</p>
+
+<ul>
+<li>List insertion (using the <code>tail</code>) => O(1) operation.</li>
+<li>Printing the list (in order).</li>
+<li>List iteration (with block capability).</li>
+</ul>
+
+
+<p>The source code for my example is contained <a href="/code/2013-08-08-linked-lists-and-ruby/linked_list.rb">HERE</a>.</p>
+
+<h2>More with Linked Lists</h2>
+
+<p>The fun doesn&rsquo;t end here!</p>
+
+<p>Check out these other types of Linked Lists:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-08-08-linked-lists-and-ruby/Doubly-linked-list.png" width="750" height="750"></p>
+
+<p style="text-align:center;"> <strong>Doubly Linked Lists</strong></p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-08-08-linked-lists-and-ruby/Circularly-linked-list.png" width="425" height="425"></p>
+
+<p style="text-align:center;"> <strong>Circular Linked Lists</strong></p>
+
+<p>Would you ever use a Linked List in practice, you ask?</p>
+
+<p>It depends on your domain model. If you get the chance, look up a <a href="http://en.wikipedia.org/wiki/Sparse_matrix">sparse matrix</a>. This problem would be perfect for a linked list.</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby and the Japanese Language]]></title>
+    <link href="http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language/"/>
+    <updated>2013-08-01T08:00:00-04:00</updated>
+    <id>http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language</id>
+    <content type="html"><![CDATA[<h2><strong>こんにちは世界</strong> (Kon'nichiwa sekai!)</h2>
+
+<p>The inspiration for this blog post comes from a few places:</p>
+
+<ol>
+<li>My love of languages and world-wide celebration of culture.</li>
+<li>This <a href="http://www.slideshare.net/inouemak/ruby-and-japanesepdf">slide deck</a> by <a href="https://twitter.com/makoto_inoue">Makoto Inoue</a> on <strong>Ruby and Japanese</strong>.</li>
+<li>General curiosity on the topic.</li>
+</ol>
+
+
+<p>Growing up, my first <strong>spoken</strong> language was Spanish, followed shortly there after by English and French, all three of which I&rsquo;m fluent in. In the present, I split my time between learning 5 other languages &ndash; Japanese, Mandarin Chinese, German, Italian, and Russian.</p>
+
+<p>Interestingly enough, during this same time period, I&rsquo;ve also worked with a variety of different <strong>programming</strong> languages &ndash; C, C++, C#, Java, Python, Scheme, and MATLAB. I continue to learn languages, like Ruby, JavaScript, and HTML/CSS.</p>
+
+<p>That begs me to ask the question:</p>
+
+<blockquote><p style="text-align:center;"> <strong>Is there a link between programming languages and spoken languages?</strong></p></blockquote>
+
+<p>Why yes, yes there is &ndash; let&rsquo;s take a look at <strong>Ruby and the Japanese Language</strong>.</p>
+
+<h2>Insight into the Japanese Language</h2>
+
+<p>Japanese has a total of three (3) different alphabets, all of which serve their own purpose:</p>
+
+<ol>
+<li><strong>Hiragana</strong> &ndash; syllabic alphabet for domestic use.</li>
+<li><strong>Katakana</strong> &ndash; syllabic alphabet used for &ldquo;borrowed&rdquo; / new words.</li>
+<li><strong>Kanji</strong>      &ndash; symbolic alphabet used to import Chinese words.</li>
+</ol>
+
+
+<p>Most students learn the syllabic alphabets first through memorization and mnemonics, using charts like this one to assist in the memorization:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/alphabet_chart.png" width="750" height="750"></p>
+
+<p>Thousands of Kanji characters are in existence today &ndash; an individual in Japanese is considered fluent when they have mastery of the base 2000 characters. These are generally learned through memorization and constant practice.</p>
+
+<p>Cool &ndash; so how does the Japanese language relate to the Ruby programming language?</p>
+
+<h2>Japanese &lt;=> Ruby &ndash; What&rsquo;s the Deal?</h2>
+
+<p>Based on the definitions of the alphabets, we can see the following comparisons between the Japanese spoken language and the Ruby programming language:</p>
+
+<ol>
+<li><strong>Hiragana</strong> &ndash; syllabic alphabet for domestic use.
+
+<blockquote><p>In Ruby: built for <strong>domestic</strong> ease-of-use (focus on programmer happiness).</p></blockquote></li>
+<li><strong>Katakana</strong> &ndash; syllabic alphabet used for &ldquo;borrowed&rdquo; / new words.
+
+<blockquote><p>In Ruby: continually evolving and adapting <strong>new</strong> functionality.</p></blockquote></li>
+<li><strong>Kanji</strong>      &ndash; symbolic alphabet used to import Chinese words.
+
+<blockquote><p>In Ruby: merge (<strong>import</strong>) concepts of Object Orientated / Functional programming.</p></blockquote></li>
+</ol>
+
+
+<p>Furthermore, parts of the Japanese language can be seen as both object oriented (OO) and functional in nature.</p>
+
+<h3>Object Oriented Comparison</h3>
+
+<p>Thinking back to when we were learning English, our teachers taught us that sentences are formed in the following order: Subject &ndash; Verb &ndash; <strong>Object</strong> (SVO). It&rsquo;s fair to state that English is an &ldquo;Object-Oriented Language,&rdquo; where context revolves around the object in question.</p>
+
+<p>Japanese is quite similar, with the &ldquo;normal&rdquo; form of expressions being in the following form: Subject &ndash; <strong>Object</strong> &ndash; Verb (SOV). For example, take the following sentence:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center"><code>English</code></th>
+<th align="center"><code>Japanese</code></th>
+<th align="center"><code>Pronunciation</code></th>
+<th align="center"><code>Structure</code></th>
+<th align="center"><code>Literal English</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">私はベーコンを食べます。</td>
+<td align="center">Watashi ha bacon wo tabemasu.</td>
+<td align="center">SOV</td>
+<td align="center">&ldquo;I bacon eat.&rdquo;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Ruby&rsquo;s primary focus, much like the Japanese language, targets the object as the center of attention. Although the grammatical structure may be different, the intention remains the absolute same.</p>
+
+<p>In terms of code, Ruby also allows us to define functionality in both object oriented and procedural ways:</p>
+
+<p>```ruby</p>
+
+<h1>Object Oriented</h1>
+
+<p>File.open(&ldquo;foo.txt&rdquo;)</p>
+
+<h1>Procedural</h1>
+
+<p>open(&ldquo;file&rdquo;,&ldquo;foo.txt)
+```
+The example above shows the flexibility of Ruby to implement the same solution using two different grammatical orders. In most cases, when dealing with a complex problem, functionality is encapsulated within a class. Object Orientation proves to be a great aspect of the Ruby language.</p>
+
+<h3>Functional Comparison</h3>
+
+<p>Japanese grammar is different in that it is <em>post-positional</em>:</p>
+
+<blockquote><p>postposition &ndash; a word placed after the word it governs (e.g. the &lsquo;ward&rsquo; in homeward).</p></blockquote>
+
+<p>These <em>post-positional</em> words are used to decide the role of the noun which it supports. This would allow a Japanese speaker to change the order of the grammar pretty easily, <em>chaining as many sentences as desired</em>, and even <em>omitting the subject</em> altogether.</p>
+
+<p>Here are some examples:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/functional_japanese.png" width="500" height="500"></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center"><code>English</code></th>
+<th align="center"><code>Japanese</code></th>
+<th align="center"><code>Pronunciation</code></th>
+<th align="center"><code>Structure</code></th>
+<th align="center"><code>Literal English</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">私はベーコンを食べます。</td>
+<td align="center">Watashi ha bacon wo tabemasu.</td>
+<td align="center">SOV</td>
+<td align="center">&ldquo;I bacon eat.&rdquo;</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">ベーコンを私は食べます。</td>
+<td align="center">Bacon wo watashi ha tabemasu.</td>
+<td align="center">OSV</td>
+<td align="center">&ldquo;Bacon I eat.&rdquo;</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">I eat bacon.</td>
+<td align="center">ベーコンを食べます。</td>
+<td align="center">Bacon wo tabemasu.</td>
+<td align="center">OV</td>
+<td align="center">&ldquo;Bacon eat.&rdquo;</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>Where do we see this sort of behavior in Ruby?</p>
+
+<p>```ruby</p>
+
+<h6>#</h6>
+
+<h1>Expressively Iterative</h1>
+
+<h6>#</h6>
+
+<h1>.times enumerator => 5x</h1>
+
+<p>5.times do</p>
+
+<pre><code># =&gt; Perform action here.
+</code></pre>
+
+<p>end</p>
+
+<p>i = 0
+c = 5</p>
+
+<h1>while loop => 5x</h1>
+
+<p>while i &lt; c do</p>
+
+<pre><code># Perform action here.
+c += 1
+</code></pre>
+
+<p>end</p>
+
+<h1>for loop => 5x</h1>
+
+<p>for i in 0..5</p>
+
+<pre><code># Perform action here.
+</code></pre>
+
+<p>end</p>
+
+<h6>#</h6>
+
+<h1>Functional Flexibility</h1>
+
+<h6>#</h6>
+
+<p>str  = &ldquo;Hello World!&rdquo;</p>
+
+<p>expr1 = str.upcase.delete(&lsquo;o&rsquo;).gsub(&lsquo;O&rsquo;,&lsquo;X&rsquo;)</p>
+
+<pre><code># =&gt; "HELLX WXRLD!"
+</code></pre>
+
+<p>expr2 = str.delete(&lsquo;o&rsquo;).upcase.gsub(&lsquo;O&rsquo;,&lsquo;X&rsquo;)</p>
+
+<pre><code># =&gt; "HELL WRLD!"
+</code></pre>
+
+<p>expr3 = str.gsub(&lsquo;O&rsquo;,&lsquo;X&rsquo;).upcase.delete(&lsquo;o&rsquo;)</p>
+
+<pre><code># =&gt; "HELLO WORLD!"
+</code></pre>
+
+<h6>#</h6>
+
+<h1>Contextual Evaluation</h1>
+
+<h6>#</h6>
+
+<h1>Opens a file.</h1>
+
+<p>File.open(&ldquo;foo.txt&rdquo;)</p>
+
+<h1>Open a file and then yield to a block.</h1>
+
+<p>File.open(&ldquo;foo.txt&rdquo;).each do |line|</p>
+
+<pre><code>puts line
+</code></pre>
+
+<p>end</p>
+
+<h6>#</h6>
+
+<h1>Implicative Nature</h1>
+
+<h6>#</h6>
+
+<h1>Explicit self used in instance method.</h1>
+
+<p>class Dog</p>
+
+<pre><code>def initialize(name)
+    @name = name
+    self.bark(@name)    # =&gt; SVO
+end
+
+def bark(name)
+    puts "'WOOF!' barks #{name}."
+end
+</code></pre>
+
+<p>end</p>
+
+<h1>Implicit call to instance method without self.</h1>
+
+<p>class Dog</p>
+
+<pre><code>def initialize(name)
+    @name = name
+    bark(@name)     # =&gt; VO
+end
+
+def bark(name)
+    puts "'WOOF!' barks #{name}."
+end
+</code></pre>
+
+<p>end</p>
+
+<p>```</p>
+
+<p>Functional programming in Ruby allows for hard-core abstraction and meta-programming, which is something that other programming languages do not support as easily.</p>
+
+<h2>Ruby in Japanese</h2>
+
+<p>One example of a gem that allows you to evaluate Japanese characters and expressions in the Ruby programming language is the <a href="https://github.com/makoto/japanize">japanize</a> gem.</p>
+
+<p>Here&rsquo;s output to what a command line might look like, along with a test that was written in order to test the interpreter:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_output.png" width="500" height="500"></p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_test.png" width="500" height="500"></p>
+
+<p>Note that this gem is outdated (3 years old), and that other gems exist that establish the morphemes (translation patterns) between English and Japanese for Ruby.</p>
+
+<h2>Embracing Language Diversity in the World</h2>
+
+<p>Too often, I overhear people argue over which language is:</p>
+
+<ul>
+<li>Better.</li>
+<li>Faster.</li>
+<li>Stronger.</li>
+<li>More Robust.</li>
+<li>More Semantically Correct.</li>
+</ul>
+
+
+<p>As programmers and as citizens of a diverse world, it&rsquo;s up to us to <strong>respect</strong> language in general, whether programming or spoken. It should come as no surprise that programming and spoken languages are so similar, <em>as one is used to express</em> the other.</p>
+
+<blockquote><p style="text-align:center;"> <strong>どうもありがとうございました。</strong> (Dōmo arigatōgozaimashita!)</p></blockquote>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Becoming a Ruby Warrior with Artificial Intelligence]]></title>
+    <link href="http://cjlwired.github.io/blog/2013/07/14/becoming-a-ruby-warrior-with-artificial-intelligence/"/>
+    <updated>2013-07-14T15:33:00-04:00</updated>
+    <id>http://cjlwired.github.io/blog/2013/07/14/becoming-a-ruby-warrior-with-artificial-intelligence</id>
+    <content type="html"><![CDATA[<p>In Weeks 3 &ndash; 6 at Flatiron School, the focus has been on learning both the Sinatra and Rails web frameworks. Understanding the paradigms has been crucial in spinning up web applications &ldquo;the right way&rdquo;.</p>
+
+<p>However, it&rsquo;s important to remember the foundation on which these frameworks are built &ndash; the <strong>Ruby</strong> language. With only 6 weeks of Ruby knowledge under my belt, I want to continue understanding the principles of abstraction, modeling, and scope.</p>
+
+<p>Enter the realm of <strong>Artificial Intelligence (AI)</strong>.</p>
+
+<h2>Basic AI Principles</h2>
+
+<p>I&rsquo;ve had the honor and pleasure of working with AI concepts in the Scheme programming language. I wanted to explore this realm in Ruby, and it turns out there&rsquo;s a great venue. Before I get into that, let me define two common terms used in AI:</p>
+
+<p><strong>Agent</strong>: an autonomous entity which observes through sensors and acts upon an environment using actuators and directs its activity towards achieving goals.</p>
+
+<p><strong>Heuristic</strong>: a function that ranks alternatives in various search algorithms at each branching step based on the available information in order to make a decision about which branch to follow during a search.</p>
+
+<p>Here&rsquo;s a cool image that will make these definitions clearer:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/AI_Agent.png" width="575" height="575"></p>
+
+<p>Now with that background, onto <strong>Ruby Warrior</strong>.</p>
+
+<h2>What is Ruby Warrior?</h2>
+
+<p>The <strong>Ruby Warrior</strong> project (<strong><a href="https://github.com/ryanb/ruby-warrior">Github</a></strong> and <strong><a href="http://rubygems.org/gems/rubywarrior">Ruby Gem</a></strong>) was built as a vehicle to teach Ruby. How? Through the gamification of artificial intelligence.</p>
+
+<p>Here&rsquo;s a quick overview:</p>
+
+<ul>
+<li>You (the player) are a Warrior in this world, with your primary objective being to scale levels of a tower.
+
+<ul>
+<li>There is a beginner / intermediate tower, both with &lsquo;epic&rsquo; modes.</li>
+</ul>
+</li>
+<li>Each level is laid out differently, and can have a variety of components.
+
+<ul>
+<li>Monsters, Captives, Bombs, Walls, etc.</li>
+</ul>
+</li>
+<li>Each level grants the warrior more abilities.
+
+<ul>
+<li>  You get to perform one and only one action(!) per turn based on whatever logic you choose to define.</li>
+<li>More abilities lead to harder levels (e.g. more directions to move in).</li>
+</ul>
+</li>
+<li>A score is given per level based on different things: level clear speed, amount of action! used, captives rescued, etc.</li>
+</ul>
+
+
+<p>Every turn, the <code>play_turn</code> method is called in <code>player.rb</code> file &ndash; this and any other files can be used, as long as <code>play_turn</code> calls one and only one action.</p>
+
+<h2>Climbing the Tower</h2>
+
+<p>For this post, my goal is to share how I&rsquo;ve applied my Ruby skills to the first 4 levels. Here&rsquo;s a quick legend regarding level layouts:</p>
+
+<p style="text-align:center;"> <strong>Legend: Tower Level Symbols</strong></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center"><code>Name</code></th>
+<th align="center"><code>Symbol</code></th>
+<th align="center"><code>HP</code></th>
+<th align="center"><code>Atk</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="center">Warrior</td>
+<td align="center">@</td>
+<td align="center">20</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">Sludge</td>
+<td align="center">s</td>
+<td align="center">12</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">Thick Sludge</td>
+<td align="center">S</td>
+<td align="center">24</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">Archer</td>
+<td align="center">a</td>
+<td align="center">7</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td></td>
+<td align="center">Stairs</td>
+<td align="center">></td>
+<td align="center">&ndash;</td>
+<td align="center">&ndash;</td>
+</tr>
+</tbody>
+</table>
+
+
+<h3>Level 01</h3>
+
+<p>Here is the representation of Level 01:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level01.png" width="175" height="175"></p>
+
+<p>This level is pretty straightforward. Having only one action available [<code>warrior.walk!</code>], the logic here is simple:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Ruby Warrior: Level 01 (player_h01.rb)</span> <a href='/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h01.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">Player</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">play_turn</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>  	<span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Level 01 was completed and I achieved maximum points.</p>
+
+<h4>Lessons learned:</h4>
+
+<ul>
+<li>Model heuristic functionality based on immediate sufficiency.</li>
+</ul>
+
+
+<h3>Level 02</h3>
+
+<p>Here is the representation of Level 02:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level02.png" width="175" height="175"></p>
+
+<p>This level introduced the first monster. I realized I needed to add logic to check to see if a monster was in front of me based on my available actions. Still pretty straightforward.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Ruby Warrior: Level 02 (player_h02.rb)</span> <a href='/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h02.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">Player</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">play_turn</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>  	<span class="n">warrior</span><span class="o">.</span><span class="n">rest!</span> <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">&lt;</span> <span class="mi">15</span>
+</span><span class='line'>  	<span class="n">warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">empty?</span> <span class="o">==</span> <span class="kp">true</span> <span class="p">?</span> <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span> <span class="p">:</span> <span class="n">warrior</span><span class="o">.</span><span class="n">attack!</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Level 02 was completed now completed.</p>
+
+<h4>Lessons learned:</h4>
+
+<ul>
+<li>Decision logic is going to get completed quick.
+
+<ul>
+<li>Probably worth refactoring and &ldquo;setting the stage&rdquo; in Level 03.</li>
+</ul>
+</li>
+<li>Able to make assumption that <code>Player</code> class is being initialized one time, with <code>play_turn</code> being called in a loop. Take advantage of the <code>initialize</code> method.</li>
+</ul>
+
+
+<h3>Level 03</h3>
+
+<p>Here is the representation of Level 03:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level03.png" width="175" height="175"></p>
+
+<p>Four (4) monsters. <strong>Oh snap son</strong>.</p>
+
+<p>As I began writing my code, I realized I didn&rsquo;t want to do annoying amounts of nested logic. Projecting into the future, I felt the need to begin splitting parts of the agent into logical methods in an organized structure. I also needed to figure out when was the right time to rest, to keep moving forward, and when to attack.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Ruby Warrior: Level 03 (player_h03.rb)</span> <a href='/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h03.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">Player</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1">#########################</span>
+</span><span class='line'>	<span class="c1"># Player Initialization #</span>
+</span><span class='line'>	<span class="c1">#########################</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>		<span class="vi">@action_taken</span> <span class="o">=</span> <span class="kp">false</span>		<span class="c1"># Did I take my action?</span>
+</span><span class='line'>		<span class="vi">@in_combat</span>		<span class="o">=</span> <span class="kp">false</span>		<span class="c1"># Am I in combat?</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1">##################</span>
+</span><span class='line'>	<span class="c1"># Helper Methods #</span>
+</span><span class='line'>	<span class="c1">##################</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">sense_environment</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>		<span class="vi">@action_taken</span>	<span class="o">=</span> <span class="kp">false</span>		<span class="c1"># Reset environment.</span>
+</span><span class='line'>
+</span><span class='line'>		<span class="c1"># No longer in combat.</span>
+</span><span class='line'>		<span class="vi">@in_combat</span> <span class="o">=</span> <span class="kp">false</span> <span class="k">if</span> <span class="p">(</span><span class="n">warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">empty?</span> <span class="o">==</span> <span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">check_health</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>		
+</span><span class='line'>		<span class="k">if</span> <span class="p">(</span><span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="vi">@in_combat</span> <span class="o">==</span> <span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>			<span class="n">warrior</span><span class="o">.</span><span class="n">rest!</span>
+</span><span class='line'>			<span class="vi">@action_taken</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>		<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">attack_monster</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>		
+</span><span class='line'>		<span class="k">if</span> <span class="p">(</span><span class="n">warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">empty?</span> <span class="o">==</span> <span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>			<span class="n">warrior</span><span class="o">.</span><span class="n">attack!</span>
+</span><span class='line'>
+</span><span class='line'>			<span class="vi">@action_taken</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>			<span class="vi">@in_combat</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>		<span class="k">else</span>
+</span><span class='line'>			<span class="vi">@in_combat</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>		<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">move_warrior</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>		<span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span> <span class="k">if</span> <span class="vi">@action_taken</span> <span class="o">==</span> <span class="kp">false</span>
+</span><span class='line'>		<span class="vi">@action_taken</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1">####################</span>
+</span><span class='line'>	<span class="c1"># Play Turn Method #</span>
+</span><span class='line'>	<span class="c1">####################</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">play_turn</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  	<span class="c1"># Sense environment for clues.</span>
+</span><span class='line'>  	<span class="n">sense_environment</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  	<span class="c1"># Check health of the warrior.</span>
+</span><span class='line'>  	<span class="n">check_health</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  	<span class="c1"># Attack monster if present.</span>
+</span><span class='line'>  	<span class="n">attack_monster</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  	<span class="c1"># Move warrior in a specific direction.</span>
+</span><span class='line'>  	<span class="n">move_warrior</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Overall, I was really happy with my code &ndash; beat this level with no issues. Even though it grew in size, the <code>play_turn</code> method is readable and tells me exactly what the Warrior is to do at any given point in time.</p>
+
+<h4>Lessons learned:</h4>
+
+<ul>
+<li>(+) Breaking out logic into well-named functions was a great idea!</li>
+<li>(&ndash;) Potential issues in the future with additional functionality (like more actions).</li>
+<li>(&ndash;) Don&rsquo;t like how each function needs to have <code>warrior</code> as a parameter.
+
+<ul>
+<li>Can this be fixed with instance variables in Level 04?</li>
+</ul>
+</li>
+<li>(&ndash;) ALL actions are evaluated even if an action is already called.</li>
+</ul>
+
+
+<p>Given all the negatives, there was going to be some heavy-duty refactoring in Level 04. All in all though, I was fairly certain that the logic in the code was &lsquo;just going to work&rsquo;.</p>
+
+<p>I couldn&rsquo;t have been more wrong.</p>
+
+<h3>Level 04</h3>
+
+<p>Here is the representation of Level 04:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level04.png" width="175" height="175"></p>
+
+<p>Enter the dreaded <strong>Archer</strong> &ndash; umm&hellip; f*ck.</p>
+
+<p>This unit can attack from multiple spaces away. With my current logic, I&rsquo;d rest when the space in front of me was empty and I wasn&rsquo;t in combat. <strong>BUT I WAS IN COMBAT</strong>, since my health was decreasing by 1HP even though I was resting (rest = +2HP, attack = -3HP).</p>
+
+<p>This now forced new state logic into my methods, along with some well-needed refactoring.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Ruby Warrior: Level 04 (player_h04.rb)</span> <a href='/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h04.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">Player</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1">#########################</span>
+</span><span class='line'>	<span class="c1"># Player Initialization #</span>
+</span><span class='line'>	<span class="c1">#########################</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1"># Initialize instance variables.</span>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>		<span class="vi">@prv_health</span>			<span class="o">=</span> <span class="mi">20</span>			<span class="c1"># What was my previous health?</span>
+</span><span class='line'>		<span class="vi">@cur_health</span>			<span class="o">=</span>	<span class="mi">20</span>			<span class="c1"># What is my current health?</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1"># List of possible warrior actions.</span>
+</span><span class='line'>	<span class="no">Actions</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:check_health</span><span class="p">,</span>
+</span><span class='line'>						 <span class="ss">:attack_monster</span><span class="p">,</span>
+</span><span class='line'>						 <span class="ss">:move_warrior</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1">###########################</span>
+</span><span class='line'>	<span class="c1"># Pre and Post Processing #</span>
+</span><span class='line'>	<span class="c1">###########################</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1"># Understand environment prior to taking action.</span>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">pre_sense</span>
+</span><span class='line'>  	<span class="c1"># Reset warrior action from previous turn.</span>
+</span><span class='line'>		<span class="vi">@action_taken</span>		<span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>
+</span><span class='line'>		<span class="c1"># Determine health and surroundings.</span>
+</span><span class='line'>		<span class="vi">@space_empty</span>		<span class="o">=</span> <span class="vi">@warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">empty?</span>
+</span><span class='line'>		<span class="vi">@cur_health</span>			<span class="o">=</span> <span class="vi">@warrior</span><span class="o">.</span><span class="n">health</span>
+</span><span class='line'>
+</span><span class='line'>		<span class="c1"># Determine combat state.</span>
+</span><span class='line'>		<span class="vi">@in_combat</span> 			<span class="o">=</span> <span class="n">in_combat?</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1"># Perform state analysis for net turn.</span>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">post_sense</span>
+</span><span class='line'>		<span class="vi">@prv_health</span>			<span class="o">=</span> <span class="vi">@warrior</span><span class="o">.</span><span class="n">health</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1">##################</span>
+</span><span class='line'>	<span class="c1"># Action Methods #</span>
+</span><span class='line'>	<span class="c1">##################</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">check_health</span>
+</span><span class='line'>		<span class="k">if</span> <span class="p">(</span><span class="vi">@cur_health</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="vi">@in_combat</span> <span class="o">==</span> <span class="ss">:no</span><span class="p">)</span>
+</span><span class='line'>			<span class="vi">@warrior</span><span class="o">.</span><span class="n">rest!</span>
+</span><span class='line'>			<span class="vi">@action_taken</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>		<span class="k">end</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">attack_monster</span>
+</span><span class='line'>		<span class="k">case</span> <span class="vi">@in_combat</span>
+</span><span class='line'>		<span class="k">when</span> <span class="ss">:near</span>							<span class="c1"># Enemy is adjacent.</span>
+</span><span class='line'>			<span class="vi">@warrior</span><span class="o">.</span><span class="n">attack!</span>
+</span><span class='line'>			<span class="vi">@action_taken</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>		<span class="k">when</span> <span class="ss">:far</span>								<span class="c1"># Walk to enemy.</span>
+</span><span class='line'>			<span class="vi">@warrior</span><span class="o">.</span><span class="n">walk!</span>
+</span><span class='line'>			<span class="vi">@action_taken</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>		<span class="k">end</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">move_warrior</span>
+</span><span class='line'>		<span class="vi">@warrior</span><span class="o">.</span><span class="n">walk!</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1">##################</span>
+</span><span class='line'>	<span class="c1"># Helper Methods #</span>
+</span><span class='line'>	<span class="c1">##################</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1"># Did I lose health from last turn to this one?</span>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">lost_health?</span>
+</span><span class='line'>		<span class="p">(</span><span class="vi">@cur_health</span> <span class="o">-</span> <span class="vi">@prv_health</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="kp">true</span> <span class="p">:</span> <span class="kp">false</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1"># Am I in combat? If so, what &quot;kind&quot; of combat?</span>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">in_combat?</span>
+</span><span class='line'>		<span class="n">combat_state</span> <span class="o">=</span> <span class="ss">:no</span>
+</span><span class='line'>
+</span><span class='line'>		<span class="n">combat_state</span> <span class="o">=</span> <span class="ss">:near</span> <span class="k">if</span> <span class="p">(</span><span class="vi">@space_empty</span> <span class="o">==</span> <span class="kp">false</span><span class="p">)</span>
+</span><span class='line'>		<span class="n">combat_state</span> <span class="o">=</span> <span class="ss">:far</span>	 <span class="k">if</span> <span class="p">(</span><span class="vi">@space_empty</span> <span class="o">==</span> <span class="kp">true</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">lost_health?</span> <span class="o">==</span> <span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>		
+</span><span class='line'>		<span class="n">combat_state</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1">#####################</span>
+</span><span class='line'>	<span class="c1"># Logic for Actions #</span>
+</span><span class='line'>	<span class="c1">#####################</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">perform_action</span>
+</span><span class='line'>		<span class="no">Actions</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">action</span><span class="o">|</span>
+</span><span class='line'>			<span class="nb">send</span> <span class="n">action</span>
+</span><span class='line'>			<span class="k">break</span> <span class="k">if</span> <span class="vi">@action_taken</span> <span class="o">==</span> <span class="kp">true</span>
+</span><span class='line'>		<span class="k">end</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="c1">####################</span>
+</span><span class='line'>	<span class="c1"># Play Turn Method #</span>
+</span><span class='line'>	<span class="c1">####################</span>
+</span><span class='line'>
+</span><span class='line'>	<span class="k">def</span> <span class="nf">take_turn</span>
+</span><span class='line'>		<span class="n">pre_sense</span>				<span class="c1"># Gather information on environment.</span>
+</span><span class='line'>		<span class="n">perform_action</span>	<span class="c1"># Perform action based on known items.</span>
+</span><span class='line'>		<span class="n">post_sense</span>			<span class="c1"># Store state of warrior for next turn.</span>
+</span><span class='line'>	<span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">play_turn</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>  	<span class="c1"># Allow warrior to be accessed in all sections.</span>
+</span><span class='line'>  	<span class="vi">@warrior</span> <span class="o">=</span> <span class="n">warrior</span>
+</span><span class='line'>
+</span><span class='line'>  	<span class="c1"># Take turn for the warrior.</span>
+</span><span class='line'>  	<span class="n">take_turn</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Awesome! This now gets around the &lsquo;distance attack&rsquo; issue. If I&rsquo;m being attacked from afar and the space in front of me is empty, <strong>do not rest</strong> and continue walking until you find and slay the offending monster.</p>
+
+<h4>Lessons learned:</h4>
+
+<ul>
+<li>(+) Building modular code makes it easy to add in edge cases.</li>
+<li>(+) Constant refactoring makes for better flow.</li>
+<li>(&ndash;) <code>class Player</code> is getting huge.
+
+<ul>
+<li>Consider splitting things into separate classes?</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Interestingly enough, your Agent can always be &ldquo;more intelligent&rdquo;.</p>
+
+<h2>Shooting for the Top</h2>
+
+<p>I have a long way to go to reach the top of the <strong>Beginner</strong> tower, but this has been a tremendous learning experience. I&rsquo;ve been able to apply Ruby principles to the challenging yet fun problem space of Artificial Intelligence.</p>
+
+<p>A few things I&rsquo;m thinking about going forward:</p>
+
+<h4>Future considerations:</h4>
+
+<ul>
+<li>Classes and further simplification makes sense.</li>
+<li>The levels are only going to get harder:
+
+<ul>
+<li>Ability to move in different directions.</li>
+<li>2-dimensional maps.
+
+<ul>
+<li>How will I track movement?</li>
+<li>How will I behave when I hit a wall?</li>
+</ul>
+</li>
+<li>Rescuing captives.</li>
+<li>Shooting ranged weapons.</li>
+<li>Commanding a &lsquo;golem&rsquo; during my turn.</li>
+<li>Avoiding bombs that detonate.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>I&rsquo;m convinced that my upfront work will help prevent the following from happening:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Ruby Warrior: Level 09 (HORRIBAD CODE) (level09_example.rb)</span> <a href='/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/level09_example.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">class</span> <span class="nc">Player</span>
+</span><span class='line'>  <span class="vi">@last_known_health</span> <span class="o">=</span> <span class="kp">nil</span>
+</span><span class='line'>  <span class="no">RUNAWAY</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="mi">0</span><span class="o">.</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span>
+</span><span class='line'>  <span class="no">BANZAI</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="mi">0</span><span class="o">.</span><span class="mi">80</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="no">VISIBLE_THINGS</span><span class="o">=[</span> <span class="ss">:stairs</span><span class="p">,</span> <span class="ss">:empty</span><span class="p">,</span> <span class="ss">:wall</span><span class="p">,</span> <span class="ss">:captive</span><span class="p">,</span> <span class="ss">:enemy</span> <span class="o">]</span>
+</span><span class='line'>  <span class="no">MAX_RANGED_ATTACK_DISTANCE</span><span class="o">=</span><span class="mi">3</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span>
+</span><span class='line'>    <span class="vi">@last_shot</span> <span class="o">=</span> <span class="kp">nil</span>
+</span><span class='line'>    <span class="vi">@last_known_health</span> <span class="o">=</span> <span class="kp">nil</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">scan</span><span class="p">(</span><span class="n">spaces</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">line_of_sight</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">spaces</span><span class="o">.</span><span class="n">each_with_index</span> <span class="p">{</span> <span class="o">|</span><span class="n">space</span><span class="p">,</span> <span class="n">index</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">distance</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">succ</span>
+</span><span class='line'>      <span class="n">entity</span> <span class="o">=</span> <span class="no">VISIBLE_THINGS</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">type</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">space</span><span class="o">.</span><span class="n">send</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">type</span><span class="o">.</span><span class="n">to_s</span><span class="si">}</span><span class="s2">?&quot;</span><span class="o">.</span><span class="n">to_sym</span>
+</span><span class='line'>      <span class="p">}</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>      <span class="k">raise</span> <span class="s2">&quot;woah&quot;</span> <span class="k">unless</span> <span class="n">entity</span>
+</span><span class='line'>      <span class="n">line_of_sight</span><span class="o">[</span><span class="ss">:nearest</span><span class="o">]</span> <span class="o">=</span> <span class="n">entity</span> <span class="k">unless</span> <span class="n">line_of_sight</span><span class="o">[</span><span class="ss">:nearest</span><span class="o">]</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">line_of_sight</span><span class="o">[</span><span class="n">entity</span><span class="o">]</span>
+</span><span class='line'>        <span class="n">line_of_sight</span><span class="o">[</span><span class="n">entity</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">distance</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">line_of_sight</span><span class="o">[</span><span class="n">entity</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="n">distance</span><span class="o">]</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">nearest_entity_key</span> <span class="o">=</span> <span class="s2">&quot;nearest_</span><span class="si">#{</span><span class="n">entity</span><span class="o">.</span><span class="n">to_s</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">to_sym</span>
+</span><span class='line'>      <span class="n">line_of_sight</span><span class="o">[</span><span class="n">nearest_entity_key</span><span class="o">]</span> <span class="o">=</span> <span class="n">distance</span> <span class="k">unless</span> <span class="n">line_of_sight</span><span class="o">[</span><span class="n">nearest_entity_key</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1"># zero based distance could be easy to forget...</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">line_of_sight</span><span class="o">[</span><span class="ss">:view</span><span class="o">]</span>
+</span><span class='line'>        <span class="n">line_of_sight</span><span class="o">[</span><span class="ss">:view</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="n">entity</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">line_of_sight</span><span class="o">[</span><span class="ss">:view</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="n">entity</span><span class="o">]</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">line_of_sight</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">play_turn</span><span class="p">(</span><span class="n">warrior</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@last_known_health</span> <span class="o">=</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="k">unless</span> <span class="vi">@last_known_health</span>
+</span><span class='line'>    <span class="n">took_damage</span> <span class="o">=</span> <span class="vi">@last_known_health</span> <span class="o">&gt;</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span>
+</span><span class='line'>    <span class="n">shot</span> <span class="o">=</span> <span class="kp">nil</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">wall?</span>
+</span><span class='line'>      <span class="n">warrior</span><span class="o">.</span><span class="n">pivot!</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="n">warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">enemy?</span>
+</span><span class='line'>      <span class="n">warrior</span><span class="o">.</span><span class="n">attack!</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="n">warrior</span><span class="o">.</span><span class="n">feel</span><span class="o">.</span><span class="n">captive?</span>
+</span><span class='line'>      <span class="n">warrior</span><span class="o">.</span><span class="n">rescue!</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="n">i_spy</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:backward</span><span class="p">,</span> <span class="ss">:forward</span><span class="o">].</span><span class="n">reduce</span><span class="p">({})</span> <span class="p">{</span> <span class="o">|</span><span class="n">area</span><span class="p">,</span> <span class="n">direction</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">area</span><span class="o">[</span><span class="n">direction</span><span class="o">]</span> <span class="o">=</span> <span class="nb">scan</span> <span class="n">warrior</span><span class="o">.</span><span class="n">look</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">area</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">stairs_ahead</span><span class="p">,</span> <span class="n">stairs_behind</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:forward</span><span class="p">,</span> <span class="ss">:backward</span><span class="o">].</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">dir</span><span class="o">|</span>
+</span><span class='line'>        <span class="k">next</span> <span class="kp">false</span> <span class="k">unless</span> <span class="n">i_spy</span><span class="o">[</span><span class="n">dir</span><span class="o">][</span><span class="ss">:stairs</span><span class="o">]</span>
+</span><span class='line'>        <span class="n">i_spy</span><span class="o">[</span><span class="n">dir</span><span class="o">][</span><span class="ss">:view</span><span class="o">].</span><span class="n">all?</span> <span class="p">{</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="o">[</span><span class="ss">:empty</span><span class="p">,</span> <span class="ss">:stairs</span><span class="p">,</span> <span class="ss">:wall</span><span class="o">].</span><span class="n">include?</span> <span class="n">item</span> <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">sneaky_captive</span> <span class="o">=</span> <span class="n">i_spy</span><span class="o">[</span><span class="ss">:backward</span><span class="o">][</span><span class="ss">:captive</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">i_spy</span><span class="o">[</span><span class="ss">:backward</span><span class="o">][</span><span class="ss">:view</span><span class="o">].</span><span class="n">all?</span> <span class="p">{</span><span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="o">[</span><span class="ss">:empty</span><span class="p">,</span> <span class="ss">:stairs</span><span class="p">,</span> <span class="ss">:wall</span><span class="p">,</span> <span class="ss">:captive</span><span class="o">].</span><span class="n">include?</span> <span class="n">item</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">nearest_wall</span> <span class="o">=</span> <span class="n">i_spy</span><span class="o">[</span><span class="ss">:backward</span><span class="o">].</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:nearest_wall</span><span class="p">,</span> <span class="no">MAX_RANGED_ATTACK_DISTANCE</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">nearest_enemy</span> <span class="o">=</span> <span class="n">i_spy</span><span class="o">[</span><span class="ss">:forward</span><span class="o">][</span><span class="ss">:nearest_enemy</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">nearest_captive</span> <span class="o">=</span> <span class="n">i_spy</span><span class="o">[</span><span class="ss">:forward</span><span class="o">][</span><span class="ss">:nearest_captive</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">nowhere_to_run</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">nearest_wall</span> <span class="o">&amp;&amp;</span> <span class="n">nearest_enemy</span> <span class="o">&amp;&amp;</span> <span class="n">took_damage</span>
+</span><span class='line'>        <span class="n">nowhere_to_run</span> <span class="o">=</span> <span class="p">(</span><span class="n">nearest_enemy</span> <span class="o">+</span> <span class="p">(</span><span class="n">nearest_wall</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="no">MAX_RANGED_ATTACK_DISTANCE</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">#pp i_spy</span>
+</span><span class='line'>      <span class="c1">#puts stairs_ahead, stairs_behind, sneaky_captive, nearest_captive, nearest_wall, nearest_enemy, nowhere_to_run</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">if</span> <span class="n">stairs_ahead</span>
+</span><span class='line'>        <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span> <span class="ss">:forward</span>
+</span><span class='line'>      <span class="k">elsif</span> <span class="n">stairs_behind</span> <span class="o">||</span> <span class="n">sneaky_captive</span>
+</span><span class='line'>        <span class="n">warrior</span><span class="o">.</span><span class="n">pivot!</span>
+</span><span class='line'>      <span class="k">elsif</span> <span class="n">took_damage</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">&gt;</span> <span class="no">RUNAWAY</span> <span class="o">||</span> <span class="n">nowhere_to_run</span>
+</span><span class='line'>          <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span> <span class="ss">:forward</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span> <span class="ss">:backward</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">elsif</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span> <span class="o">&lt;</span> <span class="no">BANZAI</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">nearest_enemy</span>
+</span><span class='line'>          <span class="n">warrior</span><span class="o">.</span><span class="n">shoot!</span>
+</span><span class='line'>          <span class="n">shot</span> <span class="o">=</span> <span class="n">nearest_enemy</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="n">warrior</span><span class="o">.</span><span class="n">rest!</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">surrounded</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:backward</span><span class="p">,</span> <span class="ss">:forward</span><span class="o">].</span><span class="n">all?</span> <span class="p">{</span> <span class="o">|</span><span class="n">dir</span><span class="o">|</span> <span class="n">i_spy</span><span class="o">[</span><span class="n">dir</span><span class="o">][</span><span class="ss">:enemy</span><span class="o">]</span> <span class="p">}</span> <span class="c1"># it&#39;s a trap!!</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="n">surrounded</span> <span class="o">&amp;&amp;</span> <span class="n">i_spy</span><span class="o">[</span><span class="ss">:backward</span><span class="o">][</span><span class="ss">:nearest_enemy</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">i_spy</span><span class="o">[</span><span class="ss">:forward</span><span class="o">][</span><span class="ss">:nearest_enemy</span><span class="o">]</span>
+</span><span class='line'>          <span class="n">warrior</span><span class="o">.</span><span class="n">pivot!</span>
+</span><span class='line'>        <span class="k">elsif</span> <span class="vi">@last_shot</span>
+</span><span class='line'>          <span class="k">if</span> <span class="n">nearest_enemy</span> <span class="o">==</span> <span class="vi">@last_shot</span> <span class="c1"># @#!$#@ didn&#39;t die, charge!!</span>
+</span><span class='line'>            <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span>
+</span><span class='line'>          <span class="k">elsif</span> <span class="n">nearest_enemy</span>
+</span><span class='line'>            <span class="n">shot</span> <span class="o">=</span> <span class="n">nearest_enemy</span>
+</span><span class='line'>            <span class="n">warrior</span><span class="o">.</span><span class="n">shoot!</span>
+</span><span class='line'>          <span class="k">else</span>
+</span><span class='line'>            <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>        <span class="k">elsif</span> <span class="n">nearest_enemy</span> <span class="o">||</span> <span class="n">nearest_captive</span>
+</span><span class='line'>          <span class="k">if</span> <span class="n">nearest_enemy</span> <span class="o">==</span> <span class="o">[</span><span class="n">nearest_enemy</span><span class="p">,</span> <span class="n">nearest_captive</span><span class="o">].</span><span class="n">compact</span><span class="o">.</span><span class="n">min</span>
+</span><span class='line'>            <span class="n">warrior</span><span class="o">.</span><span class="n">shoot!</span>
+</span><span class='line'>            <span class="n">shot</span> <span class="o">=</span> <span class="n">nearest_enemy</span>
+</span><span class='line'>          <span class="k">else</span>
+</span><span class='line'>            <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span>
+</span><span class='line'>          <span class="k">end</span>
+</span><span class='line'>        <span class="k">else</span>
+</span><span class='line'>          <span class="n">warrior</span><span class="o">.</span><span class="n">walk!</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="vi">@last_known_health</span> <span class="o">=</span> <span class="n">warrior</span><span class="o">.</span><span class="n">health</span>
+</span><span class='line'>    <span class="vi">@last_shot</span> <span class="o">=</span> <span class="n">shot</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<blockquote><p style="text-align:center;">DON&rsquo;T DO THIS!</p></blockquote>
+
+<p>Slowly but surely, I will become the Ruby Warrior I&rsquo;m destined to be.</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/RubyWarrior.png" width="750" height="750"></p>
+
+<p>A shoutout to my boy <a href="http://dfriedm.github.io/">Dan Friedman</a> for working on this with me.</p>
+
+<p>There&rsquo;s still much learning to do and more levels to conquer. Onward and upward!</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HCI - The Possibilities are Endless]]></title>
+    <link href="http://cjlwired.github.io/blog/2013/06/30/hci-the-possibilities-are-endless/"/>
+    <updated>2013-06-30T14:11:00-04:00</updated>
+    <id>http://cjlwired.github.io/blog/2013/06/30/hci-the-possibilities-are-endless</id>
+    <content type="html"><![CDATA[<p>One of the things that has most fascinated me about the world of technology is our ability (and even sometimes, inability) to interact with computers. You hear about things like <strong><a href="https://en.wikipedia.org/wiki/Artificial_intelligence" title="Definition of Artificial Intelligence">Artificial Intelligence</a></strong>, self-realizations regarding the possibilities seen in the movie <strong><a href="http://www.imdb.com/title/tt0133093/">The Matrix</a></strong>, and prophecies of when <strong><a href="http://terminator.wikia.com/wiki/Skynet">SkyNet</a></strong> will take over the world.</p>
+
+<p>Interestingly enough, this is where <strong>HCI</strong> comes into play.</p>
+
+<h2>What is HCI?</h2>
+
+<p>As defined by <a href="https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction">Wikipedia</a>:</p>
+
+<blockquote><p>Human–computer Interaction (HCI) involves the study, planning, and design of the interaction between people (users) and computers.</p></blockquote>
+
+<p>HCI extends in to a variety of different realms, encompassing things we take for granted like website interaction all the way to virtual reality. Our day to day communication with our computers, whether physical or emotional, defines our overall user experience (UX). The user interaction (UI) is a large part of what we as web developers can control.</p>
+
+<p>Coming from a computer engineering / hardware background, I&rsquo;ve always had a great interest exploring the combined space of gaming, hardware, and HCI. So that got me thinking&hellip; does an API exist that allows me to interface with the Microsoft Kinect?</p>
+
+<h2>Hacking the Microsoft Kinect</h2>
+
+<p>I&rsquo;ve owned a Microsoft Kinect since the day it was publicly released, and to this day, am continually impressed by its raw power and how its changed the space of gaming. In doing some research, it appears like there are a few Ruby wrappers in existence that allow for direct interface with the hardware. Luckily, the only requirements for the software were a computer with USB ports and lots of time.</p>
+
+<p>At the high level, here are some quick data points I discovered while analyzing two ruby gems: <strong>Kinect-Ruby Processing</strong> and <strong>Ruby-Freenect</strong>.</p>
+
+<pre><code>- Released as Ruby Gems with dependencies.
+- Interface directly with hardware via USB.
+- Allow for control of image / video type.
+    &gt; Allow for image capture.
+    &gt; Allow for video capture.
+- Allow for control of camera tilt mechanism.
+- Allow for control of LED.
+- Video feed in RGB / InfraRed (IR) / Depth provided.
+- Average of about 30 Frames per Second (FPS).
+- Support of gem halted &gt; 1yr ago! :(
+</code></pre>
+
+<p>Now to see the contenders in a little more detail!</p>
+
+<h3>Kinect-Ruby Processing</h3>
+
+<p>The <strong><a href="https://github.com/mudphone/Kinect-Ruby-Processing" title="Github of Kinect-Ruby Processing gem">Kinect-Ruby Processing</a></strong> gem interfaces directly with the Ruby Processing (rp5) library. Using this raw power that many don&rsquo;t realize Ruby can handle, it interfaces directly with the hardware and can provide functionality as described in the previous section.</p>
+
+<p>Here are images taken directly from the Kinect:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_rgb_depth.png" width="750" height="1250"></p>
+
+<p style="text-align:center;"> <strong>Kinect-Ruby Processing: RGB with Depth Map</strong></p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_ir_depth.png" width="750" height="1250"></p>
+
+<p style="text-align:center;"> <strong>Kinect-Ruby Processing: Infrared with Depth Map</strong></p>
+
+<p>So&hellip; you&rsquo;re probably asking yourself, what does some of this code look like? Let&rsquo;s see:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Kinect-Ruby Processing: RGB Depth Test (rgb_depth_test.rb)</span> <a href='/code/2013-06-30-hci-the-possibilities-are-endless/rgb_depth_test.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="nb">require</span> <span class="s1">&#39;ruby-processing&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">RGBDepthText</span> <span class="o">&lt;</span> <span class="ss">Processing</span><span class="p">:</span><span class="ss">:App</span>
+</span><span class='line'>  <span class="n">load_library</span> <span class="s2">&quot;openkinect&quot;</span>
+</span><span class='line'>  <span class="n">include_package</span> <span class="s1">&#39;org.openkinect&#39;</span>
+</span><span class='line'>  <span class="n">include_package</span> <span class="s1">&#39;org.openkinect.processing&#39;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:kinect</span><span class="p">,</span> <span class="ss">:depth</span><span class="p">,</span> <span class="ss">:rgb</span><span class="p">,</span> <span class="ss">:ir</span><span class="p">,</span> <span class="ss">:deg</span>
+</span><span class='line'>  <span class="n">alias_method</span> <span class="ss">:quit</span><span class="p">,</span> <span class="ss">:stop</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">setup</span><span class="p">()</span>
+</span><span class='line'>    <span class="vi">@deg</span> <span class="o">=</span> <span class="mi">15</span>
+</span><span class='line'>    <span class="vi">@depth</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>    <span class="vi">@rgb</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>    <span class="vi">@ir</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">size</span><span class="p">(</span><span class="mi">1280</span><span class="p">,</span><span class="mi">520</span><span class="p">);</span>
+</span><span class='line'>    <span class="vi">@kinect</span> <span class="o">=</span> <span class="no">Kinect</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@kinect</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span class='line'>    <span class="vi">@kinect</span><span class="o">.</span><span class="n">enableDepth</span><span class="p">(</span><span class="vi">@depth</span><span class="p">);</span>
+</span><span class='line'>    <span class="vi">@kinect</span><span class="o">.</span><span class="n">enableRGB</span><span class="p">(</span><span class="vi">@rgb</span><span class="p">);</span>
+</span><span class='line'>    <span class="vi">@kinect</span><span class="o">.</span><span class="n">enableIR</span><span class="p">(</span><span class="vi">@ir</span><span class="p">);</span>
+</span><span class='line'>    <span class="vi">@kinect</span><span class="o">.</span><span class="n">tilt</span><span class="p">(</span><span class="vi">@deg</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">draw</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">background</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">image</span><span class="p">(</span><span class="vi">@kinect</span><span class="o">.</span><span class="n">getVideoImage</span><span class="p">(),</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">image</span><span class="p">(</span><span class="vi">@kinect</span><span class="o">.</span><span class="n">getDepthImage</span><span class="p">(),</span><span class="mi">640</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">fill</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">text</span><span class="p">(</span><span class="s2">&quot;RGB/IR FPS: </span><span class="si">#{</span><span class="vi">@kinect</span><span class="o">.</span><span class="n">getVideoFPS</span><span class="p">()</span><span class="si">}</span><span class="s2">        Camera tilt: </span><span class="si">#{</span><span class="vi">@deg</span><span class="si">}</span><span class="s2"> degrees&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">495</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">text</span><span class="p">(</span><span class="s2">&quot;DEPTH FPS: </span><span class="si">#{</span><span class="vi">@kinect</span><span class="o">.</span><span class="n">getDepthFPS</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="mi">640</span><span class="p">,</span><span class="mi">495</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">text</span><span class="p">(</span><span class="s2">&quot;Press &#39;d&#39; to enable/disable depth    Press &#39;r&#39; to enable/disable rgb image   Press &#39;i&#39; to enable/disable IR image (crashy!)   Press &#39;q&#39; to quit   UP and DOWN to tilt camera   Framerate: </span><span class="si">#{</span><span class="n">frame_rate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">515</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">toggle_rgb</span>
+</span><span class='line'>    <span class="vi">@rgb</span> <span class="o">=</span> <span class="o">!</span><span class="vi">@rgb</span><span class="p">;</span>
+</span><span class='line'>    <span class="vi">@ir</span> <span class="o">=</span> <span class="kp">false</span> <span class="k">if</span> <span class="vi">@rgb</span>
+</span><span class='line'>    <span class="vi">@kinect</span><span class="o">.</span><span class="n">enableRGB</span><span class="p">(</span><span class="vi">@rgb</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">toggle_ir</span>
+</span><span class='line'>    <span class="vi">@ir</span> <span class="o">=</span> <span class="o">!</span><span class="vi">@ir</span><span class="p">;</span>
+</span><span class='line'>    <span class="vi">@rgb</span> <span class="o">=</span> <span class="kp">false</span> <span class="k">if</span> <span class="vi">@ir</span><span class="p">;</span>
+</span><span class='line'>    <span class="vi">@kinect</span><span class="o">.</span><span class="n">enableIR</span><span class="p">(</span><span class="vi">@ir</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">tilt_up</span>
+</span><span class='line'>    <span class="vi">@deg</span> <span class="o">=</span> <span class="vi">@deg</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">tilt_now</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">tilt_down</span>
+</span><span class='line'>    <span class="vi">@deg</span> <span class="o">=</span> <span class="vi">@deg</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">tilt_now</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">tilt_now</span>
+</span><span class='line'>    <span class="vi">@deg</span> <span class="o">=</span> <span class="n">constrain</span><span class="p">(</span><span class="vi">@deg</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">30</span><span class="p">);</span>
+</span><span class='line'>    <span class="vi">@kinect</span><span class="o">.</span><span class="n">tilt</span><span class="p">(</span><span class="vi">@deg</span><span class="p">);</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">keyPressed</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@depth</span> <span class="o">=</span> <span class="o">!</span><span class="vi">@depth</span><span class="p">;</span>
+</span><span class='line'>      <span class="vi">@kinect</span><span class="o">.</span><span class="n">enableDepth</span><span class="p">(</span><span class="vi">@depth</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">elsif</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">toggle_rgb</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">elsif</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;i&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">toggle_ir</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">elsif</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="no">CODED</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">key_code</span> <span class="o">==</span> <span class="no">UP</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">tilt_up</span>
+</span><span class='line'>      <span class="k">elsif</span> <span class="p">(</span><span class="n">key_code</span> <span class="o">==</span> <span class="no">DOWN</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">tilt_down</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">elsif</span> <span class="p">(</span><span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">stop</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">stop</span><span class="p">()</span>
+</span><span class='line'>    <span class="vi">@kinect</span><span class="o">.</span><span class="n">quit</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">super</span><span class="o">.</span><span class="n">stop</span>
+</span><span class='line'>    <span class="c1"># exit</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And this is the beauty of the Ruby programming language! Even if you didn&rsquo;t know a thing about Ruby and the way it is structured, the code above is readable and easy to understand.</p>
+
+<p>One thing to definitely note about this gem is its gracefully ungraceful way of crashing around 50% of the time when attempting to enable the IR mode:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_error.png" width="500" height="750"></p>
+
+<p>Understandably, I guess some bugs still need to be worked out.</p>
+
+<h3>Ruby-Freenect</h3>
+
+<p>As is customary in the world today, there tend to be more than one way of doing things. Let&rsquo;s take a quick peek at some output from the Kinect via the <strong><a href="https://github.com/troystribling/ruby-freenect" title="Github of Ruby-Freenect gem">Ruby-Freenect</a></strong> gem:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth_rgb.png" width="750" height="1250"></p>
+
+<p style="text-align:center;"> <strong>Ruby-Freenect: Depth Map with RGB </strong></p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth_ir.png" width="750" height="1250"></p>
+
+<p style="text-align:center;"> <strong>Ruby-Freenect: Depth Map with InfraRed (IR) </strong></p>
+
+<p>As you may have noticed, this Ruby gem outputs the depth map in a colored format based on distance. As you can see in the next picture, objects that are closer to the camera appear in a &lsquo;hotter&rsquo; color (black/red), while objects further away are a &lsquo;colder&rsquo; color (green/blue):</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth.png" width="750" height="1250"></p>
+
+<p>Engaging this library package is done via the &lsquo;opengl&rsquo; command. I still have to do some exploration in order to find the code base. This gem also seems to lose packets, and does so in a more graceful &ldquo;I don&rsquo;t crash the entire program way.&rdquo;</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_cmd.png" width="500" height="750">
+<img src="/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_img.png" width="500" height="750"></p>
+
+<p>It is a bit interesting though &ndash; sometimes, the video feed gets stuck, and you see a combination of the three video feeds. Constantly hitting the video button will eventually restore the connection, which is nice. Failure output, while never good to see, also tells me that an issue occurred, which is better than nothing.</p>
+
+<h2>The Future is Now</h2>
+
+<p>My current plan is to explore the world of HCI via the Microsoft Kinect during my semester here at the Flatiron School. The exploration of this hardware interface, perhaps through gamification, will allow me to hopefully (1) contribute to open source and (2) understand the what is possible and what isn&rsquo;t.</p>
+
+<p>Simply stated:</p>
+
+<blockquote><p style="text-align:center;"><strong>The possibilities are endless.</strong></p></blockquote>
+
+<p>Stay tuned for more information on the Kinect.</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+</feed>

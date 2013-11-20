@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sinatra | Changing the World - One Line of Code at a Time]]></title>
+  <link href="http://cjlwired.github.io/blog/categories/sinatra/atom.xml" rel="self"/>
+  <link href="http://cjlwired.github.io/"/>
+  <updated>2013-11-20T01:12:11-05:00</updated>
+  <id>http://cjlwired.github.io/</id>
+  <author>
+    <name><![CDATA[Carlos Lazo]]></name>
+    <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Web Dev, Sinatra, and Me]]></title>
+    <link href="http://cjlwired.github.io/blog/2013/06/23/web-dev/"/>
+    <updated>2013-06-23T23:36:00-04:00</updated>
+    <id>http://cjlwired.github.io/blog/2013/06/23/web-dev</id>
+    <content type="html"><![CDATA[<h2>Racks on Racks on Racks</h2>
+
+<p>After three weeks of getting to know Ruby, me and my classmates have begun our conquest of the Web Dev world. Earlier this week, we were introduced to the basics of the Internet, learning about things like messaging structure and protocols.</p>
+
+<p>The beginning of our exploration took us to <strong><a href="http://whatcodecraves.com/articles/2012/07/23/ruby-on-rack" title="What is Rack?">Rack</a></strong>, a simple and flexible library for building Ruby web applications and web frameworks. Learning this framework and its basics was particularly important, as we are now better poised to tame the dragon known as Sinatra.</p>
+
+<h2>Sinatra (the Ruby framework, NOT the singer)</h2>
+
+<p>While working at the lower levels of web dev may be a roaring good time, it turns out that there are other frameworks that exist which abstract functionality levels higher than Rack. Enter the Sinatra web framework, which is installed via the terminal:</p>
+
+<pre><code>gem install sinatra
+</code></pre>
+
+<p>Many tutorials exist that discuss how Sinatra is to be used. Here are a few:</p>
+
+<p style="text-align:center;"><strong><a href="http://titusd.co.uk/2010/04/07/a-beginners-sinatra-tutorial/">Beginner&rsquo;s tutorial for Sinatra</a></strong></p>
+
+<p style="text-align:center;"><strong><a href="http://stackoverflow.com/questions/5015471/using-sinatra-for-larger-projects-via-multiple-files">General folder structure for Sinatra Apps</a></strong></p>
+
+<p style="text-align:center;"><strong><a href="http://blog.chrisblunt.com/lightweight-web-apps-getting-started-with-sinatra/">Using Sinatra to start a simple Web App</a></strong></p>
+
+<p>The Sinatra framework allows for straightforward generation of content and webpages via ERB (Embedded Ruby) and for simple routing that connects and joins the dynamically generated website. In terms of how the an application is laid out, let&rsquo;s look at a real-world example &ndash; the <strong><a href="http://fracture.it">Fracture.it</a></strong> website.</p>
+
+<h2>Sinatra Layout of Fracture.it Website</h2>
+
+<p>By navigating to the <strong><a href="http://fracture.it">Fracture.it</a></strong> website, one is brought to the index.html webpage, where the user can &ldquo;fracture&rdquo; a URL into a smaller URL. From this main website, one can fork the repository off which it was built and see the following layout:</p>
+
+<pre><code>config - configuration files for website (e.g. database storage).
+models - location to store classes and modules.
+public - houses website details (e.g. fonts / images / css / js).
+spec - area for testing (Rspec)
+views - contains ERB templates for dynamic website viewing.
+.gitignore - files that Git repo will ignore.
+.rspec - contains .rspec file.
+Gemfile - used with "rake bundle" to install all necessary gems. 
+app.rb - contains the primary interface for the web application.
+config.ru - allows you to run rackup command to launch web app.
+</code></pre>
+
+<p>As you can see, the organization of this Github repository allows for one to see exactly and precisely the files that construct a Sinatra folder structure. In fact, most Sinatra repositories are laid out the same way, allowing for standardization and for easy reading.</p>
+
+<p>Looking forward to doing my own Sinatra development in the near future!</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+</feed>
