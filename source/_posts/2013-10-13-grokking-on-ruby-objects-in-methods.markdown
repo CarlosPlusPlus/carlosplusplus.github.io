@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Grokking on Ruby: Object Modifications in Methods"
+title: "Object Modifications in Methods"
 date: 2013-10-13 10:04
 comments: true
-categories: grok methods ruby
+categories: methods ruby
 ---
 
-In a concerted effort to start posting more content to my blog, I've decided to start a new recurring segment called **Grokking on Ruby**. Every now and then, I'll post some cool tips and tricks I find awesome or important to know as you're learning the Ruby programming language. There's a ton out there to share, so let's get to it.  
+Every now and then, I'll post some cool tips and tricks I find awesome or important to know as you're learning the Ruby programming language. There's a ton out there to share, so let's get to it.  
 
 ## Pass Parameters by 'Value' or 'Reference'
 
