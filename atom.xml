@@ -4,7 +4,7 @@
   <title><![CDATA[Changing the World - One Line of Code at a Time]]></title>
   <link href="http://cjlwired.github.io/atom.xml" rel="self"/>
   <link href="http://cjlwired.github.io/"/>
-  <updated>2014-01-04T21:57:21-05:00</updated>
+  <updated>2014-01-04T21:58:48-05:00</updated>
   <id>http://cjlwired.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
@@ -12,15 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Testing Rake Tasks with RSpec]]></title>
-    <link href="http://cjlwired.github.io/blog/2014/01/04/testing-rake-tasks-with-rspec/"/>
-    <updated>2014-01-04T12:32:00-05:00</updated>
-    <id>http://cjlwired.github.io/blog/2014/01/04/testing-rake-tasks-with-rspec</id>
-    <content type="html"><![CDATA[
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Object Modifications in Methods]]></title>
