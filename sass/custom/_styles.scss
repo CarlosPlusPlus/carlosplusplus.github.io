@@ -1,2 +1,24 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+
+// Reference _greyshade.scss for initial styling preferences.
+
+.container {
+	.mid-col {
+		.mid-col-container {
+			#content {
+				article {
+					padding: 40px 0px;
+					.entry-content {
+						h2 {
+							font-size: 1.75em;
+							border-bottom-width: 2px;
+							padding-bottom: 5px;
+							font-variant: small-caps;
+						}
+					}
+				}
+			}
+		}
+	}
+}
