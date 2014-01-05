@@ -10,11 +10,27 @@
 				article {
 					padding: 40px 0px;
 					.entry-content {
+
+						p {
+							margin-top: 0px;
+							padding-top: 20px;
+						}
+
+						blockquote p {
+							padding-top: 0px;
+						}
+
 						h2 {
 							font-size: 1.75em;
 							border-bottom-width: 2px;
-							padding-bottom: 5px;
+							padding-bottom: 10px;
+							bottom: 15px;
 							font-variant: small-caps;
+						}
+
+						h3 {
+							font-size: 1.2em;
+							font-style: italic;
 						}
 					}
 				}
