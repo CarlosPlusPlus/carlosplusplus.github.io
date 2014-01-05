@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sinatra | Changing the World - One Line of Code at a Time]]></title>
   <link href="http://cjlwired.github.io/blog/categories/sinatra/atom.xml" rel="self"/>
   <link href="http://cjlwired.github.io/"/>
-  <updated>2014-01-04T21:58:48-05:00</updated>
+  <updated>2014-01-04T23:00:47-05:00</updated>
   <id>http://cjlwired.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
@@ -18,9 +18,9 @@
     <link href="http://cjlwired.github.io/blog/2013/06/23/web-dev/"/>
     <updated>2013-06-23T23:36:00-04:00</updated>
     <id>http://cjlwired.github.io/blog/2013/06/23/web-dev</id>
-    <content type="html"><![CDATA[<h2>Racks on Racks on Racks</h2>
+    <content type="html"><![CDATA[<p>After three weeks of getting to know Ruby, me and my classmates have begun our conquest of the Web Dev world. Earlier this week, we were introduced to the basics of the Internet, learning about things like messaging structure and protocols.</p>
 
-<p>After three weeks of getting to know Ruby, me and my classmates have begun our conquest of the Web Dev world. Earlier this week, we were introduced to the basics of the Internet, learning about things like messaging structure and protocols.</p>
+<h2>Racks on Racks on Racks</h2>
 
 <p>The beginning of our exploration took us to <strong><a href="http://whatcodecraves.com/articles/2012/07/23/ruby-on-rack" title="What is Rack?">Rack</a></strong>, a simple and flexible library for building Ruby web applications and web frameworks. Learning this framework and its basics was particularly important, as we are now better poised to tame the dragon known as Sinatra.</p>
 

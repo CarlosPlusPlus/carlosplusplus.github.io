@@ -4,7 +4,7 @@
   <title><![CDATA[Category: c++ | Changing the World - One Line of Code at a Time]]></title>
   <link href="http://cjlwired.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
   <link href="http://cjlwired.github.io/"/>
-  <updated>2014-01-04T21:58:48-05:00</updated>
+  <updated>2014-01-04T23:00:47-05:00</updated>
   <id>http://cjlwired.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
@@ -18,7 +18,9 @@
     <link href="http://cjlwired.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus/"/>
     <updated>2013-06-13T14:42:00-04:00</updated>
     <id>http://cjlwired.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus</id>
-    <content type="html"><![CDATA[<h2>My Life and C++</h2>
+    <content type="html"><![CDATA[<p>Me, myself, and C++ &ndash; my &ldquo;first&rdquo; programming language.</p>
+
+<h2>My Life and C++</h2>
 
 <p>Since 10th grade of high school, I&rsquo;ve been programming in C++. Whether in school or in my previous life as an engineer working for the DoD, it&rsquo;s the programming language I&rsquo;ve grown to know the best. At this point, the structure and syntax just feels right, and although I&rsquo;ve programmed in other languages, C++ has always been my strong point.</p>
 

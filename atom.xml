@@ -4,7 +4,7 @@
   <title><![CDATA[Changing the World - One Line of Code at a Time]]></title>
   <link href="http://cjlwired.github.io/atom.xml" rel="self"/>
   <link href="http://cjlwired.github.io/"/>
-  <updated>2014-01-04T21:58:48-05:00</updated>
+  <updated>2014-01-04T23:00:47-05:00</updated>
   <id>http://cjlwired.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
@@ -150,9 +150,9 @@
     <link href="http://cjlwired.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering/"/>
     <updated>2013-09-24T07:31:00-04:00</updated>
     <id>http://cjlwired.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering</id>
-    <content type="html"><![CDATA[<h2>On the Hunt</h2>
+    <content type="html"><![CDATA[<p>Whether you&rsquo;re experienced or completely new to the world of engineering, finding that new job can be a daunting task. Either way, congratulations for getting this far!</p>
 
-<p>Whether you&rsquo;re experienced or completely new to the world of engineering, finding that new job can be a daunting task. Either way, congratulations for getting this far!</p>
+<h2>On the Hunt</h2>
 
 <p>Having worked as a professional engineer for the past five years of my career, I&rsquo;ve accumulated a few sources / websites that, when combined, have proven extremely useful. However, prior to the actual job hunt, <strong>preparation</strong> is absolutely everything.</p>
 
@@ -601,9 +601,7 @@
     <link href="http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language/"/>
     <updated>2013-08-01T08:00:00-04:00</updated>
     <id>http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language</id>
-    <content type="html"><![CDATA[<h2><strong>こんにちは世界</strong> (Kon&#8217;nichiwa sekai!)</h2>
-
-<p>The inspiration for this blog post comes from a few places:</p>
+    <content type="html"><![CDATA[<p>The inspiration for this blog post comes from a few places:</p>
 
 <ol>
 <li>My love of languages and world-wide celebration of culture.</li>
@@ -611,6 +609,8 @@
 <li>General curiosity on the topic.</li>
 </ol>
 
+
+<h2><strong>こんにちは世界</strong> (Kon&#8217;nichiwa sekai!)</h2>
 
 <p>Growing up, my first <strong>spoken</strong> language was Spanish, followed shortly there after by English and French, all three of which I&rsquo;m fluent in. In the present, I split my time between learning 5 other languages &ndash; Japanese, Mandarin Chinese, German, Italian, and Russian.</p>
 
@@ -2177,9 +2177,9 @@ The example above shows the flexibility of Ruby to implement the same solution u
     <link href="http://cjlwired.github.io/blog/2013/06/23/web-dev/"/>
     <updated>2013-06-23T23:36:00-04:00</updated>
     <id>http://cjlwired.github.io/blog/2013/06/23/web-dev</id>
-    <content type="html"><![CDATA[<h2>Racks on Racks on Racks</h2>
+    <content type="html"><![CDATA[<p>After three weeks of getting to know Ruby, me and my classmates have begun our conquest of the Web Dev world. Earlier this week, we were introduced to the basics of the Internet, learning about things like messaging structure and protocols.</p>
 
-<p>After three weeks of getting to know Ruby, me and my classmates have begun our conquest of the Web Dev world. Earlier this week, we were introduced to the basics of the Internet, learning about things like messaging structure and protocols.</p>
+<h2>Racks on Racks on Racks</h2>
 
 <p>The beginning of our exploration took us to <strong><a href="http://whatcodecraves.com/articles/2012/07/23/ruby-on-rack" title="What is Rack?">Rack</a></strong>, a simple and flexible library for building Ruby web applications and web frameworks. Learning this framework and its basics was particularly important, as we are now better poised to tame the dragon known as Sinatra.</p>
 
@@ -2403,7 +2403,9 @@ config.ru - allows you to run rackup command to launch web app.
     <link href="http://cjlwired.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus/"/>
     <updated>2013-06-13T14:42:00-04:00</updated>
     <id>http://cjlwired.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus</id>
-    <content type="html"><![CDATA[<h2>My Life and C++</h2>
+    <content type="html"><![CDATA[<p>Me, myself, and C++ &ndash; my &ldquo;first&rdquo; programming language.</p>
+
+<h2>My Life and C++</h2>
 
 <p>Since 10th grade of high school, I&rsquo;ve been programming in C++. Whether in school or in my previous life as an engineer working for the DoD, it&rsquo;s the programming language I&rsquo;ve grown to know the best. At this point, the structure and syntax just feels right, and although I&rsquo;ve programmed in other languages, C++ has always been my strong point.</p>
 
