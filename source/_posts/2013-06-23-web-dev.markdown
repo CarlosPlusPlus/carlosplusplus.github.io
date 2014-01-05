@@ -6,9 +6,9 @@ comments: true
 categories: flatironschool ruby sinatra
 ---
 
-## Racks on Racks on Racks
-
 After three weeks of getting to know Ruby, me and my classmates have begun our conquest of the Web Dev world. Earlier this week, we were introduced to the basics of the Internet, learning about things like messaging structure and protocols.  
+
+## Racks on Racks on Racks
 
 The beginning of our exploration took us to **[Rack](http://whatcodecraves.com/articles/2012/07/23/ruby-on-rack "What is Rack?")**, a simple and flexible library for building Ruby web applications and web frameworks. Learning this framework and its basics was particularly important, as we are now better poised to tame the dragon known as Sinatra.
 

@@ -6,13 +6,13 @@ comments: true
 categories: flatironschool japanese languages ruby
 ---
 
-## **こんにちは世界** (Kon'nichiwa sekai!)
-
 The inspiration for this blog post comes from a few places:
 
 1. My love of languages and world-wide celebration of culture.
 2. This [slide deck](http://www.slideshare.net/inouemak/ruby-and-japanesepdf) by [Makoto Inoue](https://twitter.com/makoto_inoue) on **Ruby and Japanese**.
 3. General curiosity on the topic.
+
+## **こんにちは世界** (Kon'nichiwa sekai!)
 
 Growing up, my first **spoken** language was Spanish, followed shortly there after by English and French, all three of which I'm fluent in. In the present, I split my time between learning 5 other languages - Japanese, Mandarin Chinese, German, Italian, and Russian.  
 

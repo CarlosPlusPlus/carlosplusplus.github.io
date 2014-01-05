@@ -6,9 +6,9 @@ comments: true
 categories: career flatironschool jobs
 ---
 
-## On the Hunt
-
 Whether you're experienced or completely new to the world of engineering, finding that new job can be a daunting task. Either way, congratulations for getting this far!  
+
+## On the Hunt
 
 Having worked as a professional engineer for the past five years of my career, I've accumulated a few sources / websites that, when combined, have proven extremely useful. However, prior to the actual job hunt, **preparation** is absolutely everything.
 

@@ -6,6 +6,8 @@ comments: true
 categories: flatironschool c++ ruby proglang
 ---
 
+Me, myself, and C++ - my "first" programming language.
+
 ## My Life and C++
 
 Since 10th grade of high school, I've been programming in C++. Whether in school or in my previous life as an engineer working for the DoD, it's the programming language I've grown to know the best. At this point, the structure and syntax just feels right, and although I've programmed in other languages, C++ has always been my strong point.
