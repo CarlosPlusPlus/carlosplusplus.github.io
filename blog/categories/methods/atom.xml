@@ -4,7 +4,7 @@
   <title><![CDATA[Category: methods | Changing the World - One Line of Code at a Time]]></title>
   <link href="http://cjlwired.github.io/blog/categories/methods/atom.xml" rel="self"/>
   <link href="http://cjlwired.github.io/"/>
-  <updated>2013-11-20T01:12:11-05:00</updated>
+  <updated>2014-01-04T21:40:25-05:00</updated>
   <id>http://cjlwired.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Grokking on Ruby: Object Modifications in Methods]]></title>
+    <title type="html"><![CDATA[Object Modifications in Methods]]></title>
     <link href="http://cjlwired.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods/"/>
     <updated>2013-10-13T10:04:00-04:00</updated>
     <id>http://cjlwired.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods</id>
-    <content type="html"><![CDATA[<p>In a concerted effort to start posting more content to my blog, I&rsquo;ve decided to start a new recurring segment called <strong>Grokking on Ruby</strong>. Every now and then, I&rsquo;ll post some cool tips and tricks I find awesome or important to know as you&rsquo;re learning the Ruby programming language. There&rsquo;s a ton out there to share, so let&rsquo;s get to it.</p>
+    <content type="html"><![CDATA[<p>Every now and then, I&rsquo;ll post some cool tips and tricks I find awesome or important to know as you&rsquo;re learning the Ruby programming language. There&rsquo;s a ton out there to share, so let&rsquo;s get to it.</p>
 
 <h2>Pass Parameters by &lsquo;Value&rsquo; or &lsquo;Reference&rsquo;</h2>
 
