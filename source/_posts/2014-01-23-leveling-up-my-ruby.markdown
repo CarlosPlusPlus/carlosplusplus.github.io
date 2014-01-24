@@ -18,7 +18,7 @@ This is how I would've written this portion a few months ago:
 
 ```ruby
 class StreetEasyScraper
-  attr_accessor :browser, # ...
+  attr_accessor :type, # ...
 
   def initialize(browser)
   	@type = "rent" if browser.contains?("rent")
@@ -35,7 +35,7 @@ And here's how I wrote it a few days ago:
 
 ```ruby
 class StreetEasyScraper
-  attr_reader :browser, # ...
+  attr_reader :type, # ...
 
   def initialize(browser)
     @type = browser['rent'] || 'sale'
@@ -48,7 +48,7 @@ end
 
 Let's look at some of the differences:
 
-- `attr_reader` instead of `attr_accessor`, as won't be changing.
+- `attr_reader` instead of `attr_accessor`, as `@type` won't be changing.
 - A **really cool** way to search & return a substring if it exists.
 - Use of the `||` operator, as I know API will only ever be two values.
 - `' '` vs `" "` for strings that will not be interpolated (Ruby best practice).
