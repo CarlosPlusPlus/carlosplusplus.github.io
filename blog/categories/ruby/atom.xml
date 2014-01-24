@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | My Adventure Through Code]]></title>
   <link href="http://carlosplusplus.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://carlosplusplus.github.io/"/>
-  <updated>2014-01-23T23:23:06-05:00</updated>
+  <updated>2014-01-23T23:25:21-05:00</updated>
   <id>http://carlosplusplus.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
@@ -30,7 +30,7 @@
 
 <p>```ruby
 class StreetEasyScraper
-  attr_accessor :browser, # &hellip;</p>
+  attr_accessor :type, # &hellip;</p>
 
 <p>  def initialize(browser)</p>
 
@@ -50,7 +50,7 @@ end</p>
 
 <p>```ruby
 class StreetEasyScraper
-  attr_reader :browser, # &hellip;</p>
+  attr_reader :type, # &hellip;</p>
 
 <p>  def initialize(browser)</p>
 
@@ -67,7 +67,7 @@ end
 <p>Let&rsquo;s look at some of the differences:</p>
 
 <ul>
-<li><code>attr_reader</code> instead of <code>attr_accessor</code>, as won&rsquo;t be changing.</li>
+<li><code>attr_reader</code> instead of <code>attr_accessor</code>, as <code>@type</code> won&rsquo;t be changing.</li>
 <li>A <strong>really cool</strong> way to search &amp; return a substring if it exists.</li>
 <li>Use of the <code>||</code> operator, as I know API will only ever be two values.</li>
 <li><code>' '</code> vs <code>" "</code> for strings that will not be interpolated (Ruby best practice).</li>

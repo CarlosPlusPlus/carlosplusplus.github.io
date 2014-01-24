@@ -135,7 +135,7 @@
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">StreetEasyScraper</span>
-</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:browser</span><span class="p">,</span> <span class="c1"># ...</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:type</span><span class="p">,</span> <span class="c1"># ...</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
 </span><span class='line'>      <span class="vi">@type</span> <span class="o">=</span> <span class="s2">&quot;rent&quot;</span> <span class="k">if</span> <span class="n">browser</span><span class="o">.</span><span class="n">contains?</span><span class="p">(</span><span class="s2">&quot;rent&quot;</span><span class="p">)</span>
@@ -161,7 +161,7 @@
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">StreetEasyScraper</span>
-</span><span class='line'>  <span class="kp">attr_reader</span> <span class="ss">:browser</span><span class="p">,</span> <span class="c1"># ...</span>
+</span><span class='line'>  <span class="kp">attr_reader</span> <span class="ss">:type</span><span class="p">,</span> <span class="c1"># ...</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
 </span><span class='line'>    <span class="vi">@type</span> <span class="o">=</span> <span class="n">browser</span><span class="o">[</span><span class="s1">&#39;rent&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;sale&#39;</span>
@@ -176,7 +176,7 @@
 <p>Let&rsquo;s look at some of the differences:</p>
 
 <ul>
-<li><code>attr_reader</code> instead of <code>attr_accessor</code>, as won&rsquo;t be changing.</li>
+<li><code>attr_reader</code> instead of <code>attr_accessor</code>, as <code>@type</code> won&rsquo;t be changing.</li>
 <li>A <strong>really cool</strong> way to search &amp; return a substring if it exists.</li>
 <li>Use of the <code>||</code> operator, as I know API will only ever be two values.</li>
 <li><code>' '</code> vs <code>" "</code> for strings that will not be interpolated (Ruby best practice).</li>
