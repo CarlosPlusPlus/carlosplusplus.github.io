@@ -57,8 +57,13 @@ As simple as these four differences may be, they took me by surprise and made me
 
 ## Introspect Often
 
-Amidst the chaos we know as life, I encourage you to take the time to **introspect**, regardless of whether you're new to programming or not. There are days when you feel feel down (happens to me all the time). However, remind yourself that as long as you've learned something that day, you will always come out on top. Be sure to also take breaks from programming (this is healthy and strongly recommended), and to get **regular sleep**. Your body and mind need rest to be at their prime!
+Amidst the chaos we know as life, I encourage you to take the time to **introspect**, regardless of whether you're new to programming or not. There are days when you feel feel down (happens to me all the time). However, remind yourself that as long as you've learned something that day, you will always come out on top. Be sure to also take breaks from programming (this is healthy and strongly recommended), and to get regular sleep. Your body and mind need rest to be at their prime!
 
-Don't forget that more often than not, the **best teachers are also students**. Stay strong and continue learning, friends. Have faith in yourselves, and continue being pillars of support for each other.
+Don't forget that more often than not:
+
+>->**The best teachers are also students.**<-
+
+Stay strong and continue learning, friends.  
+Have faith in yourselves, and continue being pillars of support for each other.
 
 CJL

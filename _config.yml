@@ -2,9 +2,9 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://cjlwired.github.io
-title: Changing the World - One Line of Code at a Time
-subtitle: A blogging framework for hackers.
+url: http://carlosplusplus.github.io
+title: My Adventure Through Code
+subtitle: A Technical Blog
 author: Carlos Lazo
 simple_search: 
 description: Changing the World ; One Line of Code At A Time. You Must Construct Additional Pylons.
@@ -95,7 +95,7 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name: cjlwired
+disqus_short_name: carlosplusplus
 disqus_show_comment_count: true
 
 # Google Analytics
