@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Changing the World - One Line of Code at a Time]]></title>
-  <link href="http://cjlwired.github.io/atom.xml" rel="self"/>
-  <link href="http://cjlwired.github.io/"/>
-  <updated>2014-01-23T23:07:06-05:00</updated>
-  <id>http://cjlwired.github.io/</id>
+  <title><![CDATA[My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2014-01-23T23:23:06-05:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
     <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Leveling Up my Ruby]]></title>
-    <link href="http://cjlwired.github.io/blog/2014/01/23/leveling-up-my-ruby/"/>
+    <link href="http://carlosplusplus.github.io/blog/2014/01/23/leveling-up-my-ruby/"/>
     <updated>2014-01-23T22:37:00-05:00</updated>
-    <id>http://cjlwired.github.io/blog/2014/01/23/leveling-up-my-ruby</id>
+    <id>http://carlosplusplus.github.io/blog/2014/01/23/leveling-up-my-ruby</id>
     <content type="html"><![CDATA[<p>In an effort to share more with the world and write, I&rsquo;m going to give this micro-post idea a try.</p>
 
 <h2>An Evolution Through Time</h2>
@@ -92,9 +92,14 @@
 
 <h2>Introspect Often</h2>
 
-<p>Amidst the chaos we know as life, I encourage you to take the time to <strong>introspect</strong>, regardless of whether you&rsquo;re new to programming or not. There are days when you feel feel down (happens to me all the time). However, remind yourself that as long as you&rsquo;ve learned something that day, you will always come out on top. Be sure to also take breaks from programming (this is healthy and strongly recommended), and to get <strong>regular sleep</strong>. Your body and mind need rest to be at their prime!</p>
+<p>Amidst the chaos we know as life, I encourage you to take the time to <strong>introspect</strong>, regardless of whether you&rsquo;re new to programming or not. There are days when you feel feel down (happens to me all the time). However, remind yourself that as long as you&rsquo;ve learned something that day, you will always come out on top. Be sure to also take breaks from programming (this is healthy and strongly recommended), and to get regular sleep. Your body and mind need rest to be at their prime!</p>
 
-<p>Don&rsquo;t forget that more often than not, the <strong>best teachers are also students</strong>. Stay strong and continue learning, friends. Have faith in yourselves, and continue being pillars of support for each other.</p>
+<p>Don&rsquo;t forget that more often than not:</p>
+
+<blockquote><p style="text-align:center;"><strong>The best teachers are also students.</strong></p></blockquote>
+
+<p>Stay strong and continue learning, friends.<br/>
+Have faith in yourselves, and continue being pillars of support for each other.</p>
 
 <p>CJL</p>
 ]]></content>
@@ -102,9 +107,9 @@
   
   <entry>
     <title type="html"><![CDATA[Object Modifications in Methods]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods/"/>
     <updated>2013-10-13T10:04:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods</id>
+    <id>http://carlosplusplus.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods</id>
     <content type="html"><![CDATA[<p>Every now and then, I&rsquo;ll post some cool tips and tricks I find awesome or important to know as you&rsquo;re learning the Ruby programming language. There&rsquo;s a ton out there to share, so let&rsquo;s get to it.</p>
 
 <h2>Pass Parameters by &lsquo;Value&rsquo; or &lsquo;Reference&rsquo;</h2>
@@ -144,7 +149,7 @@
 
 <p>Take a look at this code &ndash; it checks Object ID and values at different stages of the example to reinforce the fact that the original objects are being modified:</p>
 
-<figure class='code'><figcaption><span>Object Modifcations in Ruby Methods (object_mods_in_ruby.rb)</span> <a href='http://cjlwired.github.io/code/2013-10-13-grokking-on-ruby-objects-in-methods/object_mods_in_ruby.rb'>download</a></figcaption>
+<figure class='code'><figcaption><span>Object Modifcations in Ruby Methods (object_mods_in_ruby.rb)</span> <a href='http://carlosplusplus.github.io/code/2013-10-13-grokking-on-ruby-objects-in-methods/object_mods_in_ruby.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -218,7 +223,7 @@
 
 <p>Here is the output from the program:</p>
 
-<p><img src="http://cjlwired.github.io/images/posts/2013-10-13-grokking-on-ruby-objects-in-methods/ruby_obj_output.png" width="1000" height="750"></p>
+<p><img src="http://carlosplusplus.github.io/images/posts/2013-10-13-grokking-on-ruby-objects-in-methods/ruby_obj_output.png" width="1000" height="750"></p>
 
 <p>Following the method and the requisite output, you&rsquo;ll notice how the bang(!) methods changed the original objects (Object IDs are still the same).</p>
 
@@ -234,9 +239,9 @@
   
   <entry>
     <title type="html"><![CDATA[ProTips on Finding a Job in Engineering]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering/"/>
     <updated>2013-09-24T07:31:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering</id>
+    <id>http://carlosplusplus.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering</id>
     <content type="html"><![CDATA[<p>Whether you&rsquo;re experienced or completely new to the world of engineering, finding that new job can be a daunting task. Either way, congratulations for getting this far!</p>
 
 <h2>On the Hunt</h2>
@@ -422,9 +427,9 @@
   
   <entry>
     <title type="html"><![CDATA[Linked Lists and Ruby]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/08/08/linked-lists-and-ruby/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/08/08/linked-lists-and-ruby/"/>
     <updated>2013-08-08T15:24:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/08/08/linked-lists-and-ruby</id>
+    <id>http://carlosplusplus.github.io/blog/2013/08/08/linked-lists-and-ruby</id>
     <content type="html"><![CDATA[<p>One of the most talked about data structures in Computer Science is the <strong>Linked List</strong>.</p>
 
 <p>So, what is a <strong>Linked List</strong> and how can we implement it in Ruby?</p>
@@ -449,7 +454,7 @@
 
 <p>For the visual learners, here&rsquo;s a picture that shows the structure:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_layout.png" width="500" height="500"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_layout.png" width="500" height="500"></p>
 
 <p>Awesome &ndash; so, how can we build this in Ruby?</p>
 
@@ -648,7 +653,7 @@
 
 <p>Here is the output from the test bench:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_output.png" width="750" height="750"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_output.png" width="750" height="750"></p>
 
 <p>Take a look at the methods I defined for:</p>
 
@@ -659,7 +664,7 @@
 </ul>
 
 
-<p>The source code for my example is contained <a href="http://cjlwired.github.io/code/2013-08-08-linked-lists-and-ruby/linked_list.rb">HERE</a>.</p>
+<p>The source code for my example is contained <a href="http://carlosplusplus.github.io/code/2013-08-08-linked-lists-and-ruby/linked_list.rb">HERE</a>.</p>
 
 <h2>More with Linked Lists</h2>
 
@@ -667,11 +672,11 @@
 
 <p>Check out these other types of Linked Lists:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-08-08-linked-lists-and-ruby/Doubly-linked-list.png" width="750" height="750"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-08-08-linked-lists-and-ruby/Doubly-linked-list.png" width="750" height="750"></p>
 
 <p style="text-align:center;"> <strong>Doubly Linked Lists</strong></p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-08-08-linked-lists-and-ruby/Circularly-linked-list.png" width="425" height="425"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-08-08-linked-lists-and-ruby/Circularly-linked-list.png" width="425" height="425"></p>
 
 <p style="text-align:center;"> <strong>Circular Linked Lists</strong></p>
 
@@ -685,9 +690,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ruby and the Japanese Language]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/08/01/ruby-and-the-japanese-language/"/>
     <updated>2013-08-01T08:00:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language</id>
+    <id>http://carlosplusplus.github.io/blog/2013/08/01/ruby-and-the-japanese-language</id>
     <content type="html"><![CDATA[<p>The inspiration for this blog post comes from a few places:</p>
 
 <ol>
@@ -722,7 +727,7 @@
 
 <p>Most students learn the syllabic alphabets first through memorization and mnemonics, using charts like this one to assist in the memorization:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-07-28-ruby-and-the-japanese-language/alphabet_chart.png" width="750" height="750"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-07-28-ruby-and-the-japanese-language/alphabet_chart.png" width="750" height="750"></p>
 
 <p>Thousands of Kanji characters are in existence today &ndash; an individual in Japanese is considered fluent when they have mastery of the base 2000 characters. These are generally learned through memorization and constant practice.</p>
 
@@ -807,7 +812,7 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>Here are some examples:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-07-28-ruby-and-the-japanese-language/functional_japanese.png" width="500" height="500"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-07-28-ruby-and-the-japanese-language/functional_japanese.png" width="500" height="500"></p>
 
 <table>
 <thead>
@@ -1012,9 +1017,9 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>Here&rsquo;s output to what a command line might look like, along with a test that was written in order to test the interpreter:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_output.png" width="500" height="500"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_output.png" width="500" height="500"></p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_test.png" width="500" height="500"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-07-28-ruby-and-the-japanese-language/japanize_test.png" width="500" height="500"></p>
 
 <p>Note that this gem is outdated (3 years old), and that other gems exist that establish the morphemes (translation patterns) between English and Japanese for Ruby.</p>
 
@@ -1041,9 +1046,9 @@ The example above shows the flexibility of Ruby to implement the same solution u
   
   <entry>
     <title type="html"><![CDATA[Becoming a Ruby Warrior with Artificial Intelligence]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/07/14/becoming-a-ruby-warrior-with-artificial-intelligence/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/07/14/becoming-a-ruby-warrior-with-artificial-intelligence/"/>
     <updated>2013-07-14T15:33:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/07/14/becoming-a-ruby-warrior-with-artificial-intelligence</id>
+    <id>http://carlosplusplus.github.io/blog/2013/07/14/becoming-a-ruby-warrior-with-artificial-intelligence</id>
     <content type="html"><![CDATA[<p>In Weeks 3 &ndash; 6 at Flatiron School, the focus has been on learning both the Sinatra and Rails web frameworks. Understanding the paradigms has been crucial in spinning up web applications &ldquo;the right way&rdquo;.</p>
 
 <p>However, it&rsquo;s important to remember the foundation on which these frameworks are built &ndash; the <strong>Ruby</strong> language. With only 6 weeks of Ruby knowledge under my belt, I want to continue understanding the principles of abstraction, modeling, and scope.</p>
@@ -1060,7 +1065,7 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>Here&rsquo;s a cool image that will make these definitions clearer:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/AI_Agent.png" width="575" height="575"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/AI_Agent.png" width="575" height="575"></p>
 
 <p>Now with that background, onto <strong>Ruby Warrior</strong>.</p>
 
@@ -1156,11 +1161,11 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>Here is the representation of Level 01:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level01.png" width="175" height="175"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level01.png" width="175" height="175"></p>
 
 <p>This level is pretty straightforward. Having only one action available [<code>warrior.walk!</code>], the logic here is simple:</p>
 
-<figure class='code'><figcaption><span>Ruby Warrior: Level 01 (player_h01.rb)</span> <a href='http://cjlwired.github.io/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h01.rb'>download</a></figcaption>
+<figure class='code'><figcaption><span>Ruby Warrior: Level 01 (player_h01.rb)</span> <a href='http://carlosplusplus.github.io/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h01.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1191,11 +1196,11 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>Here is the representation of Level 02:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level02.png" width="175" height="175"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level02.png" width="175" height="175"></p>
 
 <p>This level introduced the first monster. I realized I needed to add logic to check to see if a monster was in front of me based on my available actions. Still pretty straightforward.</p>
 
-<figure class='code'><figcaption><span>Ruby Warrior: Level 02 (player_h02.rb)</span> <a href='http://cjlwired.github.io/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h02.rb'>download</a></figcaption>
+<figure class='code'><figcaption><span>Ruby Warrior: Level 02 (player_h02.rb)</span> <a href='http://carlosplusplus.github.io/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h02.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1234,13 +1239,13 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>Here is the representation of Level 03:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level03.png" width="175" height="175"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level03.png" width="175" height="175"></p>
 
 <p>Four (4) monsters. <strong>Oh snap son</strong>.</p>
 
 <p>As I began writing my code, I realized I didn&rsquo;t want to do annoying amounts of nested logic. Projecting into the future, I felt the need to begin splitting parts of the agent into logical methods in an organized structure. I also needed to figure out when was the right time to rest, to keep moving forward, and when to attack.</p>
 
-<figure class='code'><figcaption><span>Ruby Warrior: Level 03 (player_h03.rb)</span> <a href='http://cjlwired.github.io/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h03.rb'>download</a></figcaption>
+<figure class='code'><figcaption><span>Ruby Warrior: Level 03 (player_h03.rb)</span> <a href='http://carlosplusplus.github.io/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h03.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1409,7 +1414,7 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>Here is the representation of Level 04:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level04.png" width="175" height="175"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/Level04.png" width="175" height="175"></p>
 
 <p>Enter the dreaded <strong>Archer</strong> &ndash; umm&hellip; f*ck.</p>
 
@@ -1417,7 +1422,7 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>This now forced new state logic into my methods, along with some well-needed refactoring.</p>
 
-<figure class='code'><figcaption><span>Ruby Warrior: Level 04 (player_h04.rb)</span> <a href='http://cjlwired.github.io/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h04.rb'>download</a></figcaption>
+<figure class='code'><figcaption><span>Ruby Warrior: Level 04 (player_h04.rb)</span> <a href='http://carlosplusplus.github.io/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/player_h04.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1699,7 +1704,7 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>I&rsquo;m convinced that my upfront work will help prevent the following from happening:</p>
 
-<figure class='code'><figcaption><span>Ruby Warrior: Level 09 (HORRIBAD CODE) (level09_example.rb)</span> <a href='http://cjlwired.github.io/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/level09_example.rb'>download</a></figcaption>
+<figure class='code'><figcaption><span>Ruby Warrior: Level 09 (HORRIBAD CODE) (level09_example.rb)</span> <a href='http://carlosplusplus.github.io/code/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/level09_example.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -1961,7 +1966,7 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>Slowly but surely, I will become the Ruby Warrior I&rsquo;m destined to be.</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/RubyWarrior.png" width="750" height="750"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-07-14-becoming-a-ruby-warrior-with-artificial-intelligence/RubyWarrior.png" width="750" height="750"></p>
 
 <p>A shoutout to my boy <a href="http://dfriedm.github.io/">Dan Friedman</a> for working on this with me.</p>
 
@@ -1973,9 +1978,9 @@ The example above shows the flexibility of Ruby to implement the same solution u
   
   <entry>
     <title type="html"><![CDATA[HCI - The Possibilities are Endless]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/06/30/hci-the-possibilities-are-endless/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/06/30/hci-the-possibilities-are-endless/"/>
     <updated>2013-06-30T14:11:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/06/30/hci-the-possibilities-are-endless</id>
+    <id>http://carlosplusplus.github.io/blog/2013/06/30/hci-the-possibilities-are-endless</id>
     <content type="html"><![CDATA[<p>One of the things that has most fascinated me about the world of technology is our ability (and even sometimes, inability) to interact with computers. You hear about things like <strong><a href="https://en.wikipedia.org/wiki/Artificial_intelligence" title="Definition of Artificial Intelligence">Artificial Intelligence</a></strong>, self-realizations regarding the possibilities seen in the movie <strong><a href="http://www.imdb.com/title/tt0133093/">The Matrix</a></strong>, and prophecies of when <strong><a href="http://terminator.wikia.com/wiki/Skynet">SkyNet</a></strong> will take over the world.</p>
 
 <p>Interestingly enough, this is where <strong>HCI</strong> comes into play.</p>
@@ -2016,17 +2021,17 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>Here are images taken directly from the Kinect:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_rgb_depth.png" width="750" height="1250"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_rgb_depth.png" width="750" height="1250"></p>
 
 <p style="text-align:center;"> <strong>Kinect-Ruby Processing: RGB with Depth Map</strong></p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_ir_depth.png" width="750" height="1250"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_ir_depth.png" width="750" height="1250"></p>
 
 <p style="text-align:center;"> <strong>Kinect-Ruby Processing: Infrared with Depth Map</strong></p>
 
 <p>So&hellip; you&rsquo;re probably asking yourself, what does some of this code look like? Let&rsquo;s see:</p>
 
-<figure class='code'><figcaption><span>Kinect-Ruby Processing: RGB Depth Test (rgb_depth_test.rb)</span> <a href='http://cjlwired.github.io/code/2013-06-30-hci-the-possibilities-are-endless/rgb_depth_test.rb'>download</a></figcaption>
+<figure class='code'><figcaption><span>Kinect-Ruby Processing: RGB Depth Test (rgb_depth_test.rb)</span> <a href='http://carlosplusplus.github.io/code/2013-06-30-hci-the-possibilities-are-endless/rgb_depth_test.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -2218,7 +2223,7 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>One thing to definitely note about this gem is its gracefully ungraceful way of crashing around 50% of the time when attempting to enable the IR mode:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_error.png" width="500" height="750"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/rp5_error.png" width="500" height="750"></p>
 
 <p>Understandably, I guess some bugs still need to be worked out.</p>
 
@@ -2226,22 +2231,22 @@ The example above shows the flexibility of Ruby to implement the same solution u
 
 <p>As is customary in the world today, there tend to be more than one way of doing things. Let&rsquo;s take a quick peek at some output from the Kinect via the <strong><a href="https://github.com/troystribling/ruby-freenect" title="Github of Ruby-Freenect gem">Ruby-Freenect</a></strong> gem:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth_rgb.png" width="750" height="1250"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth_rgb.png" width="750" height="1250"></p>
 
 <p style="text-align:center;"> <strong>Ruby-Freenect: Depth Map with RGB </strong></p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth_ir.png" width="750" height="1250"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth_ir.png" width="750" height="1250"></p>
 
 <p style="text-align:center;"> <strong>Ruby-Freenect: Depth Map with InfraRed (IR) </strong></p>
 
 <p>As you may have noticed, this Ruby gem outputs the depth map in a colored format based on distance. As you can see in the next picture, objects that are closer to the camera appear in a &lsquo;hotter&rsquo; color (black/red), while objects further away are a &lsquo;colder&rsquo; color (green/blue):</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth.png" width="750" height="1250"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_depth.png" width="750" height="1250"></p>
 
 <p>Engaging this library package is done via the &lsquo;opengl&rsquo; command. I still have to do some exploration in order to find the code base. This gem also seems to lose packets, and does so in a more graceful &ldquo;I don&rsquo;t crash the entire program way.&rdquo;</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_cmd.png" width="500" height="750">
-<img src="http://cjlwired.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_img.png" width="500" height="750"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_cmd.png" width="500" height="750">
+<img src="http://carlosplusplus.github.io/images/posts/2013-06-30-hci-the-possibilities-are-endless/libfree_packetloss_img.png" width="500" height="750"></p>
 
 <p>It is a bit interesting though &ndash; sometimes, the video feed gets stuck, and you see a combination of the three video feeds. Constantly hitting the video button will eventually restore the connection, which is nice. Failure output, while never good to see, also tells me that an issue occurred, which is better than nothing.</p>
 
@@ -2261,9 +2266,9 @@ The example above shows the flexibility of Ruby to implement the same solution u
   
   <entry>
     <title type="html"><![CDATA[Web Dev, Sinatra, and Me]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/06/23/web-dev/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/06/23/web-dev/"/>
     <updated>2013-06-23T23:36:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/06/23/web-dev</id>
+    <id>http://carlosplusplus.github.io/blog/2013/06/23/web-dev</id>
     <content type="html"><![CDATA[<p>After three weeks of getting to know Ruby, me and my classmates have begun our conquest of the Web Dev world. Earlier this week, we were introduced to the basics of the Internet, learning about things like messaging structure and protocols.</p>
 
 <h2>Racks on Racks on Racks</h2>
@@ -2313,9 +2318,9 @@ config.ru - allows you to run rackup command to launch web app.
   
   <entry>
     <title type="html"><![CDATA[Code to Joy]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/06/16/code-to-joy/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/06/16/code-to-joy/"/>
     <updated>2013-06-16T13:16:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/06/16/code-to-joy</id>
+    <id>http://carlosplusplus.github.io/blog/2013/06/16/code-to-joy</id>
     <content type="html"><![CDATA[<p>In the search to educate myself a bit more on Ruby principles, both procedural and technical, I came upon a presentation by Avdi Grimm (<strong><a href="https://speakerdeck.com/avdi" title="SpeakerDeck Website for avdi">avdi</a></strong>) on <strong><a href="http://speaderdeck.com" title="SpeakerDeck">SpeakerDeck</a></strong>.</p>
 
 <p>These slide decks goes into things I&rsquo;m passionate about when it comes to programming:</p>
@@ -2487,9 +2492,9 @@ config.ru - allows you to run rackup command to launch web app.
   
   <entry>
     <title type="html"><![CDATA[The Road to Ruby from C++]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus/"/>
     <updated>2013-06-13T14:42:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus</id>
+    <id>http://carlosplusplus.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus</id>
     <content type="html"><![CDATA[<p>Me, myself, and C++ &ndash; my &ldquo;first&rdquo; programming language.</p>
 
 <h2>My Life and C++</h2>
@@ -2504,7 +2509,7 @@ config.ru - allows you to run rackup command to launch web app.
 
 <p>The problem of choice was to develop a simple solution that calculates the <strong>HISTOGRAM</strong>, or frequency, of words that appear in a simple sting. I purposefully made the output from both programs identical so one can see that they do the same thing:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-06-13-the-road-to-ruby-from-c-plus-plus/C++_v_Ruby.png" width="700" height="1000"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-06-13-the-road-to-ruby-from-c-plus-plus/C++_v_Ruby.png" width="700" height="1000"></p>
 
 <p style="text-align:center;"> Great &ndash; the output from the programs is the same. But now, it&rsquo;s time to analyze the code.</p>
 
@@ -2518,7 +2523,7 @@ config.ru - allows you to run rackup command to launch web app.
 
 <p>Here is my implementation of a histogram in C++:</p>
 
-<figure class='code'><figcaption><span>Histogram function in C++ (histogram.cpp)</span> <a href='http://cjlwired.github.io/code/2013-06-13-the-road-to-ruby-from-c-plus-plus/histogram.cpp'>download</a></figcaption>
+<figure class='code'><figcaption><span>Histogram function in C++ (histogram.cpp)</span> <a href='http://carlosplusplus.github.io/code/2013-06-13-the-road-to-ruby-from-c-plus-plus/histogram.cpp'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -2656,7 +2661,7 @@ config.ru - allows you to run rackup command to launch web app.
 
 <p>Here is my implementation of a histogram in Ruby:</p>
 
-<figure class='code'><figcaption><span>Histogram function in Ruby (histogram.rb)</span> <a href='http://cjlwired.github.io/code/2013-06-13-the-road-to-ruby-from-c-plus-plus/histogram.rb'>download</a></figcaption>
+<figure class='code'><figcaption><span>Histogram function in Ruby (histogram.rb)</span> <a href='http://carlosplusplus.github.io/code/2013-06-13-the-road-to-ruby-from-c-plus-plus/histogram.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -2779,9 +2784,9 @@ config.ru - allows you to run rackup command to launch web app.
   
   <entry>
     <title type="html"><![CDATA[The World of Startups w/ Matt Hackett]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/06/12/the-world-of-startups-w-slash-matt-hackett/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/06/12/the-world-of-startups-w-slash-matt-hackett/"/>
     <updated>2013-06-12T20:00:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/06/12/the-world-of-startups-w-slash-matt-hackett</id>
+    <id>http://carlosplusplus.github.io/blog/2013/06/12/the-world-of-startups-w-slash-matt-hackett</id>
     <content type="html"><![CDATA[<p>On Thursday, June 6th, 2013, me and my current classmates here at the Flatiron School were given the unique opportunity to hear from and be inspired by <strong>Matt Hackett</strong>.</p>
 
 <h2>Who is Matt Hackett?</h2>
@@ -2800,7 +2805,7 @@ config.ru - allows you to run rackup command to launch web app.
 
 <p>And here&rsquo;s a picture of him at our very own campus here at the Flatiron School:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-06-12-the-world-of-startups-w-slash-matt-hackett/matthackett_pic1.png" width="300" height="450"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-06-12-the-world-of-startups-w-slash-matt-hackett/matthackett_pic1.png" width="300" height="450"></p>
 
 <p style="text-align:center;"> <strong>You can almost taste the happy.</strong></p>
 
@@ -2810,7 +2815,7 @@ config.ru - allows you to run rackup command to launch web app.
 
 <p>Matt was able to break down startups into five distinct phases:</p>
 
-<p style="text-align:center;"> <img src="http://cjlwired.github.io/images/posts/2013-06-12-the-world-of-startups-w-slash-matt-hackett/matthackett_pic2.png" width="300" height="450"></p>
+<p style="text-align:center;"> <img src="http://carlosplusplus.github.io/images/posts/2013-06-12-the-world-of-startups-w-slash-matt-hackett/matthackett_pic2.png" width="300" height="450"></p>
 
 <h3>1 &ndash;> Pre-Funding</h3>
 
@@ -2901,9 +2906,9 @@ config.ru - allows you to run rackup command to launch web app.
   
   <entry>
     <title type="html"><![CDATA["Hello World" - My Journey to Awesome]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/06/09/hello-world-my-journey-to-awesome/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/06/09/hello-world-my-journey-to-awesome/"/>
     <updated>2013-06-09T20:00:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/06/09/hello-world-my-journey-to-awesome</id>
+    <id>http://carlosplusplus.github.io/blog/2013/06/09/hello-world-my-journey-to-awesome</id>
     <content type="html"><![CDATA[<p>On Monday, June 3rd, my life changes again for the best. I&rsquo;ve begun my 12 week journey at the Flatiron School. Can&rsquo;t wait to see me before / after this glorious code retreat of sorts. Stay tuned for some awesome blog posts on a variety of topics going forward.</p>
 
 <p>CJL</p>

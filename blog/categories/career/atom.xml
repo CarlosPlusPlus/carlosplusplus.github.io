@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: career | Changing the World - One Line of Code at a Time]]></title>
-  <link href="http://cjlwired.github.io/blog/categories/career/atom.xml" rel="self"/>
-  <link href="http://cjlwired.github.io/"/>
-  <updated>2014-01-23T23:07:06-05:00</updated>
-  <id>http://cjlwired.github.io/</id>
+  <title><![CDATA[Category: career | My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/blog/categories/career/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2014-01-23T23:23:06-05:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
     <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ProTips on Finding a Job in Engineering]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering/"/>
     <updated>2013-09-24T07:31:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering</id>
+    <id>http://carlosplusplus.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering</id>
     <content type="html"><![CDATA[<p>Whether you&rsquo;re experienced or completely new to the world of engineering, finding that new job can be a daunting task. Either way, congratulations for getting this far!</p>
 
 <h2>On the Hunt</h2>

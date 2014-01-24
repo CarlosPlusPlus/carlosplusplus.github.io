@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: oop | Changing the World - One Line of Code at a Time]]></title>
-  <link href="http://cjlwired.github.io/blog/categories/oop/atom.xml" rel="self"/>
-  <link href="http://cjlwired.github.io/"/>
-  <updated>2014-01-23T23:07:06-05:00</updated>
-  <id>http://cjlwired.github.io/</id>
+  <title><![CDATA[Category: oop | My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/blog/categories/oop/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2014-01-23T23:23:06-05:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
     <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Linked Lists and Ruby]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/08/08/linked-lists-and-ruby/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/08/08/linked-lists-and-ruby/"/>
     <updated>2013-08-08T15:24:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/08/08/linked-lists-and-ruby</id>
+    <id>http://carlosplusplus.github.io/blog/2013/08/08/linked-lists-and-ruby</id>
     <content type="html"><![CDATA[<p>One of the most talked about data structures in Computer Science is the <strong>Linked List</strong>.</p>
 
 <p>So, what is a <strong>Linked List</strong> and how can we implement it in Ruby?</p>

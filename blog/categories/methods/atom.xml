@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: methods | Changing the World - One Line of Code at a Time]]></title>
-  <link href="http://cjlwired.github.io/blog/categories/methods/atom.xml" rel="self"/>
-  <link href="http://cjlwired.github.io/"/>
-  <updated>2014-01-23T23:07:06-05:00</updated>
-  <id>http://cjlwired.github.io/</id>
+  <title><![CDATA[Category: methods | My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/blog/categories/methods/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2014-01-23T23:23:06-05:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
     <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Object Modifications in Methods]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods/"/>
     <updated>2013-10-13T10:04:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods</id>
+    <id>http://carlosplusplus.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods</id>
     <content type="html"><![CDATA[<p>Every now and then, I&rsquo;ll post some cool tips and tricks I find awesome or important to know as you&rsquo;re learning the Ruby programming language. There&rsquo;s a ton out there to share, so let&rsquo;s get to it.</p>
 
 <h2>Pass Parameters by &lsquo;Value&rsquo; or &lsquo;Reference&rsquo;</h2>

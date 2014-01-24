@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: c++ | Changing the World - One Line of Code at a Time]]></title>
-  <link href="http://cjlwired.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
-  <link href="http://cjlwired.github.io/"/>
-  <updated>2014-01-23T23:07:06-05:00</updated>
-  <id>http://cjlwired.github.io/</id>
+  <title><![CDATA[Category: c++ | My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2014-01-23T23:23:06-05:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
     <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Road to Ruby from C++]]></title>
-    <link href="http://cjlwired.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus/"/>
+    <link href="http://carlosplusplus.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus/"/>
     <updated>2013-06-13T14:42:00-04:00</updated>
-    <id>http://cjlwired.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus</id>
+    <id>http://carlosplusplus.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus</id>
     <content type="html"><![CDATA[<p>Me, myself, and C++ &ndash; my &ldquo;first&rdquo; programming language.</p>
 
 <h2>My Life and C++</h2>

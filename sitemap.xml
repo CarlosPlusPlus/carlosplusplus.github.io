@@ -1,75 +1,85 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://cjlwired.github.io/blog/2013/06/09/hello-world-my-journey-to-awesome/</loc>
-        <lastmod>2013-11-20T01:11:22-05:00</lastmod>
-    </url>
-    <url>
         <loc>
-            http://cjlwired.github.io/blog/2013/06/12/the-world-of-startups-w-slash-matt-hackett/
+            http://carlosplusplus.github.io/blog/2013/06/09/hello-world-my-journey-to-awesome/
         </loc>
         <lastmod>2013-11-20T01:11:22-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus/</loc>
+        <loc>
+            http://carlosplusplus.github.io/blog/2013/06/12/the-world-of-startups-w-slash-matt-hackett/
+        </loc>
+        <lastmod>2013-11-20T01:11:22-05:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://carlosplusplus.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus/
+        </loc>
         <lastmod>2014-01-04T22:56:14-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/2013/06/16/code-to-joy/</loc>
+        <loc>http://carlosplusplus.github.io/blog/2013/06/16/code-to-joy/</loc>
         <lastmod>2013-11-20T01:11:22-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/2013/06/23/web-dev/</loc>
+        <loc>http://carlosplusplus.github.io/blog/2013/06/23/web-dev/</loc>
         <lastmod>2014-01-04T22:56:43-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/2013/06/30/hci-the-possibilities-are-endless/</loc>
-        <lastmod>2013-11-20T01:11:22-05:00</lastmod>
-    </url>
-    <url>
         <loc>
-            http://cjlwired.github.io/blog/2013/07/14/becoming-a-ruby-warrior-with-artificial-intelligence/
+            http://carlosplusplus.github.io/blog/2013/06/30/hci-the-possibilities-are-endless/
         </loc>
         <lastmod>2013-11-20T01:11:22-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/2013/08/01/ruby-and-the-japanese-language/</loc>
+        <loc>
+            http://carlosplusplus.github.io/blog/2013/07/14/becoming-a-ruby-warrior-with-artificial-intelligence/
+        </loc>
+        <lastmod>2013-11-20T01:11:22-05:00</lastmod>
+    </url>
+    <url>
+        <loc>http://carlosplusplus.github.io/blog/2013/08/01/ruby-and-the-japanese-language/</loc>
         <lastmod>2014-01-04T22:57:12-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/2013/08/08/linked-lists-and-ruby/</loc>
+        <loc>http://carlosplusplus.github.io/blog/2013/08/08/linked-lists-and-ruby/</loc>
         <lastmod>2013-11-20T01:11:22-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering/</loc>
+        <loc>
+            http://carlosplusplus.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering/
+        </loc>
         <lastmod>2014-01-04T22:57:29-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods/</loc>
+        <loc>
+            http://carlosplusplus.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods/
+        </loc>
         <lastmod>2014-01-04T22:57:34-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/2014/01/23/leveling-up-my-ruby/</loc>
-        <lastmod>2014-01-23T23:06:06-05:00</lastmod>
+        <loc>http://carlosplusplus.github.io/blog/2014/01/23/leveling-up-my-ruby/</loc>
+        <lastmod>2014-01-23T23:22:25-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/archives/</loc>
-        <lastmod>2014-01-23T23:06:06-05:00</lastmod>
+        <loc>http://carlosplusplus.github.io/blog/archives/</loc>
+        <lastmod>2014-01-23T23:22:25-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/blog/categories/</loc>
+        <loc>http://carlosplusplus.github.io/blog/categories/</loc>
         <lastmod>2013-11-20T01:11:22-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/</loc>
-        <lastmod>2014-01-23T23:06:06-05:00</lastmod>
+        <loc>http://carlosplusplus.github.io/</loc>
+        <lastmod>2014-01-23T23:22:25-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/robots.txt</loc>
+        <loc>http://carlosplusplus.github.io/robots.txt</loc>
         <lastmod>2013-11-20T01:11:22-05:00</lastmod>
     </url>
     <url>
-        <loc>http://cjlwired.github.io/search.html</loc>
+        <loc>http://carlosplusplus.github.io/search.html</loc>
         <lastmod>2013-11-20T01:11:22-05:00</lastmod>
     </url>
 </urlset>
