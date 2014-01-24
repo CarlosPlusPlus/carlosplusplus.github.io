@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rails | Changing the World - One Line of Code at a Time]]></title>
+  <link href="http://cjlwired.github.io/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://cjlwired.github.io/"/>
+  <updated>2014-01-23T23:07:06-05:00</updated>
+  <id>http://cjlwired.github.io/</id>
+  <author>
+    <name><![CDATA[Carlos Lazo]]></name>
+    <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Leveling Up my Ruby]]></title>
+    <link href="http://cjlwired.github.io/blog/2014/01/23/leveling-up-my-ruby/"/>
+    <updated>2014-01-23T22:37:00-05:00</updated>
+    <id>http://cjlwired.github.io/blog/2014/01/23/leveling-up-my-ruby</id>
+    <content type="html"><![CDATA[<p>In an effort to share more with the world and write, I&rsquo;m going to give this micro-post idea a try.</p>
+
+<h2>An Evolution Through Time</h2>
+
+<p>It&rsquo;s been about 6 months since I&rsquo;ve started learning Ruby, and until recently, I didn&rsquo;t realize how much I&rsquo;ve learned in such little time. Both at work and through self-study, I continue to build, define, and hone my programming knowledge. I&rsquo;ve been investing a lot of time at work with Ruby / Rails / RSpec, and decided to mix it up with some Front-End skill development off hours. Whatever path you choose on your conquest to become a better developer, be receptive to learning and stay focused.</p>
+
+<p>It&rsquo;s a fun exercise to see how your programming skill evolves as a function of time. Recently, I was helping a friend write a scraper for the StreetEasy website. This is only a small sample of the overall code.</p>
+
+<p>This is how I would&rsquo;ve written this portion a few months ago:</p>
+
+<p>```ruby
+class StreetEasyScraper
+  attr_accessor :browser, # &hellip;</p>
+
+<p>  def initialize(browser)</p>
+
+<pre><code>@type = "rent" if browser.contains?("rent")
+@type = "sale" if browser.contains?("sale")
+# ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  # &hellip;
+end</p>
+
+<p>```</p>
+
+<p>And here&rsquo;s how I wrote it a few days ago:</p>
+
+<p>```ruby
+class StreetEasyScraper
+  attr_reader :browser, # &hellip;</p>
+
+<p>  def initialize(browser)</p>
+
+<pre><code>@type = browser['rent'] || 'sale'
+# ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  # &hellip;
+end
+```</p>
+
+<p>Let&rsquo;s look at some of the differences:</p>
+
+<ul>
+<li><code>attr_reader</code> instead of <code>attr_accessor</code>, as won&rsquo;t be changing.</li>
+<li>A <strong>really cool</strong> way to search &amp; return a substring if it exists.</li>
+<li>Use of the <code>||</code> operator, as I know API will only ever be two values.</li>
+<li><code>' '</code> vs <code>" "</code> for strings that will not be interpolated (Ruby best practice).</li>
+</ul>
+
+
+<p>As simple as these four differences may be, they took me by surprise and made me feel amazing. The things I&rsquo;m both learning and seeing are beginning to stick, and rather than going back and refactoring, they&rsquo;re being expressed in my code upfront. Pretty awesome!</p>
+
+<h2>Introspect Often</h2>
+
+<p>Amidst the chaos we know as life, I encourage you to take the time to <strong>introspect</strong>, regardless of whether you&rsquo;re new to programming or not. There are days when you feel feel down (happens to me all the time). However, remind yourself that as long as you&rsquo;ve learned something that day, you will always come out on top. Be sure to also take breaks from programming (this is healthy and strongly recommended), and to get <strong>regular sleep</strong>. Your body and mind need rest to be at their prime!</p>
+
+<p>Don&rsquo;t forget that more often than not, the <strong>best teachers are also students</strong>. Stay strong and continue learning, friends. Have faith in yourselves, and continue being pillars of support for each other.</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+</feed>

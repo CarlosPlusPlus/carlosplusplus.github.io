@@ -9,7 +9,7 @@
 	<meta name="author" content="Carlos Lazo">
 
 	
-	<meta name="description" content="Oct 13th, 2013 methods, ruby Comments Object Modifications in Methods Every now and then, I&rsquo;ll post some cool tips and tricks I find awesome &hellip;">
+	<meta name="description" content="Jan 23rd, 2014 rails, ruby Comments Leveling Up My Ruby In an effort to share more with the world and write, I&rsquo;m going to give this micro-post &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,10 +82,10 @@
 		
 		
 		
-			<a class="twitter" href="http://twitter.com/cjlwired" title="Twitter">Twitter</a>
+			<a class="twitter" href="http://twitter.com/carlosplusplus" title="Twitter">Twitter</a>
 		
 		
-			<a class="github" href="https://github.com/cjlwired" title="GitHub">GitHub</a>
+			<a class="github" href="https://github.com/carlosplusplus" title="GitHub">GitHub</a>
 		
 		
 			<a class="coderwall" href="https://coderwall.com/cjlwired" title="Coderwall">Coderwall</a>
@@ -113,6 +113,121 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-23T22:37:00-05:00" data-updated="true" itemprop="datePublished">Jan 23<span>rd</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2014/01/23/leveling-up-my-ruby/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/23/leveling-up-my-ruby/" itemprop="url">Leveling Up My Ruby</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>In an effort to share more with the world and write, I&rsquo;m going to give this micro-post idea a try.</p>
+
+<h2>An Evolution Through Time</h2>
+
+<p>It&rsquo;s been about 6 months since I&rsquo;ve started learning Ruby, and until recently, I didn&rsquo;t realize how much I&rsquo;ve learned in such little time. Both at work and through self-study, I continue to build, define, and hone my programming knowledge. I&rsquo;ve been investing a lot of time at work with Ruby / Rails / RSpec, and decided to mix it up with some Front-End skill development off hours. Whatever path you choose on your conquest to become a better developer, be receptive to learning and stay focused.</p>
+
+<p>It&rsquo;s a fun exercise to see how your programming skill evolves as a function of time. Recently, I was helping a friend write a scraper for the StreetEasy website. This is only a small sample of the overall code.</p>
+
+<p>This is how I would&rsquo;ve written this portion a few months ago:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">StreetEasyScraper</span>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:browser</span><span class="p">,</span> <span class="c1"># ...</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@type</span> <span class="o">=</span> <span class="s2">&quot;rent&quot;</span> <span class="k">if</span> <span class="n">browser</span><span class="o">.</span><span class="n">contains?</span><span class="p">(</span><span class="s2">&quot;rent&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@type</span> <span class="o">=</span> <span class="s2">&quot;sale&quot;</span> <span class="k">if</span> <span class="n">browser</span><span class="o">.</span><span class="n">contains?</span><span class="p">(</span><span class="s2">&quot;sale&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># ...</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here&rsquo;s how I wrote it a few days ago:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">StreetEasyScraper</span>
+</span><span class='line'>  <span class="kp">attr_reader</span> <span class="ss">:browser</span><span class="p">,</span> <span class="c1"># ...</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@type</span> <span class="o">=</span> <span class="n">browser</span><span class="o">[</span><span class="s1">&#39;rent&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;sale&#39;</span>
+</span><span class='line'>    <span class="c1"># ...</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># ...</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s look at some of the differences:</p>
+
+<ul>
+<li><code>attr_reader</code> instead of <code>attr_accessor</code>, as won&rsquo;t be changing.</li>
+<li>A <strong>really cool</strong> way to search &amp; return a substring if it exists.</li>
+<li>Use of the <code>||</code> operator, as I know API will only ever be two values.</li>
+<li><code>' '</code> vs <code>" "</code> for strings that will not be interpolated (Ruby best practice).</li>
+</ul>
+
+
+<p>As simple as these four differences may be, they took me by surprise and made me feel amazing. The things I&rsquo;m both learning and seeing are beginning to stick, and rather than going back and refactoring, they&rsquo;re being expressed in my code upfront. Pretty awesome!</p>
+
+<h2>Introspect Often</h2>
+
+<p>Amidst the chaos we know as life, I encourage you to take the time to <strong>introspect</strong>, regardless of whether you&rsquo;re new to programming or not. There are days when you feel feel down (happens to me all the time). However, remind yourself that as long as you&rsquo;ve learned something that day, you will always come out on top. Be sure to also take breaks from programming (this is healthy and strongly recommended), and to get <strong>regular sleep</strong>. Your body and mind need rest to be at their prime!</p>
+
+<p>Don&rsquo;t forget that more often than not, the <strong>best teachers are also students</strong>. Stay strong and continue learning, friends. Have faith in yourselves, and continue being pillars of support for each other.</p>
+
+<p>CJL</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -3034,156 +3149,6 @@ config.ru - allows you to run rackup command to launch web app.
 <p style="text-align:center;"> <strong>10 days of Ruby vs. 10 years of C++</strong></p>
 
 <p>Ruby, you&rsquo;ve won over my &lt;3 already, &amp; we&rsquo;ve only just begun getting to know each other.</p>
-
-<p>CJL</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-12T20:00:00-04:00" data-updated="true" itemprop="datePublished">Jun 12<span>th</span>, 2013</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/flatironschool/'>flatironschool</a>, <a class='category' href='/blog/categories/startups/'>startups</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/blog/2013/06/12/the-world-of-startups-w-slash-matt-hackett/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/06/12/the-world-of-startups-w-slash-matt-hackett/" itemprop="url">The World of Startups W/ Matt Hackett</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>On Thursday, June 6th, 2013, me and my current classmates here at the Flatiron School were given the unique opportunity to hear from and be inspired by <strong>Matt Hackett</strong>.</p>
-
-<h2>Who is Matt Hackett?</h2>
-
-<p>Who is Matt Hackett you ask? Here&rsquo;s a brief summary from his <strong><a href="http://matthackett.net/" title="Website of Matt Hackett">website</a></strong>:</p>
-
-<blockquote><p>I obsess over the engineering and dissemination of technology for creative people.</p></blockquote>
-
-<hr />
-
-<blockquote><p>I&rsquo;m happily torn between work on visible (marketing) and invisible (architecture, management) components of media-product-making machinery.</p></blockquote>
-
-<hr />
-
-<blockquote><p>Most recently, I spent 2 &frac12; years at Tumblr as VP Engineering and later Head of Brand Strategy, as we grew the platform from a monthly audience of 25 million to 150 million people around the world.</p></blockquote>
-
-<p>And here&rsquo;s a picture of him at our very own campus here at the Flatiron School:</p>
-
-<p style="text-align:center;"> <img src="/images/posts/2013-06-12-the-world-of-startups-w-slash-matt-hackett/matthackett_pic1.png" width="300" height="450"></p>
-
-<p style="text-align:center;"> <strong>You can almost taste the happy.</strong></p>
-
-<p style="text-align:center;"> Matt visited us and shared his insight into the startup world.</p>
-
-<h2>A Simple Breakdown of Startup Phases</h2>
-
-<p>Matt was able to break down startups into five distinct phases:</p>
-
-<p style="text-align:center;"> <img src="/images/posts/2013-06-12-the-world-of-startups-w-slash-matt-hackett/matthackett_pic2.png" width="300" height="450"></p>
-
-<h3>1 &ndash;> Pre-Funding</h3>
-
-<ul>
-<li>Team is incredibly small (e.g. 1-3 people).</li>
-<li>Willingness to take on lots of risk to explore idea.</li>
-<li>OK with being unpaid and potentially contributing persona funds.</li>
-<li>&ldquo;Just get something done&rdquo; attitude.</li>
-</ul>
-
-
-<h3>2 &ndash;> Early Team</h3>
-
-<ul>
-<li>Success at an early team place is based upon two main things:
-
-<ul>
-<li>Awareness of the environment &ndash; knowing where you at.</li>
-<li>Willingness to adapt to change and take on new direction.</li>
-</ul>
-</li>
-<li>Experience isn&rsquo;t necessarily required: &ldquo;can-do, will-do&rdquo; attitude.</li>
-<li>Constantly checking in with the team is extremely important:
-
-<ul>
-<li>Is my vision aligned with the rest of the team?</li>
-<li>Am I doing things right?</li>
-</ul>
-</li>
-<li>Focus on agile development and continual process improvement.</li>
-<li>Cultural fit is the biggest part of this stage.</li>
-<li>How excited are you about the product itself?</li>
-</ul>
-
-
-<h3>3 &ndash;> Growth</h3>
-
-<ul>
-<li>Cultural fit isn&rsquo;t as emphasized as much; things are more team based.</li>
-<li>Passion still helps in getting hired, but having skills is most important.</li>
-<li>Expect more technical interviewing along with 30min pre-interview phone calls.
-
-<ul>
-<li>Pre-interview coding is fairly regular (e.g. 1-3 hours of pre-work).</li>
-</ul>
-</li>
-<li>Important to start finding your own specialty within the code base and product.
-
-<ul>
-<li>Focusing on breadth vs. depth is the key.</li>
-<li>Knowledge and skills will become critical as team scales at a greater pace.</li>
-</ul>
-</li>
-</ul>
-
-
-<h3>4 &ndash;> Hypergrowth</h3>
-
-<ul>
-<li>Specialization is the most important given the rate at which the company is growing.</li>
-<li>Incredibly specific hiring process is enforced (for specialization).</li>
-<li>Overall time-line to reach this spot is around 1-2 years since the Early Team phase.</li>
-</ul>
-
-
-<h3>5 &ndash;> Mature Company</h3>
-
-<ul>
-<li>Output from hypergrowth leads into a mature company &ndash; specialization is still important.</li>
-<li>This is the stage where &ldquo;traditional&rdquo; things like performance reviews begin to show up.</li>
-<li>One of the main goals it to get bought out by a larger company and GET PAID.</li>
-</ul>
-
-
-<h2>Closing Thoughts</h2>
-
-<p>Matt&rsquo;s overall recommendation was for us Flatiron School students, future web developers here in New York City and elsewhere, is to target startups in the <strong>Early Team</strong> and <strong>Growth</strong> phases of development. This would give us all enough time to find our place, both learn new skills and hone current ones, and be part of something amazing.</p>
-
-<p>He also mentioned that as junior developers looking to work at startups, we need to find companies where we feel passionate about the product. Matt encourages us to never settle and to find the company that fits <strong>our own</strong> requirements for culture.</p>
-
-<p>Taking a position at a more mature company also isn&rsquo;t a bad idea, as you can &ldquo;learn the ropes&rdquo; before you dive into the deep end of startup culture.</p>
-
-<p style="text-align:center;"> <strong>Thank you for imparting your wisdom, Matt!</strong></p>
 
 <p>CJL</p>
 
