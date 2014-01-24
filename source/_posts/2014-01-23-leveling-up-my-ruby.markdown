@@ -49,11 +49,12 @@ end
 Let's look at some of the differences:
 
 - `attr_reader` instead of `attr_accessor`, as `@type` won't be changing.
-- A **really cool** way to search & return a substring if it exists.
+- A really cool way to search & return a substring if it exists.
 - Use of the `||` operator, as I know API will only ever be two values.
 - `' '` vs `" "` for strings that will not be interpolated (Ruby best practice).
+- **Less code** which accomplishes the same thing optimally (better / faster).
 
-As simple as these four differences may be, they took me by surprise and made me feel amazing. The things I'm both learning and seeing are beginning to stick, and rather than going back and refactoring, they're being expressed in my code upfront. Pretty awesome!
+As simple as these five differences may be, they took me by surprise and made me feel amazing. The things I'm both learning and seeing are beginning to stick, and rather than going back and refactoring, they're being expressed in my code upfront. Pretty awesome!
 
 ## Introspect Often
 
