@@ -3,7 +3,7 @@ layout: post
 title: "Testing Rake Tasks with RSpec"
 date: 2014-02-01 08:00
 comments: true
-categories: ruby rails rake mongodb rspec testing
+categories: ruby rails rake rspec testing
 ---
 
 One of the projects I'm currently supporting at work involves migrating an entire database from the [Oracle](http://www.oracle.com/index.html) framework to the [MongoDB](http://www.mongodb.org/) framework. This Rails application is crucial in that it serves as one of the primary JSON APIs for my company's web services.
