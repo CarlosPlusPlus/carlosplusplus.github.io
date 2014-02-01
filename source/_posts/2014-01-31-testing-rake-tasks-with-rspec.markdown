@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Testing Rake Tasks with RSPec"
-date: 2014-01-31 19:53
+title: "Testing Rake Tasks with RSpec"
+date: 2014-02-01 08:00
 comments: true
 categories: ruby rails rake mongodb rspec testing
 ---
