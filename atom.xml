@@ -4,7 +4,7 @@
   <title><![CDATA[My Adventure Through Code]]></title>
   <link href="http://carlosplusplus.github.io/atom.xml" rel="self"/>
   <link href="http://carlosplusplus.github.io/"/>
-  <updated>2014-02-01T01:02:47-05:00</updated>
+  <updated>2014-02-01T01:03:30-05:00</updated>
   <id>http://carlosplusplus.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Testing Rake Tasks with RSPec]]></title>
-    <link href="http://carlosplusplus.github.io/blog/2014/01/31/testing-rake-tasks-with-rspec/"/>
-    <updated>2014-01-31T19:53:00-05:00</updated>
-    <id>http://carlosplusplus.github.io/blog/2014/01/31/testing-rake-tasks-with-rspec</id>
+    <title type="html"><![CDATA[Testing Rake Tasks with RSpec]]></title>
+    <link href="http://carlosplusplus.github.io/blog/2014/02/01/testing-rake-tasks-with-rspec/"/>
+    <updated>2014-02-01T08:00:00-05:00</updated>
+    <id>http://carlosplusplus.github.io/blog/2014/02/01/testing-rake-tasks-with-rspec</id>
     <content type="html"><![CDATA[<p>One of the projects I&rsquo;m currently supporting at work involves migrating an entire database from the <a href="http://www.oracle.com/index.html">Oracle</a> framework to the <a href="http://www.mongodb.org/">MongoDB</a> framework. This Rails application is crucial in that it serves as one of the primary JSON APIs for my company&rsquo;s web services.</p>
 
 <p>My colleagues had written an import task which will takes the (deprecated) Oracle versions of our models and migrate them to the new MongoDB representations. However, there are aggregation columns and custom <a href="http://railscasts.com/episodes/23-counter-cache-column">counter caches</a> that must be recomputed once the migration is done. I was asked to write a rake task to perform this operation on all relevant models. It was also recommended I find a way to test this locally, as the task was going to be performed on millions of rows of data in production, making it imperative to get it right the first time.</p>
