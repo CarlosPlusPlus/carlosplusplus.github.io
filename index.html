@@ -147,9 +147,9 @@
 
 <p>My colleagues had written an import task which will takes the (deprecated) Oracle versions of our models and migrate them to the new MongoDB representations. However, there are aggregation columns and custom <a href="http://railscasts.com/episodes/23-counter-cache-column">counter caches</a> that must be recomputed once the migration is done. I was asked to write a rake task to perform this operation on all relevant models. It was also recommended I find a way to test this locally, as the task was going to be performed on millions of rows of data in production, making it imperative to get it right the first time.</p>
 
-<p>This blog post assumes some knowledge about <a href="https://github.com/thoughtbot/factory_girl">FactoryGirl</a> and <a href="http://relishapp.com/rspec">RSpec</a> for testing purposes. Be sure to read up on these incredible testing tools in Ruby if you haven&rsquo;t used them before</p>
+<p>This blog post assumes some knowledge about <a href="https://github.com/thoughtbot/factory_girl">FactoryGirl</a> and <a href="http://relishapp.com/rspec">RSpec</a> for testing purposes. Be sure to read up on these incredible testing tools in Ruby if you haven&rsquo;t used them before.</p>
 
-<p>Alright, let&rsquo;s dive in head first.</p>
+<p>Alright, time to dive in head first. Let&rsquo;s first talk about our model.</p>
 
 <h2>The Model Space</h2>
 
