@@ -19,7 +19,7 @@ The Rails model I'll be using is **Question**. The `Mongoid` Ruby driver is used
 Here are the parts of the **Question** model we care about in the Rails app:
 
 ```ruby
-# ./app/models/question.rb
+# app/models/question.rb
 class Question
   include Mongoid::Document
 
@@ -47,7 +47,7 @@ Great! Now let's look at the rake task that will recompute those fields.
 Let's get right to it and look at the rake task I wrote to re-compute these fields:
 
 ```ruby
-# ./lib/tasks/aggregation.rake
+# lib/tasks/aggregation.rake
 WORK_SIZE ||= 1000
 
 desc 'Aggregation Task for: Question'
@@ -77,11 +77,69 @@ Let's dissect what's happening above:
 
 Great, so now I have a rake task built. How can I test this?
 
-## RSpec, FactoryGirl, and Context Magic
+## RSpec, FactoryGirl, and Contextual Magic
 
-I have to give credit where it's due - 
+I have to give credit where it's due - this post titled **[How to Test Rake Tasks Like a BOSS](http://robots.thoughtbot.com/test-rake-tasks-like-a-boss)** from [ThoughtBot](http://www.thoughtbot.com) made this all possible, with a few modifications.
+
+#### Sharing is Caring via RSpec Context
+
+Since I knew I was going to be performing this operation across multiple models (all with different fields), I started out by making an RSpec context (as described in the blog post):
+
+```ruby
+# spec/support/shared_contexts/aggregation.rb
+
+shared_context 'aggregation' do
+  let(:rake)      { Rake::Application.new }
+  let(:task_name) { self.class.top_level_description }
+  let(:task_path) { "lib/tasks/aggregation" }
+  subject         { rake[task_name] }
+
+  def loaded_files_excluding_current_rake_file
+    $".reject {|file| file == Rails.root.join("#{task_path}.rake").to_s }
+  end
+
+  before do
+    Rake.application = rake
+    Rake.application.rake_require(task_path, [Rails.root.to_s], loaded_files_excluding_current_rake_file)
+
+    Rake::Task.define_task(:environment)
+  end
+end
+```
+
+Here are the lines we care the most about:
+
+- `let(:task_name)` => my task_name will equal the top level description of my Rspec example.
+- `let(:task_path)` => here's where I link to my aggregation.rake file.
+- `subject { ... }` => the subject in my RSpec example will be set to my specifc rake task.
+
+This context is automagically loaded in all specs thanks to this line in `spec_helper.rb`:
+
+```ruby
+Dir[Rails.root.join("spec/support/**/*.rb")].sort.each {|f| require f}
+```
+
+Now with this context setup, let's move onto the Factories:
+
+#### FactoryGirl to the Rescue
+
+In the Rspec Tests, you will see things like the following:
+
+```ruby
+FactoryGirl.create(:question)
+FactoryGirl.create(:answer, question: question) }
+FactoryGirl.create(:answer, question: question, approved: true)
+
+```
+
+Factories are defined elsewhere that give me the flexibility to create new documents (models) in particular configurations. In this case, I know I want to specifically test my two aggregation fields, so I'll be setting those when I use my factories in my RSpec examples. So the associations are upheld, I want to assign the newly create answers to the question that was created.
+
+With my factories all setup, I'm ready to look at my RSpec tests.
+
+## RSpec 
 
 # Future Considerations
 
+- After doing this the first time, I was able to write my tests first.
 - No huge deal in Development, but HUGE deal in production.
 - Perfect candidate for DelayedJob.
