@@ -4,7 +4,7 @@
   <title><![CDATA[My Adventure Through Code]]></title>
   <link href="http://carlosplusplus.github.io/atom.xml" rel="self"/>
   <link href="http://carlosplusplus.github.io/"/>
-  <updated>2014-01-24T07:56:45-05:00</updated>
+  <updated>2014-01-31T22:40:03-05:00</updated>
   <id>http://carlosplusplus.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Testing Rake Tasks with RSPec]]></title>
+    <link href="http://carlosplusplus.github.io/blog/2014/01/31/testing-rake-tasks-with-rspec/"/>
+    <updated>2014-01-31T19:53:00-05:00</updated>
+    <id>http://carlosplusplus.github.io/blog/2014/01/31/testing-rake-tasks-with-rspec</id>
+    <content type="html"><![CDATA[<p>One of the projects I&rsquo;m currently supporting at work involves migrating an entire database from the <a href="www.oracle.com">Oracle</a> framework to the <a href="wwww.mongodb.com">MongoDB</a> framework. This Rails application is crucial in that it serves as one of the primary JSON APIs for my company&rsquo;s web services.</p>
+
+<p>My colleagues had written an import task which will take the (deprecated) Oracle versions of our models and migrate them to the new MongoDB representations. However, there are aggregation columns and <a href="www.countercache.com">counter caches</a> that must be recomputed once the migration is done. I was asked to write a rake task to perform this operation on all relevant models. It was also recommended I find a way to test this locally, as the task was going to be performed on millions of rows of data in production and it would be best to get it right the first time.</p>
+
+<p>I had never heard the notion of testing a rake task, but given the importance of what I was doing, decided to dive in head first.</p>
+
+<h2>The Model Space</h2>
+
+<p>The Rails model I&rsquo;ll be using here is one titled <strong>Question</strong>. I realize that some of you may not be familiar with MongoDB or the Mongoid Driver &ndash; don&rsquo;t worry, I&rsquo;ll explain the parts you may not understand when we get to them. I was new to MongoDB when I first started this task.</p>
+
+<p>Here is the Questions model:</p>
+
+<ul>
+<li>MongoDB and importance of this.</li>
+<li>Question Model</li>
+<li>Rake Task</li>
+</ul>
+
+
+<h2>RSpec</h2>
+
+<ul>
+<li>Context for aggregation.</li>
+<li>Actual Rspec Test.</li>
+<li>Talk about the individual lines</li>
+</ul>
+
+
+<h2>Future Optimizations</h2>
+
+<ul>
+<li>No huge deal in Development, but HUGE deal in production.</li>
+<li>Perfect candidate for DelayedJob.</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Leveling Up my Ruby]]></title>
@@ -39,7 +82,7 @@
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">StreetEasyScraper</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Scraper</span>
 </span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:type</span><span class="p">,</span> <span class="c1"># ...</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">browser</span><span class="p">)</span>
