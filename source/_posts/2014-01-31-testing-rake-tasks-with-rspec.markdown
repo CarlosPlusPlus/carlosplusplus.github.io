@@ -48,6 +48,7 @@ Let's get right to it and look at the rake task I wrote to re-compute these fiel
 
 ```ruby
 # lib/tasks/aggregation.rake
+
 WORK_SIZE ||= 1000
 
 desc 'Aggregation Task for: Question'
@@ -79,7 +80,7 @@ Great, so now I have a rake task built. How can I test this?
 
 ## Contextual Magic with FactoryGirl and RSpec
 
-I have to give credit where it's due - this post titled **[How to Test Rake Tasks Like a BOSS](http://robots.thoughtbot.com/test-rake-tasks-like-a-boss)** from [ThoughtBot](http://www.thoughtbot.com) made this all possible, with a few modifications.
+I have to give credit where it's due - this post titled **[How to Test Rake Tasks Like a BOSS](http://robots.thoughtbot.com/test-rake-tasks-like-a-boss)** from [ThoughtBot](http://www.thoughtbot.com) made this all possible, with a few modifications. Please read this for a more in-depth explanation at how this upcoming RSpec context works.
 
 ### Sharing is Caring via RSpec Context
 
@@ -109,7 +110,7 @@ end
 
 Here are the lines we care the most about:
 
-- `let(:task_name)` => my task_name will equal the top level description of my Rspec example.
+- `let(:task_name)` => my task_name will equal the top level description of my RSpec example.
 - `let(:task_path)` => here's where I link to my aggregation.rake file.
 - `subject { ... }` => the subject in my RSpec example will be set to my specifc rake task.
 
@@ -123,7 +124,7 @@ Now with this context setup, let's move onto the Factories.
 
 ### It's a Bird... It's a Plane... It's FactoryGirl!
 
-In my Rspec tests, you will see things like the following:
+In my RSpec tests, you will see things like the following:
 
 ```ruby
 FactoryGirl.create(:question)
@@ -138,7 +139,7 @@ With my factories all setup, I'm ready to look at my RSpec tests.
 
 ### RSpec, Do That Voodoo That You Do So Well
 
-Now with everything in place, let's write some Rspec examples. I'm going to break this up into two sections so that it's easier to digest.
+Now with everything in place, let's write some RSpec examples. I'm going to break this up into two sections so that it's easier to digest.
 
 #### INITIALIZATION
 
@@ -223,7 +224,7 @@ Now, onto the execution of the rake task:
 	- Q1: 2 total answers, 1 of which  is approved.
 	- Q2: 4 total answers, 2 of which are approved.
 	- Q3: 6 total answers, 3 of which are approved.
-- I force set my aggregation counters to 0, since the model counter cache is incrementing the values upon creation.
+- I force my aggregation fields to 0, as counter caches are increasing upon document creation.
 - Just to be sure, I check to see that my test database has the correct number of questions.
 
 The magic all happens in my last example:
