@@ -77,11 +77,11 @@ Let's dissect what's happening above:
 
 Great, so now I have a rake task built. How can I test this?
 
-## RSpec, FactoryGirl, and Contextual Magic
+## Contextual Magic with FactoryGirl and RSpec
 
 I have to give credit where it's due - this post titled **[How to Test Rake Tasks Like a BOSS](http://robots.thoughtbot.com/test-rake-tasks-like-a-boss)** from [ThoughtBot](http://www.thoughtbot.com) made this all possible, with a few modifications.
 
-#### Sharing is Caring via RSpec Context
+### Sharing is Caring via RSpec Context
 
 Since I knew I was going to be performing this operation across multiple models (all with different fields), I started out by making an RSpec context (as described in the blog post):
 
@@ -119,11 +119,11 @@ This context is automagically loaded in all specs thanks to this line in `spec_h
 Dir[Rails.root.join("spec/support/**/*.rb")].sort.each {|f| require f}
 ```
 
-Now with this context setup, let's move onto the Factories:
+Now with this context setup, let's move onto the Factories.
 
-#### FactoryGirl to the Rescue
+### It's a Bird... It's a Plane... It's FactoryGirl!
 
-In the Rspec Tests, you will see things like the following:
+In my Rspec tests, you will see things like the following:
 
 ```ruby
 FactoryGirl.create(:question)
@@ -136,10 +136,112 @@ Factories are defined elsewhere that give me the flexibility to create new docum
 
 With my factories all setup, I'm ready to look at my RSpec tests.
 
-## RSpec 
+### RSpec, Do That Voodoo That You Do So Well
 
-# Future Considerations
+Now with everything in place, let's write some Rspec examples. I'm going to break this up into two sections so that it's easier to digest.
 
-- After doing this the first time, I was able to write my tests first.
-- No huge deal in Development, but HUGE deal in production.
-- Perfect candidate for DelayedJob.
+#### INITIALIZATION
+
+```ruby
+# spec/lib/aggregation_spec.rb
+
+describe 'aggregation_question' do
+  include_context 'aggregation'
+
+  describe 'Initialization' do
+    its(:prerequisites) { should include('environment') }
+
+    it 'should initialize fields to zero' do
+      q = FactoryGirl.create(:question)
+
+      q.answers_count.should be_zero
+      q.approved_answers_count.should be_zero
+    end
+  end
+
+  # Execution
+
+  end
+end
+```
+
+So, what's going on here?
+
+- The top level description of my example is purposely named `aggregation_question`.
+	- If you recall, this is the name of my rake task, which will be set as the `subject`.
+- For this to all work, I must include my shared_context we created previously.
+- I create a few examples to test out the initialization of my model.
+
+Awesome! This all works as intended. I know my rake task (`:aggregation_question`) is wired correctly due to the `:prerequisites` example. Now, onto the execution of the rake task.
+
+#### EXECUTION
+
+```ruby
+# spec/lib/aggregation_spec.rb
+
+describe 'aggregation_question' do
+  include_context 'aggregation'
+
+	# Initialization
+
+	describe 'Execution' do
+    before do
+      (1..3).each do |n|
+        question = FactoryGirl.create(:question)
+        n.times  { FactoryGirl.create(:answer, question: question) }
+        n.times  { FactoryGirl.create(:answer, question: question, approved: true) }
+
+        question.set(:answers_count, 0)
+        question.set(:approved_answers_count, 0)
+      end
+    end
+
+    it 'should contain the correct instance count' do
+      Question.count.should == 3
+    end
+
+    it 'should properly set aggregation fields for Questions' do
+      Question.all.each do |q|
+        q.answers_count.should be_zero
+        q.approved_answers_count.should be_zero
+      end
+
+      subject.invoke
+
+      Question.all.each_with_index do |q,i|
+        q.answers_count.should == (i + 1) * 2
+        q.approved_answers_count.should == i + 1
+      end
+    end
+  end
+end
+```
+
+Now, onto the execution of the rake task:
+
+- Using my factories, I use a loop to setup a total of three (3) questions as follows:
+	- Q1: 2 total answers, 1 of which  is approved.
+	- Q2: 4 total answers, 2 of which are approved.
+	- Q3: 6 total answers, 3 of which are approved.
+- I force set my aggregation counters to 0, since the model counter cache is incrementing the values upon creation.
+- Just to be sure, I check to see that my test database has the correct number of questions.
+
+The magic all happens in my last example:
+
+1. First, I check to ensure all Questions I created have zero values for their aggregation fields.
+2. Given that `subject` is the rake task I want to execute, I `invoke` the task, running it.
+3. Based on my creation criteria, I then check to ensure all fields equal their expected values.
+
+Running these tests yields four (4) **passing** examples!
+
+## Future Considerations
+
+Having gone through the first model in this exact fashion, I was able to write my **tests first** for the other models and write similar examples. However, there's a really big issue here that is hard to ignore.
+
+While the tests are great, they in no way represent the volume of data I'll be finding in production. As you can see, the rake task is executed 1000 documents at a time, in serial fashion. The time this takes in unacceptable when processing millions of documents, as this data needs to be available as soon as possible. So, how can we solve this problem?
+
+Stay tuned for a future blog post on how I re-did my rake task as a `DelayedJob`.
+
+Thanks for reading; keep calm and carry on!
+
+CJL
