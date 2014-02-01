@@ -19,6 +19,7 @@ The Rails model I'll be using is **Question**. The `Mongoid` Ruby driver is used
 Here are the parts of the **Question** model we care about in the Rails app:
 
 ```ruby
+# ./app/models/question.rb
 class Question
   include Mongoid::Document
 
@@ -29,7 +30,7 @@ class Question
 end
 ```
 
-A few bullet points on the code above:
+So, what's happening with the code above?
 
 - With Mongoid, we include the `Mongoid::Document` module.
 	- An individual instance of a model is known as a `document`.
@@ -41,13 +42,46 @@ A few bullet points on the code above:
 
 Great! Now let's look at the rake task that will recompute those fields.
 
-## RSpec
+## Rake Task to Compute Aggregation Fields
 
-- Context for aggregation.
-- Actual Rspec Test.
-- Talk about the individual lines
+Let's get right to it and look at the rake task I wrote to re-compute these fields:
 
-## Future Optimizations
+```ruby
+# ./lib/tasks/aggregation.rake
+WORK_SIZE ||= 1000
+
+desc 'Aggregation Task for: Question'
+task :aggregation_question => :environment do
+  Question.all.batch_size(WORK_SIZE).each do |q|
+    attrs = {}
+
+    answers_count          = q.answers.count
+    approved_answers_count = q.answers.where(approved: true).count
+
+    attrs[:answers_count]          = answers_count          unless answers_count.zero?
+    attrs[:approved_answers_count] = approved_answers_count unless approved_answers_count.zero?
+
+    Question.where(id: q.id).update(attrs) unless attrs.empty?
+  end
+end
+```
+
+Let's dissect what's happening above:
+
+- I define `WORK_SIZE` to control the # of Questions I load at a time.
+	- Attempting to load all models into memory at once is NOT recommended.
+- Each field is computed and added to the `attrs` hash if it's non-zero.
+	- Recall how the model defaults these to 0 - no need to update if not needed, right?
+- In order to perform just one vs. multiple updates, I pass in my hash to update if non-empty.
+	- This query is *optimized** via Mongoid / MongoDB. You'll have to believe me here.
+
+Great, so now I have a rake task built. How can I test this?
+
+## RSpec, FactoryGirl, and Context Magic
+
+I have to give credit where it's due - 
+
+# Future Considerations
 
 - No huge deal in Development, but HUGE deal in production.
 - Perfect candidate for DelayedJob.
