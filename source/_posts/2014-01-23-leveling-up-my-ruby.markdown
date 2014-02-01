@@ -17,7 +17,7 @@ It's a fun exercise to see how your programming skill evolves as a function of t
 This is how I would've written this portion a few months ago:
 
 ```ruby
-class StreetEasyScraper
+class Scraper
   attr_accessor :type, # ...
 
   def initialize(browser)
