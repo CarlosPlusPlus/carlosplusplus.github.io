@@ -147,7 +147,9 @@
 
 <p>My colleagues had written an import task which will takes the (deprecated) Oracle versions of our models and migrate them to the new MongoDB representations. However, there are aggregation columns and custom <a href="http://railscasts.com/episodes/23-counter-cache-column">counter caches</a> that must be recomputed once the migration is done. I was asked to write a rake task to perform this operation on all relevant models. It was also recommended I find a way to test this locally, as the task was going to be performed on millions of rows of data in production, making it imperative to get it right the first time.</p>
 
-<p>No better way to get started than to dive in head first!</p>
+<p>This blog post assumes some knowledge about <a href="https://github.com/thoughtbot/factory_girl">FactoryGirl</a> and <a href="http://relishapp.com/rspec">RSpec</a> for testing purposes. Be sure to read up on these incredible testing tools in Ruby if you haven&rsquo;t used them before</p>
+
+<p>Alright, let&rsquo;s dive in head first.</p>
 
 <h2>The Model Space</h2>
 
@@ -270,7 +272,7 @@
 
 <h2>Contextual Magic with FactoryGirl and RSpec</h2>
 
-<p>I have to give credit where it&rsquo;s due &ndash; this post titled <strong><a href="http://robots.thoughtbot.com/test-rake-tasks-like-a-boss">How to Test Rake Tasks Like a BOSS</a></strong> from <a href="http://www.thoughtbot.com">ThoughtBot</a> made this all possible, with a few modifications. Please read this for a more in-depth explanation at how this upcoming RSpec context works.</p>
+<p>I have to give credit where it&rsquo;s due &ndash; this post titled <strong><a href="http://robots.thoughtbot.com/test-rake-tasks-like-a-boss">How to Test Rake Tasks Like a BOSS</a></strong> from <a href="http://www.thoughtbot.com">ThoughtBot</a> made this all possible, with a few modifications. Please read this post for a more in-depth explanation at how this upcoming RSpec context works.</p>
 
 <h3>Sharing is Caring via RSpec Context</h3>
 
