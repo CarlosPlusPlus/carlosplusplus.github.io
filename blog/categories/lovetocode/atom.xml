@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: lovetocode | My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/blog/categories/lovetocode/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2014-02-01T01:02:47-05:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
+  <author>
+    <name><![CDATA[Carlos Lazo]]></name>
+    <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Code to Joy]]></title>
+    <link href="http://carlosplusplus.github.io/blog/2013/06/16/code-to-joy/"/>
+    <updated>2013-06-16T13:16:00-04:00</updated>
+    <id>http://carlosplusplus.github.io/blog/2013/06/16/code-to-joy</id>
+    <content type="html"><![CDATA[<p>In the search to educate myself a bit more on Ruby principles, both procedural and technical, I came upon a presentation by Avdi Grimm (<strong><a href="https://speakerdeck.com/avdi" title="SpeakerDeck Website for avdi">avdi</a></strong>) on <strong><a href="http://speaderdeck.com" title="SpeakerDeck">SpeakerDeck</a></strong>.</p>
+
+<p>These slide decks goes into things I&rsquo;m passionate about when it comes to programming:</p>
+
+<pre><code>- Sharing your happiness of coding with others.
+- Constantly exploring the possibilities of programming.
+- Trying new things and getting messy.
+</code></pre>
+
+<p>In this day and age, it is my firm belief that we, as programmers, are our own best source of motivation. Through constant exploration and profound expressiveness of programming languages, it is within our power to shape the world as we know it today.</p>
+
+<h2>Joyful, Joyful We Adore Thee (Ruby)</h2>
+
+<p>In <strong><a href="http://www.twitter.com/avdi" title="Avdi Grimm's Twitter">@avdi</a></strong>&rsquo;s slide deck, <strong>Code to Joy</strong>, he discusses many things about the Ruby programming language that he loves. He begins first by staying that both his job and that ruby is awesome, stating:</p>
+
+<blockquote><p style="text-align:center;">It (Ruby) still finds ways to make me smile after all these years.</p></blockquote>
+
+<p>Avdi then goes into the Ruby language and standard library, calling out a few of his favorite idioms and tools. Reading through these was a great learning experience (given my current n00b status with Ruby itself). Here&rsquo;s are a few things I learned:</p>
+
+<ul>
+<li><p>Functions can have multiple <code>return</code> values:
+<code>ruby
+001 &gt; def sum_diff(x,y)
+002?&gt;   return x+y,x-y
+003?&gt;   end
+=&gt; nil
+004 &gt; a,b = sum_diff(5,3)
+=&gt; [8, 2]
+005 &gt; a
+=&gt; 8
+006 &gt; b
+=&gt; 2
+</code></p></li>
+<li><p>The ability to access the local file structure:
+```ruby
+001 > require &lsquo;pathname&rsquo;
+=> true
+002 > Dir.chdir(&lsquo;/Users/carloslazo/Development/FlatironSchool&rsquo;)
+=> 0
+003 > Pathname.pwd.ascend{|dir| puts dir}</p>
+
+<h1>/Users/carloslazo/Development/FlatironSchool</h1>
+
+<h1>/Users/carloslazo/Development</h1>
+
+<h1>/Users/carloslazo</h1>
+
+<h1>/Users</h1>
+
+<h1>/</h1>
+
+<p>=> nil
+```</p></li>
+<li><p>The concept of <code>ensure</code> in <code>enumerable lists</code>:
+```ruby
+001 > def names
+002?>   yield &lsquo;Carlos&rsquo;
+003?>   yield &lsquo;Dan&rsquo;
+004?>   yield &lsquo;Sagar&rsquo;
+005?>   yield &lsquo;Thomas&rsquo;
+006?>   ensure
+007 >     puts &ldquo;Avi&rdquo;
+008?>   end
+=> nil
+009 > i = 0
+010 > names do |name|
+011 >     puts name
+012?>   break if i >= 1
+013?>   i += 1
+014?>   end</p>
+
+<h1>Carlos</h1>
+
+<h1>Dan</h1>
+
+<h1>Avi</h1>
+
+<p>=> nil
+```</p></li>
+<li><p>The ability to <code>break</code> with a value:
+<code>ruby
+001 &gt; def names
+002?&gt;   yield 'Carlos'
+003?&gt;   yield 'Dan'
+004?&gt;   yield 'Sagar'
+005?&gt;   yield 'Thomas'
+006?&gt;   end
+=&gt; nil
+007 &gt; result = names do |name|
+008 &gt;     break name if name =~ /^S/
+009?&gt;   end
+=&gt; "Sagar"
+010 &gt; result
+=&gt; "Sagar"
+</code></p></li>
+</ul>
+
+
+<h2>Be Confident in your Ruby</h2>
+
+<p>The remainder of the technical topics went over my head, as my level of Ruby knowledge is not there yet.  One thing I <strong>can</strong> understand is the crux of Avdi&rsquo;s advice:</p>
+
+<blockquote><p style="text-align:center;">Practice joyful coding.</p></blockquote>
+
+<p>All in all, there is no rubric to tell you what is considered &ldquo;joyful coding&rdquo; in this world. Spread knowledge to those around you, always. Inspire through example and by teaching what you know. Cherish those &ldquo;A-HA&rdquo; moments, both when you have them and when you witness them in others. The world of coding, and the world in general, will be a better place for it.</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+</feed>

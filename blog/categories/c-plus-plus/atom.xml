@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: c++ | My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/blog/categories/c-plus-plus/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2014-02-01T01:02:47-05:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
+  <author>
+    <name><![CDATA[Carlos Lazo]]></name>
+    <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Road to Ruby from C++]]></title>
+    <link href="http://carlosplusplus.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus/"/>
+    <updated>2013-06-13T14:42:00-04:00</updated>
+    <id>http://carlosplusplus.github.io/blog/2013/06/13/the-road-to-ruby-from-c-plus-plus</id>
+    <content type="html"><![CDATA[<p>Me, myself, and C++ &ndash; my &ldquo;first&rdquo; programming language.</p>
+
+<h2>My Life and C++</h2>
+
+<p>Since 10th grade of high school, I&rsquo;ve been programming in C++. Whether in school or in my previous life as an engineer working for the DoD, it&rsquo;s the programming language I&rsquo;ve grown to know the best. At this point, the structure and syntax just feels right, and although I&rsquo;ve programmed in other languages, C++ has always been my strong point.</p>
+
+<p>Enter the Flatiron School, whose primary focus is to teach me to be a full stack web developer. The language of choice here is Ruby, one of the rising programming languages in the web development world. It&rsquo;s been a battle these past 2 weeks working with Ruby given my background in C++. Forcing yourself to detach from one mindset you&rsquo;ve been used to for so long is always a challenge.</p>
+
+<p>While I could syntactically see the differences between C++ and Ruby, I thought it would be an awesome idea to pick a simple programming problem, implement the same solution with both programming languages, and quantify the results.</p>
+
+<h2>A Wild &ldquo;HISTOGRAM&rdquo; Has Appeared!</h2>
+
+<p>The problem of choice was to develop a simple solution that calculates the <strong>HISTOGRAM</strong>, or frequency, of words that appear in a simple sting. I purposefully made the output from both programs identical so one can see that they do the same thing:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-06-13-the-road-to-ruby-from-c-plus-plus/C++_v_Ruby.png" width="700" height="1000"></p>
+
+<p style="text-align:center;"> Great &ndash; the output from the programs is the same. But now, it&rsquo;s time to analyze the code.</p>
+
+<h2>C++ vs. Ruby &ndash; Whose Code Cuisine Reigns Supreme?</h2>
+
+<p>This analysis is predicated on a few assumptions:</p>
+
+<pre><code>- Using basic C++ / Ruby structures (e.g. no classes).
+- Using current knowledge of Ruby programming language (9 days worth).
+</code></pre>
+
+<p>Here is my implementation of a histogram in C++:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Histogram function in C++ (histogram.cpp)</span> <a href='/code/2013-06-13-the-road-to-ruby-from-c-plus-plus/histogram.cpp'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">// Histogram with C++</span>
+</span><span class='line'><span class="c1">//  {compile} --&gt; g++ histogram.cpp -o histogram</span>
+</span><span class='line'><span class="c1">//  {run}     --&gt; ./histogram</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;map&gt;        </span><span class="c1">// STD map</span>
+</span><span class='line'><span class="cp">#include &lt;string&gt;     </span><span class="c1">// STD string</span>
+</span><span class='line'><span class="cp">#include &lt;vector&gt;     </span><span class="c1">// STD vector</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;iostream&gt;   </span><span class="c1">// STD I/O</span>
+</span><span class='line'><span class="cp">#include &lt;sstream&gt;    </span><span class="c1">// StringStream</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="cm">/* Declare all variables for program. */</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">string</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">sentence</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">words</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">get_freq</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;::</span><span class="n">iterator</span> <span class="n">iter1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="n">frequency</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;::</span><span class="n">reverse_iterator</span> <span class="n">iter2</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/* Setup sentence for frequency analysis. */</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">sentence</span> <span class="o">=</span> <span class="s">&quot;this test of is a a this test phrase of is a of a of a test&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Test sentence for histogram is:</span><span class="se">\n\t</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">sentence</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/* Perform string split via stringstream. */</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">stringstream</span> <span class="n">ss</span><span class="p">(</span><span class="n">sentence</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">while</span><span class="p">(</span><span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">buffer</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">words</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/* Calculate frequency of words via the map. */</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">words</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// If word does not exist, add it to the map.</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="n">get_freq</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="n">get_freq</span><span class="p">.</span><span class="n">end</span><span class="p">())</span>
+</span><span class='line'>      <span class="n">get_freq</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>      <span class="n">get_freq</span><span class="p">[</span><span class="n">words</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/* Create a second map with K-V pairs flipped so it is sorted. */</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Set values from first map to keys of second map.</span>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">iter1</span> <span class="o">=</span> <span class="n">get_freq</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">iter1</span> <span class="o">!=</span> <span class="n">get_freq</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">iter1</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">frequency</span><span class="p">[</span><span class="n">iter1</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">]</span> <span class="o">=</span> <span class="n">iter1</span><span class="o">-&gt;</span><span class="n">first</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/* Print out frequency map in reverse order as &quot;V-K&quot; pairs in output. */</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">Frequency table of sentence is:</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">iter2</span> <span class="o">=</span> <span class="n">frequency</span><span class="p">.</span><span class="n">rbegin</span><span class="p">();</span> <span class="n">iter2</span> <span class="o">!=</span> <span class="n">frequency</span><span class="p">.</span><span class="n">rend</span><span class="p">();</span> <span class="n">iter2</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">iter2</span><span class="o">-&gt;</span><span class="n">second</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, count = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">iter2</span><span class="o">-&gt;</span><span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">C++ program is DONE.</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Here is my implementation of a histogram in Ruby:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Histogram function in Ruby (histogram.rb)</span> <a href='/code/2013-06-13-the-road-to-ruby-from-c-plus-plus/histogram.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># Histogram with Ruby</span>
+</span><span class='line'><span class="c1">#//  {run}     --&gt; ruby histogram.rb</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">sentence</span>    <span class="o">=</span> <span class="s2">&quot;this test of is a a this test phrase of is a of a of a test&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test sentence for histogram is:</span><span class="se">\n\t</span><span class="si">#{</span><span class="n">sentence</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">words</span>       <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">frequencies</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'><span class="n">words</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">w</span><span class="o">|</span> <span class="n">frequencies</span><span class="o">[</span><span class="n">w</span><span class="o">]</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">frequencies</span> <span class="o">=</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">sort_by</span> <span class="p">{</span><span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">|</span> <span class="n">b</span><span class="p">}</span>
+</span><span class='line'><span class="n">frequencies</span><span class="o">.</span><span class="n">reverse!</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Frequency table of sentence is:</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">frequencies</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="o">|</span> <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">key</span><span class="si">}</span><span class="s2">, count = </span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ruby program is DONE.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>To analyze the code, I created six (6) criteria on which I&rsquo;ll be &ldquo;judging&rdquo; the languages.</p>
+
+<p><strong>DATA</strong> = Unique Data Structures<br/>
+<strong>LIBR</strong> = Libraries Imported (Non Default)<br/>
+<strong>LOFC</strong> = Lines of Code (Functional; e.g. no prints, var declarations)<br/>
+<strong>LOOP</strong> = Explicit Loops [O(n)]<br/>
+<strong>READ</strong> = Readability : 1 => n00b, 10 => t3h w!nZ<br/>
+<strong>VARS</strong> = Unique Variables</p>
+
+<p style="text-align:center;"> <strong>Histogram Comparison : C++ vs Ruby.</strong></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th align="center"><strong>Language</strong></th>
+<th align="center"><code>C++</code></th>
+<th align="center"><code>Ruby</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td align="center">DATA</td>
+<td align="center">06</td>
+<td align="center"><strong>02</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="center">LIBR</td>
+<td align="center">05</td>
+<td align="center"><strong>00</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="center">LOFC</td>
+<td align="center">13</td>
+<td align="center"><strong>07</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="center">LOOP</td>
+<td align="center">04</td>
+<td align="center"><strong>02</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="center">READ</td>
+<td align="center">-1</td>
+<td align="center"><strong>10</strong></td>
+</tr>
+<tr>
+<td></td>
+<td align="center">VARS</td>
+<td align="center">08</td>
+<td align="center"><strong>03</strong>  </td>
+</tr>
+</tbody>
+</table>
+
+
+<p style="text-align:center;"> The clear victor, under these set of criteria, is <strong>RUBY</strong>.</p>
+
+<h2>Final Thoughts</h2>
+
+<p>Understandably, all programming languages have their advantages and disadvantages. The embedded systems world loves C++ and its ability to easily access lower levels of the stack and hardware in general.</p>
+
+<p>In terms of general ease of learning and forgiveness, it&rsquo;s <strong>Ruby</strong> all the way. For those that also come from a C / C++ background, here&rsquo;s a <strong><a href="http://www.ruby-lang.org/en/documentation/ruby-from-other-languages/to-ruby-from-c-and-c-/" title="Transitioning from C / C++ --&gt; Ruby">cool website</a></strong> that talks about transitioning from C / C++ &mdash;> Ruby.</p>
+
+<p style="text-align:center;"> <strong>10 days of Ruby vs. 10 years of C++</strong></p>
+
+<p>Ruby, you&rsquo;ve won over my &lt;3 already, &amp; we&rsquo;ve only just begun getting to know each other.</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+</feed>

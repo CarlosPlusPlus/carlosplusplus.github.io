@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: oop | My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/blog/categories/oop/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2014-02-01T01:02:47-05:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
+  <author>
+    <name><![CDATA[Carlos Lazo]]></name>
+    <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Linked Lists and Ruby]]></title>
+    <link href="http://carlosplusplus.github.io/blog/2013/08/08/linked-lists-and-ruby/"/>
+    <updated>2013-08-08T15:24:00-04:00</updated>
+    <id>http://carlosplusplus.github.io/blog/2013/08/08/linked-lists-and-ruby</id>
+    <content type="html"><![CDATA[<p>One of the most talked about data structures in Computer Science is the <strong>Linked List</strong>.</p>
+
+<p>So, what is a <strong>Linked List</strong> and how can we implement it in Ruby?</p>
+
+<h2>What is a Linked List?</h2>
+
+<p>As defined by <strong><a href="https://en.wikipedia.org/wiki/Linked_list">Wikipedia</a></strong>, a <strong>Linked List</strong> (LL) is:</p>
+
+<blockquote><p>Data structure consisting of a group of nodes which together represent a sequence.</p></blockquote>
+
+<p>In the simplest implementation of a LinkedList, each node has the following:</p>
+
+<blockquote><p><strong>value</strong> = represents the value of the node (e.g. integer, Class, etc.)</p>
+
+<p><strong>next</strong> = pointer to the next value in the sequence.</p></blockquote>
+
+<p>In most implementations, you also have a head and a tail pointer:</p>
+
+<blockquote><p><strong>head</strong> = points to the first Node in the linked list.</p>
+
+<p><strong>tail</strong> = points to the last Node in the linked list.</p></blockquote>
+
+<p>For the visual learners, here&rsquo;s a picture that shows the structure:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_layout.png" width="500" height="500"></p>
+
+<p>Awesome &ndash; so, how can we build this in Ruby?</p>
+
+<h2>Ruby Implementation of a Linked List</h2>
+
+<p>Two classes are needed in order to build a Linked List: <code>Node</code> and <code>LinkedList</code></p>
+
+<h3>Node Class</h3>
+
+<p>Here is my implementation of the <code>Node</code> class:</p>
+
+<p>```ruby</p>
+
+<h1>Define a Node class that holds the following:</h1>
+
+<h1>=> next : stores the next Node in the Linked List.</h1>
+
+<h1>=> value: stores the value of the current list element.</h1>
+
+<p>class Node</p>
+
+<pre><code>attr_accessor :value, :next
+
+def initialize(value)
+    @value = value
+end
+</code></pre>
+
+<p>end</p>
+
+<p>```</p>
+
+<h3>LinkedList Class</h3>
+
+<p>Here is my implementation of the <code>LinkedList</code> class:</p>
+
+<p>```ruby</p>
+
+<h1>Define a LinkedList class the holds the following:</h1>
+
+<h1>=> head : pointer to the head of the Linked List.</h1>
+
+<h1>=> tail : pointer to the tail of the Linked List.</h1>
+
+<p>class LinkedList</p>
+
+<pre><code>attr_accessor :head, :tail
+
+# Initialize head and tail to same initial Node.
+def initialize (head)
+    raise "LinkedList must be initialized with a Node." unless head.is_a?(Node)
+
+    @head = head
+    @tail = head
+end
+
+# Insert Node after the tail of the LinkedList.
+def insert(node)
+    @tail.next = node
+    @tail = @tail.next
+end
+
+# Print out all the values of the LinkedList in order.
+def print
+    current_node = @head
+
+    while current_node != nil
+        puts "\tLL Node Value = #{current_node.value}"
+        current_node = current_node.next
+    end
+end
+
+# Iterate through LinkedList and yield values to block.
+def iterate
+    if block_given?
+        current_node = @head
+
+        while current_node != nil
+            yield current_node.value
+            current_node = current_node.next
+        end
+    else
+        print
+    end
+end
+</code></pre>
+
+<p>end</p>
+
+<p>```</p>
+
+<h3>TestBench</h3>
+
+<p>Here is a quick test bench I wrote to test functionality:</p>
+
+<p>```ruby</p>
+
+<p>puts &ldquo;\nCreating LinkedList of 5 Node elements with values 1-5.\n&rdquo;</p>
+
+<p>h    = Node.new(1)
+list = LinkedList.new(h)</p>
+
+<p>(2..5).each {|n| list.insert(Node.new(n)) }</p>
+
+<p>puts &ldquo;\nCurrent values contained in LinkedList:\n&rdquo;</p>
+
+<p>list.print</p>
+
+<p>puts &ldquo;\n&rdquo;
+puts &ldquo;Values of head and tail of LinkedList:\n&rdquo;</p>
+
+<p>puts &ldquo;\tValue of LL Head = #{list.head.value}&rdquo;
+puts &ldquo;\tValue of LL Tail = #{list.tail.value}&rdquo;</p>
+
+<p>puts &ldquo;\n&rdquo;
+puts &ldquo;Iterating through LinkedList without a block prints the list.\n&rdquo;</p>
+
+<p>list.iterate</p>
+
+<p>puts &ldquo;\n&rdquo;
+puts &ldquo;Iterating through the LinkedList with a block runs the block on each element.\n&rdquo;</p>
+
+<p>list.iterate {|n| puts &ldquo;\tLL Node Value squared = #{n ** 2}&rdquo;}</p>
+
+<p>puts &ldquo;\n&rdquo;</p>
+
+<p>```</p>
+
+<p>Here is the output from the test bench:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-08-08-linked-lists-and-ruby/linkedlist_output.png" width="750" height="750"></p>
+
+<p>Take a look at the methods I defined for:</p>
+
+<ul>
+<li>List insertion (using the <code>tail</code>) => O(1) operation.</li>
+<li>Printing the list (in order).</li>
+<li>List iteration (with block capability).</li>
+</ul>
+
+
+<p>The source code for my example is contained <a href="/code/2013-08-08-linked-lists-and-ruby/linked_list.rb">HERE</a>.</p>
+
+<h2>More with Linked Lists</h2>
+
+<p>The fun doesn&rsquo;t end here!</p>
+
+<p>Check out these other types of Linked Lists:</p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-08-08-linked-lists-and-ruby/Doubly-linked-list.png" width="750" height="750"></p>
+
+<p style="text-align:center;"> <strong>Doubly Linked Lists</strong></p>
+
+<p style="text-align:center;"> <img src="/images/posts/2013-08-08-linked-lists-and-ruby/Circularly-linked-list.png" width="425" height="425"></p>
+
+<p style="text-align:center;"> <strong>Circular Linked Lists</strong></p>
+
+<p>Would you ever use a Linked List in practice, you ask?</p>
+
+<p>It depends on your domain model. If you get the chance, look up a <a href="http://en.wikipedia.org/wiki/Sparse_matrix">sparse matrix</a>. This problem would be perfect for a linked list.</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+</feed>

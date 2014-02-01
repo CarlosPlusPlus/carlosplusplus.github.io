@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: career | My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/blog/categories/career/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2014-02-01T01:02:47-05:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
+  <author>
+    <name><![CDATA[Carlos Lazo]]></name>
+    <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ProTips on Finding a Job in Engineering]]></title>
+    <link href="http://carlosplusplus.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering/"/>
+    <updated>2013-09-24T07:31:00-04:00</updated>
+    <id>http://carlosplusplus.github.io/blog/2013/09/24/tips-on-finding-a-job-in-engineering</id>
+    <content type="html"><![CDATA[<p>Whether you&rsquo;re experienced or completely new to the world of engineering, finding that new job can be a daunting task. Either way, congratulations for getting this far!</p>
+
+<h2>On the Hunt</h2>
+
+<p>Having worked as a professional engineer for the past five years of my career, I&rsquo;ve accumulated a few sources / websites that, when combined, have proven extremely useful. However, prior to the actual job hunt, <strong>preparation</strong> is absolutely everything.</p>
+
+<h2>Preparation for the Uphill Battle</h2>
+
+<p>Here are a few tips I&rsquo;ve found really helpful to know prior to starting the job hunt:</p>
+
+<ul>
+<li><strong>Know what you want.</strong>
+
+<ul>
+<li>The more specific your search criteria, the better.</li>
+<li>Casting a wide net is good, but always remain focused.</li>
+<li>Be realistic &ndash; go for jobs for which you are qualified to apply.</li>
+</ul>
+</li>
+<li><strong>Know what you&rsquo;re worth.</strong>
+
+<ul>
+<li>What are people in the position you&rsquo;re making normally make?</li>
+<li>Are you an entry / senior level developer? What is your experience worth?</li>
+<li>Does your cost of living play a factor?</li>
+</ul>
+</li>
+<li><strong>Be prepared for interviewing, both behavioral and technical.</strong>
+
+<ul>
+<li>Go over the typical behavioral interviewing questions.
+
+<ul>
+<li>Have answers to all of these before coming into the interview.</li>
+<li>This should actually be the easiest part of the interview.</li>
+</ul>
+</li>
+<li>Review technical material and <strong>practice</strong> in expected formats (e.g. white-boarding).</li>
+</ul>
+</li>
+</ul>
+
+
+<p>With those things figured out, it&rsquo;s time to work on your presentation.</p>
+
+<h3>RESUME</h3>
+
+<ul>
+<li>Your resume needs to be the best it has ever been.</li>
+<li>This is a way for you to tell your story in a creative, professional way.</li>
+<li>Be <strong>accurate</strong> and only post <strong>relevant information</strong> for the job in question.
+
+<ul>
+<li>Resumes should be <strong>tailored</strong> for each job position.</li>
+</ul>
+</li>
+<li>Be <strong>specific</strong> with details and <strong>quantify</strong> wherever possible.</li>
+<li>Hiring people normally spend 30-45 sec on your resume. <strong>Make it count!</strong></li>
+<li>In many cases, it&rsquo;s recommended to have a matching <strong>Cover Letter</strong>.</li>
+</ul>
+
+
+<h3>LINKEDIN PROFILE</h3>
+
+<ul>
+<li>Your LinkedIn profile needs to be <strong>accurate</strong> and <strong>polished</strong>.</li>
+<li>LinkedIn Profile != Resume.
+
+<ul>
+<li>LinkedIn can and should house way more information than your resume.</li>
+<li>They should both <strong>tell the same story</strong> in different formats.</li>
+</ul>
+</li>
+<li>I&rsquo;d recommend uploading a PDF version of your resume here.</li>
+<li>Invest the time in making this amazing&hellip; you never know!</li>
+</ul>
+
+
+<p>Now that you&rsquo;re poised for success, onto resources that will aid in the quest for glory.</p>
+
+<h2>Useful Resources</h2>
+
+<p>Here&rsquo;s a list of resources I&rsquo;ve compiled over the years that help with finding jobs in engineering. If you find others, please let me know and I will add them to the list.</p>
+
+<h3>Job Boards</h3>
+
+<p>This is my list of job boards / websites:</p>
+
+<blockquote><p><strong><a href="http://www.indeed.com">INDEED</a></strong></p></blockquote>
+
+<ul>
+<li>Pings a variety of job search engines based on location and salary options.</li>
+<li>Keyword searches here are incredible at downsizing your job options.</li>
+<li>Use the &lsquo;sort by relevance / sort by date&rsquo; feature tactically.</li>
+</ul>
+
+
+<blockquote><p><strong><a href="http://www.dice.com">DICE</a></strong></p></blockquote>
+
+<ul>
+<li>Specifically for jobs in engineering &amp; technology &ndash; great jobs on here.</li>
+<li>Much like Indeed, keyword searches here are your friend &ndash; be specific when possible.</li>
+</ul>
+
+
+<blockquote><p><strong><a href="http://www.linkedin.com">LINKEDIN</a></strong></p></blockquote>
+
+<ul>
+<li>Has a variety of job postings, which many don&rsquo;t know.</li>
+<li>As stated in the previous section, invest the time into creating a good profile.</li>
+</ul>
+
+
+<blockquote><p><strong><a href="http://www.glassdoor.com">GLASSDOOR</a></strong></p></blockquote>
+
+<ul>
+<li>Great lookup for company (1) satisfaction, (2) salary info, and (3) interview questions.</li>
+<li>Also a portal to many job requisitions, so be sure to look at those.</li>
+</ul>
+
+
+<blockquote><p><strong><a href="http://www.monster.com">MONSTER</a></strong></p></blockquote>
+
+<ul>
+<li>Once you have your resume set, upload it to Monster.com and specify location of interest.</li>
+<li>You should start getting an influx of emails / phone calls from recruiters.</li>
+<li>This helped me in two ways: (a) great practice and (b) helped me figure out my &ldquo;worth&rdquo;.</li>
+</ul>
+
+
+<h3>Startup Sites</h3>
+
+<p>This is my list of startup websites:</p>
+
+<blockquote><p><strong><a href="http://www.startuply.com">STARTUPLY</a></strong></p></blockquote>
+
+<ul>
+<li>This is an amazing resource for those interested in exploring startup jobs.</li>
+<li>Searching the database by city (location) will yield good results.</li>
+</ul>
+
+
+<blockquote><p><strong><a href="http://www.insidestartups.org">INSIDE STARTUPS</a></strong></p></blockquote>
+
+<ul>
+<li>Another great resource for startups based on city (location).</li>
+</ul>
+
+
+<blockquote><p><strong><a href="https://angel.co/jobs">ANGEL LIST JOBS</a></strong></p></blockquote>
+
+<ul>
+<li>Search for startups in your area based on city (location).</li>
+<li>By filling out the profile, companies may reach out to you.</li>
+</ul>
+
+
+<blockquote><p><strong><a href="http://wearemadeinny.com/find-a-job/">MADE IN NY</a></strong></p></blockquote>
+
+<ul>
+<li>Awesome website specific to jobs in NYC startups.</li>
+<li>The Job Search page is amazing (e.g. sort by companies hiring.)</li>
+</ul>
+
+
+<h3>Meetups / Networking</h3>
+
+<p>Wanted to spend some time here talking about Meetups and Networking.</p>
+
+<p>Nothing beats &lsquo;old school&rsquo; networking. Whether getting coffee, making a &lsquo;cold call&rsquo;, or sending an email expressing interest, it&rsquo;s up to you to do this. Sure, it may not be in your comfort zone, but you want that job, right? Stay confident and network!</p>
+
+<p>One of my favorite ways of expanding my network is through attending programming meetups and hackathons. I recommend using <strong><a href="http://www.meetup.com">MEETUP</a></strong> to help you with this.</p>
+
+<h2>Closing Thoughts</h2>
+
+<p>Contrary to what many say, job hunting is a full time job in of itself. It takes a lot of time, energy, dedication, &amp; determination. Hopefully, these resources will help on your conquest.</p>
+
+<blockquote><p style="text-align:center;">Good luck and all the best in your job search!</p></blockquote>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+</feed>

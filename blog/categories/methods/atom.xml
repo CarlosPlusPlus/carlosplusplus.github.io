@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: methods | My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/blog/categories/methods/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2014-02-01T01:02:47-05:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
+  <author>
+    <name><![CDATA[Carlos Lazo]]></name>
+    <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Object Modifications in Methods]]></title>
+    <link href="http://carlosplusplus.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods/"/>
+    <updated>2013-10-13T10:04:00-04:00</updated>
+    <id>http://carlosplusplus.github.io/blog/2013/10/13/grokking-on-ruby-objects-in-methods</id>
+    <content type="html"><![CDATA[<p>Every now and then, I&rsquo;ll post some cool tips and tricks I find awesome or important to know as you&rsquo;re learning the Ruby programming language. There&rsquo;s a ton out there to share, so let&rsquo;s get to it.</p>
+
+<h2>Pass Parameters by &lsquo;Value&rsquo; or &lsquo;Reference&rsquo;</h2>
+
+<p>Prior to learning about Ruby, my primary programming language was C++. When passing arguments to methods, most statically typed programming languages require you to <em>explicitly</em> declare variables as <strong>value</strong> or <strong>reference</strong> parameters when passed into methods.</p>
+
+<ul>
+<li>Pass by <strong>value</strong>: a <em>copy</em> of the parameter is passed into method.</li>
+<li>Pass by <strong>reference</strong>: the <em>actual</em> parameter passed into method.</li>
+</ul>
+
+
+<p>In other words, when passed by value, the original parameter passed into the method is not changed, whereas when passing by reference, the original object may actually be changed.</p>
+
+<h2>Object Behavior in Ruby Methods</h2>
+
+<p>Ruby is powerful in that it is a dynamically typed language which is good for duck-typing and meta-programming. This means that you (1) don&rsquo;t have to explicitly define variable types or (2) distinguish between value / reference parameters.</p>
+
+<p>In order to illustrate this, check out the code below:</p>
+
+<p>```ruby
+def modifyStrings(aString,anotherString)
+  aString.capitalize!
+  anotherString.reverse!.capitalize!</p>
+
+<pre><code>aString.swapcase +  " " + anotherString.swapcase!
+</code></pre>
+
+<p>end
+```</p>
+
+<p>This method takes in two strings and performs modifications. It turns out that the original objects passed into this method <em>will be changed</em> as a result of the bang (!) methods performed in the strings, regardless of them being in this method scope.</p>
+
+<p>Take a look at this code &ndash; it checks Object ID and values at different stages of the example to reinforce the fact that the original objects are being modified:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Object Modifcations in Ruby Methods (object_mods_in_ruby.rb)</span> <a href='/code/2013-10-13-grokking-on-ruby-objects-in-methods/object_mods_in_ruby.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">def</span> <span class="nf">modifyStrings</span><span class="p">(</span><span class="n">aString</span><span class="p">,</span><span class="n">anotherString</span><span class="p">)</span>
+</span><span class='line'>	<span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">aString gets capitalized(!).&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">aString</span><span class="o">.</span><span class="n">capitalize!</span>
+</span><span class='line'>  <span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;aString =&gt;</span><span class="se">\n\t</span><span class="s2">Address: </span><span class="si">#{</span><span class="n">aString</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">aString</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">anotherString gets reversed(!) and capitalized(!)&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">anotherString</span><span class="o">.</span><span class="n">reverse!</span><span class="o">.</span><span class="n">capitalize!</span>
+</span><span class='line'>  <span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;anotherString =&gt;</span><span class="se">\n\t</span><span class="s2">Address: </span><span class="si">#{</span><span class="n">anotherString</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">anotherString</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Return ::: aString swap-cased + </span><span class="se">\&quot;</span><span class="s2"> </span><span class="se">\&quot;</span><span class="s2"> + anotherString swap-cased(!)&quot;</span><span class="p">)</span>
+</span><span class='line'>	<span class="n">aString</span><span class="o">.</span><span class="n">swapcase</span> <span class="o">+</span>  <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">anotherString</span><span class="o">.</span><span class="n">swapcase!</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">str1</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+</span><span class='line'><span class="n">str2</span> <span class="o">=</span> <span class="s2">&quot;world&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Original Ruby Objects can be modified in Methods</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">upcase</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;Str1 =&gt; Address: </span><span class="si">#{</span><span class="n">str1</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">str1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;Str2 =&gt; Address: </span><span class="si">#{</span><span class="n">str2</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">str2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#############################################</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="n">str3</span> <span class="o">=</span> <span class="n">modifyStrings</span><span class="p">(</span><span class="n">str1</span><span class="p">,</span><span class="n">str2</span><span class="p">)</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#############################################</span><span class="se">\n</span><span class="s2">&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;Str1 =&gt; Address: </span><span class="si">#{</span><span class="n">str1</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">str1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;Str2 =&gt; Address: </span><span class="si">#{</span><span class="n">str2</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">str2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">puts</span><span class="p">(</span><span class="s2">&quot;Str3 =&gt; Address: </span><span class="si">#{</span><span class="n">str3</span><span class="o">.</span><span class="n">object_id</span><span class="si">}</span><span class="s2">, Value: </span><span class="si">#{</span><span class="n">str3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Here is the output from the program:</p>
+
+<p><img src="/images/posts/2013-10-13-grokking-on-ruby-objects-in-methods/ruby_obj_output.png" width="1000" height="750"></p>
+
+<p>Following the method and the requisite output, you&rsquo;ll notice how the bang(!) methods changed the original objects (Object IDs are still the same).</p>
+
+<h2>Summary</h2>
+
+<p>Understanding the implications and importance of object modifications in Ruby methods is <em>critical</em> to understanding how Ruby works and will help you avoid issues in the future.</p>
+
+<p>Happy coding!</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+</feed>
