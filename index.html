@@ -139,41 +139,397 @@
 	</div>
 	<h1 class="title" itemprop="name"><a href="/blog/2014/01/31/testing-rake-tasks-with-rspec/" itemprop="url">Testing Rake Tasks With RSPec</a></h1>
 	<div class="entry-content" itemprop="articleBody">
-		<p>One of the projects I&rsquo;m currently supporting at work involves migrating an entire database from the <a href="www.oracle.com">Oracle</a> framework to the <a href="wwww.mongodb.com">MongoDB</a> framework. This Rails application is crucial in that it serves as one of the primary JSON APIs for my company&rsquo;s web services.</p>
+		<p>One of the projects I&rsquo;m currently supporting at work involves migrating an entire database from the <a href="http://www.oracle.com/index.html">Oracle</a> framework to the <a href="http://www.mongodb.org/">MongoDB</a> framework. This Rails application is crucial in that it serves as one of the primary JSON APIs for my company&rsquo;s web services.</p>
 
-<p>My colleagues had written an import task which will take the (deprecated) Oracle versions of our models and migrate them to the new MongoDB representations. However, there are aggregation columns and <a href="www.countercache.com">counter caches</a> that must be recomputed once the migration is done. I was asked to write a rake task to perform this operation on all relevant models. It was also recommended I find a way to test this locally, as the task was going to be performed on millions of rows of data in production and it would be best to get it right the first time.</p>
+<p>My colleagues had written an import task which will takes the (deprecated) Oracle versions of our models and migrate them to the new MongoDB representations. However, there are aggregation columns and custom <a href="http://railscasts.com/episodes/23-counter-cache-column">counter caches</a> that must be recomputed once the migration is done. I was asked to write a rake task to perform this operation on all relevant models. It was also recommended I find a way to test this locally, as the task was going to be performed on millions of rows of data in production, making it imperative to get it right the first time.</p>
 
-<p>I had never heard the notion of testing a rake task, but given the importance of what I was doing, decided to dive in head first.</p>
+<p>No better way to get started than to dive in head first!</p>
 
 <h2>The Model Space</h2>
 
-<p>The Rails model I&rsquo;ll be using here is one titled <strong>Question</strong>. I realize that some of you may not be familiar with MongoDB or the Mongoid Driver &ndash; don&rsquo;t worry, I&rsquo;ll explain the parts you may not understand when we get to them. I was new to MongoDB when I first started this task.</p>
+<p>The Rails model I&rsquo;ll be using is <strong>Question</strong>. The <code>Mongoid</code> Ruby driver is used instead of <code>ActiveRecord</code> &ndash; I&rsquo;ll do my best to explain any Mongoid syntax in case you have never worked with MongoDB.</p>
 
-<p>Here is the Questions model:</p>
+<p>Here are the parts of the <strong>Question</strong> model we care about in the Rails app:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># app/models/question.rb</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Question</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">Mongoid</span><span class="p">:</span><span class="ss">:Document</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:answers_count</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="nb">Integer</span><span class="p">,</span> <span class="ss">default</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="n">field</span> <span class="ss">:approved_answers_count</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="nb">Integer</span><span class="p">,</span> <span class="ss">default</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:answers</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, what&rsquo;s happening with the code above?</p>
 
 <ul>
-<li>MongoDB and importance of this.</li>
-<li>Question Model</li>
-<li>Rake Task</li>
+<li>With Mongoid, we include the <code>Mongoid::Document</code> module.
+
+<ul>
+<li>An individual instance of a model is known as a <code>document</code>.</li>
+<li>The group of all Question models is known as a <code>collection</code>.</li>
+</ul>
+</li>
+<li>With Mongoid, our schema is defined <strong>within the model</strong>.
+
+<ul>
+<li>This means there are no migrations to run.</li>
+<li>We define fields: <code>answers_count</code> and <code>approved_answers_count</code>.</li>
+</ul>
+</li>
+<li>This model <code>has_many: answers</code>, so <code>question.answers</code> should yield me its answers.</li>
 </ul>
 
 
-<h2>RSpec</h2>
+<p>Great! Now let&rsquo;s look at the rake task that will recompute those fields.</p>
+
+<h2>Rake Task to Compute Aggregation Fields</h2>
+
+<p>Let&rsquo;s get right to it and look at the rake task I wrote to re-compute these fields:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/tasks/aggregation.rake</span>
+</span><span class='line'><span class="no">WORK_SIZE</span> <span class="o">||=</span> <span class="mi">1000</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">desc</span> <span class="s1">&#39;Aggregation Task for: Question&#39;</span>
+</span><span class='line'><span class="n">task</span> <span class="ss">:aggregation_question</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>  <span class="no">Question</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">batch_size</span><span class="p">(</span><span class="no">WORK_SIZE</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">q</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">attrs</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">answers_count</span>          <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">answers</span><span class="o">.</span><span class="n">count</span>
+</span><span class='line'>    <span class="n">approved_answers_count</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">answers</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">approved</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span><span class="o">.</span><span class="n">count</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">attrs</span><span class="o">[</span><span class="ss">:answers_count</span><span class="o">]</span>          <span class="o">=</span> <span class="n">answers_count</span>          <span class="k">unless</span> <span class="n">answers_count</span><span class="o">.</span><span class="n">zero?</span>
+</span><span class='line'>    <span class="n">attrs</span><span class="o">[</span><span class="ss">:approved_answers_count</span><span class="o">]</span> <span class="o">=</span> <span class="n">approved_answers_count</span> <span class="k">unless</span> <span class="n">approved_answers_count</span><span class="o">.</span><span class="n">zero?</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="no">Question</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="n">q</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span> <span class="k">unless</span> <span class="n">attrs</span><span class="o">.</span><span class="n">empty?</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s dissect what&rsquo;s happening above:</p>
 
 <ul>
-<li>Context for aggregation.</li>
-<li>Actual Rspec Test.</li>
-<li>Talk about the individual lines</li>
+<li>I define <code>WORK_SIZE</code> to control the # of Questions I load at a time.
+
+<ul>
+<li>Attempting to load all models into memory at once is NOT recommended.</li>
+</ul>
+</li>
+<li>Each field is computed and added to the <code>attrs</code> hash if it&rsquo;s non-zero.
+
+<ul>
+<li>Recall how the model defaults these to 0 &ndash; no need to update if not needed, right?</li>
+</ul>
+</li>
+<li>In order to perform just one vs. multiple updates, I pass in my hash to update if non-empty.
+
+<ul>
+<li>This query is *optimized** via Mongoid / MongoDB. You&rsquo;ll have to believe me here.</li>
+</ul>
+</li>
 </ul>
 
 
-<h2>Future Optimizations</h2>
+<p>Great, so now I have a rake task built. How can I test this?</p>
+
+<h2>Contextual Magic with FactoryGirl and RSpec</h2>
+
+<p>I have to give credit where it&rsquo;s due &ndash; this post titled <strong><a href="http://robots.thoughtbot.com/test-rake-tasks-like-a-boss">How to Test Rake Tasks Like a BOSS</a></strong> from <a href="http://www.thoughtbot.com">ThoughtBot</a> made this all possible, with a few modifications.</p>
+
+<h3>Sharing is Caring via RSpec Context</h3>
+
+<p>Since I knew I was going to be performing this operation across multiple models (all with different fields), I started out by making an RSpec context (as described in the blog post):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># spec/support/shared_contexts/aggregation.rb</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">shared_context</span> <span class="s1">&#39;aggregation&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:rake</span><span class="p">)</span>      <span class="p">{</span> <span class="ss">Rake</span><span class="p">:</span><span class="ss">:Application</span><span class="o">.</span><span class="n">new</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:task_name</span><span class="p">)</span> <span class="p">{</span> <span class="nb">self</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">top_level_description</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">let</span><span class="p">(</span><span class="ss">:task_path</span><span class="p">)</span> <span class="p">{</span> <span class="s2">&quot;lib/tasks/aggregation&quot;</span> <span class="p">}</span>
+</span><span class='line'>  <span class="n">subject</span>         <span class="p">{</span> <span class="n">rake</span><span class="o">[</span><span class="n">task_name</span><span class="o">]</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">loaded_files_excluding_current_rake_file</span>
+</span><span class='line'>    <span class="vg">$&quot;</span><span class="o">.</span><span class="n">reject</span> <span class="p">{</span><span class="o">|</span><span class="n">file</span><span class="o">|</span> <span class="n">file</span> <span class="o">==</span> <span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">task_path</span><span class="si">}</span><span class="s2">.rake&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">before</span> <span class="k">do</span>
+</span><span class='line'>    <span class="no">Rake</span><span class="o">.</span><span class="n">application</span> <span class="o">=</span> <span class="n">rake</span>
+</span><span class='line'>    <span class="no">Rake</span><span class="o">.</span><span class="n">application</span><span class="o">.</span><span class="n">rake_require</span><span class="p">(</span><span class="n">task_path</span><span class="p">,</span> <span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">to_s</span><span class="o">]</span><span class="p">,</span> <span class="n">loaded_files_excluding_current_rake_file</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="ss">Rake</span><span class="p">:</span><span class="ss">:Task</span><span class="o">.</span><span class="n">define_task</span><span class="p">(</span><span class="ss">:environment</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here are the lines we care the most about:</p>
 
 <ul>
-<li>No huge deal in Development, but HUGE deal in production.</li>
-<li>Perfect candidate for DelayedJob.</li>
+<li><code>let(:task_name)</code> => my task_name will equal the top level description of my Rspec example.</li>
+<li><code>let(:task_path)</code> => here&rsquo;s where I link to my aggregation.rake file.</li>
+<li><code>subject { ... }</code> => the subject in my RSpec example will be set to my specifc rake task.</li>
 </ul>
 
+
+<p>This context is automagically loaded in all specs thanks to this line in <code>spec_helper.rb</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Dir</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;spec/support/**/*.rb&quot;</span><span class="p">)</span><span class="o">].</span><span class="n">sort</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="nb">require</span> <span class="n">f</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now with this context setup, let&rsquo;s move onto the Factories.</p>
+
+<h3>It&rsquo;s a Bird&hellip; It&rsquo;s a Plane&hellip; It&rsquo;s FactoryGirl!</h3>
+
+<p>In my Rspec tests, you will see things like the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:question</span><span class="p">)</span>
+</span><span class='line'><span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:answer</span><span class="p">,</span> <span class="ss">question</span><span class="p">:</span> <span class="n">question</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'><span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:answer</span><span class="p">,</span> <span class="ss">question</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="ss">approved</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Factories are defined elsewhere that give me the flexibility to create new documents (models) in particular configurations. In this case, I know I want to specifically test my two aggregation fields, so I&rsquo;ll be setting those when I use my factories in my RSpec examples. So the associations are upheld, I want to assign the newly create answers to the question that was created.</p>
+
+<p>With my factories all setup, I&rsquo;m ready to look at my RSpec tests.</p>
+
+<h3>RSpec, Do That Voodoo That You Do So Well</h3>
+
+<p>Now with everything in place, let&rsquo;s write some Rspec examples. I&rsquo;m going to break this up into two sections so that it&rsquo;s easier to digest.</p>
+
+<h4>INITIALIZATION</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># spec/lib/aggregation_spec.rb</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="s1">&#39;aggregation_question&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">include_context</span> <span class="s1">&#39;aggregation&#39;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">describe</span> <span class="s1">&#39;Initialization&#39;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">its</span><span class="p">(</span><span class="ss">:prerequisites</span><span class="p">)</span> <span class="p">{</span> <span class="n">should</span> <span class="kp">include</span><span class="p">(</span><span class="s1">&#39;environment&#39;</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">it</span> <span class="s1">&#39;should initialize fields to zero&#39;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">q</span> <span class="o">=</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:question</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">q</span><span class="o">.</span><span class="n">answers_count</span><span class="o">.</span><span class="n">should</span> <span class="n">be_zero</span>
+</span><span class='line'>      <span class="n">q</span><span class="o">.</span><span class="n">approved_answers_count</span><span class="o">.</span><span class="n">should</span> <span class="n">be_zero</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Execution</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, what&rsquo;s going on here?</p>
+
+<ul>
+<li>The top level description of my example is purposely named <code>aggregation_question</code>.
+
+<ul>
+<li>If you recall, this is the name of my rake task, which will be set as the <code>subject</code>.</li>
+</ul>
+</li>
+<li>For this to all work, I must include my shared_context we created previously.</li>
+<li>I create a few examples to test out the initialization of my model.</li>
+</ul>
+
+
+<p>Awesome! This all works as intended. I know my rake task (<code>:aggregation_question</code>) is wired correctly due to the <code>:prerequisites</code> example. Now, onto the execution of the rake task.</p>
+
+<h4>EXECUTION</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># spec/lib/aggregation_spec.rb</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="s1">&#39;aggregation_question&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">include_context</span> <span class="s1">&#39;aggregation&#39;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># Initialization</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">describe</span> <span class="s1">&#39;Execution&#39;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">before</span> <span class="k">do</span>
+</span><span class='line'>      <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">question</span> <span class="o">=</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:question</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">n</span><span class="o">.</span><span class="n">times</span>  <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:answer</span><span class="p">,</span> <span class="ss">question</span><span class="p">:</span> <span class="n">question</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>        <span class="n">n</span><span class="o">.</span><span class="n">times</span>  <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:answer</span><span class="p">,</span> <span class="ss">question</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="ss">approved</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">question</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="ss">:answers_count</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">question</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="ss">:approved_answers_count</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">it</span> <span class="s1">&#39;should contain the correct instance count&#39;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="no">Question</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="mi">3</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">it</span> <span class="s1">&#39;should properly set aggregation fields for Questions&#39;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="no">Question</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">q</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">q</span><span class="o">.</span><span class="n">answers_count</span><span class="o">.</span><span class="n">should</span> <span class="n">be_zero</span>
+</span><span class='line'>        <span class="n">q</span><span class="o">.</span><span class="n">approved_answers_count</span><span class="o">.</span><span class="n">should</span> <span class="n">be_zero</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">subject</span><span class="o">.</span><span class="n">invoke</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="no">Question</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">each_with_index</span> <span class="k">do</span> <span class="o">|</span><span class="n">q</span><span class="p">,</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">q</span><span class="o">.</span><span class="n">answers_count</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+</span><span class='line'>        <span class="n">q</span><span class="o">.</span><span class="n">approved_answers_count</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, onto the execution of the rake task:</p>
+
+<ul>
+<li>Using my factories, I use a loop to setup a total of three (3) questions as follows:
+
+<ul>
+<li>Q1: 2 total answers, 1 of which  is approved.</li>
+<li>Q2: 4 total answers, 2 of which are approved.</li>
+<li>Q3: 6 total answers, 3 of which are approved.</li>
+</ul>
+</li>
+<li>I force set my aggregation counters to 0, since the model counter cache is incrementing the values upon creation.</li>
+<li>Just to be sure, I check to see that my test database has the correct number of questions.</li>
+</ul>
+
+
+<p>The magic all happens in my last example:</p>
+
+<ol>
+<li>First, I check to ensure all Questions I created have zero values for their aggregation fields.</li>
+<li>Given that <code>subject</code> is the rake task I want to execute, I <code>invoke</code> the task, running it.</li>
+<li>Based on my creation criteria, I then check to ensure all fields equal their expected values.</li>
+</ol>
+
+
+<p>Running these tests yields four (4) <strong>passing</strong> examples!</p>
+
+<h2>Future Considerations</h2>
+
+<p>Having gone through the first model in this exact fashion, I was able to write my <strong>tests first</strong> for the other models and write similar examples. However, there&rsquo;s a really big issue here that is hard to ignore.</p>
+
+<p>While the tests are great, they in no way represent the volume of data I&rsquo;ll be finding in production. As you can see, the rake task is executed 1000 documents at a time, in serial fashion. The time this takes in unacceptable when processing millions of documents, as this data needs to be available as soon as possible. So, how can we solve this problem?</p>
+
+<p>Stay tuned for a future blog post on how I re-did my rake task as a <code>DelayedJob</code>.</p>
+
+<p>Thanks for reading; keep calm and carry on!</p>
+
+<p>CJL</p>
 
 		
 		
