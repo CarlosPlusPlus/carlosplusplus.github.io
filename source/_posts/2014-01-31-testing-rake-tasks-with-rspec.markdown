@@ -10,7 +10,9 @@ One of the projects I'm currently supporting at work involves migrating an entir
 
 My colleagues had written an import task which will takes the (deprecated) Oracle versions of our models and migrate them to the new MongoDB representations. However, there are aggregation columns and custom [counter caches](http://railscasts.com/episodes/23-counter-cache-column) that must be recomputed once the migration is done. I was asked to write a rake task to perform this operation on all relevant models. It was also recommended I find a way to test this locally, as the task was going to be performed on millions of rows of data in production, making it imperative to get it right the first time.
 
-No better way to get started than to dive in head first!
+This blog post assumes some knowledge about [FactoryGirl](https://github.com/thoughtbot/factory_girl) and [RSpec](http://relishapp.com/rspec) for testing purposes. Be sure to read up on these incredible testing tools in Ruby if you haven't used them before
+
+Alright, let's dive in head first.
 
 ## The Model Space
 
@@ -80,7 +82,7 @@ Great, so now I have a rake task built. How can I test this?
 
 ## Contextual Magic with FactoryGirl and RSpec
 
-I have to give credit where it's due - this post titled **[How to Test Rake Tasks Like a BOSS](http://robots.thoughtbot.com/test-rake-tasks-like-a-boss)** from [ThoughtBot](http://www.thoughtbot.com) made this all possible, with a few modifications. Please read this for a more in-depth explanation at how this upcoming RSpec context works.
+I have to give credit where it's due - this post titled **[How to Test Rake Tasks Like a BOSS](http://robots.thoughtbot.com/test-rake-tasks-like-a-boss)** from [ThoughtBot](http://www.thoughtbot.com) made this all possible, with a few modifications. Please read this post for a more in-depth explanation at how this upcoming RSpec context works.
 
 ### Sharing is Caring via RSpec Context
 
