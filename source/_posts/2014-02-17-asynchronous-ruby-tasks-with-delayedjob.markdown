@@ -6,9 +6,11 @@ comments: true
 categories: ruby rails concurrency delayedjob
 ---
 
-As promised in my previous blog entry, this post will go into details on how to better optimize asynchronous tasks in the Ruby programming language via DelayedJob.
+As promised in my previous entry, it's time to talk about how one can better optimize asynchronous tasks in the Ruby programming language via **DelayedJob**. If you haven't already, I strongly recommend you read my **[last blog post](http://carlosplusplus.github.io/blog/2014/02/01/testing-rake-tasks-with-rspec/)**, as I will be working on the example previously presented there.
 
-## Quick Introduction
+So, what does *asynchronous* even mean and why should we care?
+
+## Asynchronous? Why Bother?
 
 > What does asynchronous mean?  Talk about serialized nature of Ruby.
 > Why is speed important in data migration tasks? Large data?
