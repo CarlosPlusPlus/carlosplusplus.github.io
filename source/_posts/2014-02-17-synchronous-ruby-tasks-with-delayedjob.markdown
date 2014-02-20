@@ -42,7 +42,6 @@ To further highlight the issue, here's a look at what the full rake task does:
 ```ruby
 # lib/tasks/aggregation.rake
 namespace :mongo_import do
-
   MODELS    ||= %w(answer comment question resource)
   WORK_SIZE ||= 1000.freeze
 
@@ -55,16 +54,12 @@ namespace :mongo_import do
 
 As you can see, there are a total of four (4) rake tasks that will be run in sequence, each with varying levels of work based on the number of models present in the database and the amount of counter caches for each model. Given that this work needs to be done while the data set is in production, these rake tasks need to finish fast - this is impossible with the current implementation. Wouldn't it be great if there was a way to split up this work and run these tasks in parallel, or synchronously, in order to get the task done faster?
 
-Let's see what DelayedJob can do for us.
+Let's see what `DelayedJob` can do for us.
 
-> Show the entire rake task.
+## DelayedJob to the Rescue
 
-> Speed is an issue in this serialized operation - can take forever.
-> Wouldn't it be great for a server to spin up multiple processes
+For those who have never heard of or used `DelayedJob`, I recommend you check out the following resources: [DelayedJob Github Repository](www.example.com) and [RailsCast on DelayedJob](www.example.com). This gem integrates pretty seamlessly with Rails applications and different database configurations, like SQLite3 and MongoDB. The documentation provides great use cases for when and why you would want to use this service.
 
-## Delayed Job to the Rescue
-
-> References to DelayedJob
 > Code Implementation + Idea of Workers
 
 ## Improvements and Closing Thoughts
