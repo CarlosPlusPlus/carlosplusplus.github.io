@@ -27,8 +27,8 @@ When we first start learning Ruby, or most programming languages, we are taught 
 There are, however, situations where you may want to think synchronously. In other words, perhaps it may be preferable for events to happen at the same time, or more commonly, **in the background**. This would allow your web service to keep servicing operations while intense work was being performed elsewhere. A few uses cases for this may be:
 
 - Batch imports of updates to your database.
-- HTTP Downloads (steaming intensive operations).
-- Image Resizing (size intensive operations).
+- HTTP downloads (steaming intensive operations).
+- Image resizing (size intensive operations).
 - Sending mass emails (newsletters) to your user base.
 
 Let's explore the use case for batch updates as it relates to Rails rake tasks.
