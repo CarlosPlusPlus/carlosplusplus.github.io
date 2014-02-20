@@ -35,7 +35,27 @@ Let's explore the use case for batch updates as it relates to Rails rake tasks.
 
 ## Issue with Previous Rake Task Implementation
 
-As described in my **[last blog post](http://carlosplusplus.github.io/blog/2014/02/01/testing-rake-tasks-with-rspec/)**, I implemented a set of Rake tasks that recomputed custom counter caches for some of my Rails models.
+As described in my **[last blog post](http://carlosplusplus.github.io/blog/2014/02/01/testing-rake-tasks-with-rspec/)**, I implemented a set of Rake tasks that recomputed custom counter caches for some of my Rails models. While the solution certainly solved the problem, it was implemented in an asynchronous fashion. In other words, each **unit of work** needed to complete before the previous one. In this case, a unit of work was equal to one model having its counter caches recomputed.  
+
+To further highlight the issue, here's a look at what the full rake task does:
+
+```ruby
+# lib/tasks/aggregation.rake
+namespace :mongo_import do
+
+  MODELS    ||= %w(answer comment question resource)
+  WORK_SIZE ||= 1000.freeze
+
+  desc 'Rebuilds ALL aggregation columns and counter caches.'
+  task :aggregation => :environment do
+    MODELS.each { |model| Rake::Task["mongo_import:aggregation_#{model}"].invoke }
+  end
+
+```
+
+As you can see, there are a total of four (4) rake tasks that will be run in sequence, each with varying levels of work based on the number of models present in the database and the amount of counter caches for each model. Given that this work needs to be done while the data set is in production, these rake tasks need to finish fast - this is impossible with the current implementation. Wouldn't it be great if there was a way to split up this work and run these tasks in parallel, or synchronously, in order to get the task done faster?
+
+Let's see what DelayedJob can do for us.
 
 > Show the entire rake task.
 

@@ -50,7 +50,6 @@ Let's get right to it and look at the rake task I wrote to re-compute these fiel
 
 ```ruby
 # lib/tasks/aggregation.rake
-
 WORK_SIZE ||= 1000
 
 desc 'Aggregation Task for: Question'
@@ -147,7 +146,6 @@ Now with everything in place, let's write some RSpec examples. I'm going to brea
 
 ```ruby
 # spec/lib/aggregation_spec.rb
-
 describe 'aggregation_question' do
   include_context 'aggregation'
 
@@ -181,7 +179,6 @@ Awesome! This all works as intended. I know my rake task (`:aggregation_question
 
 ```ruby
 # spec/lib/aggregation_spec.rb
-
 describe 'aggregation_question' do
   include_context 'aggregation'
 
