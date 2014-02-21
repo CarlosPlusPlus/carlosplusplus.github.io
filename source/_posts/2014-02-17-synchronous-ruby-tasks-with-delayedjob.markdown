@@ -60,7 +60,28 @@ Let's see what `DelayedJob` can do for us.
 
 For those who have never heard of or used `DelayedJob`, I recommend you check out the following resources: [DelayedJob Github Repository](www.example.com) and [RailsCast on DelayedJob](www.example.com). This gem integrates pretty seamlessly with Rails applications and different database configurations, like SQLite3 and MongoDB. The documentation provides great use cases for when and why you would want to use this service.
 
-> Code Implementation + Idea of Workers
+### Background Process and Workers
+
+I won't go into the implementation detail of how precisely to get setup with DelayedJob (check out the documentation), but I do want to mention a few key concepts that are important:
+
+> **Enqueue**: add unit of work to DelayedJob priority queue for processing.
+
+> **Perform**: method required for DelayedJob to recognize class as actionable.
+
+> **Workers**: specific background processes setup to handle **units of work**.
+
+At the high level, your processing work flow will probably look something like this:
+
+1. Spin up amount of workers based on (a) server capability and (b) need.
+2. Enqueue DelayedJobs whenever required (e.g. mass mailings and rake tasks).
+    - You can add jobs to different queues, establish Job priorities, etc.!
+3. Workers will perform queued up jobs as soon as they are 'free'.
+
+Great - let's dive into some code and see how I re-did my rake task.
+
+### Code Rewrite for Rake Task via DelayedJob
+
+
 
 ## Improvements and Closing Thoughts
 
