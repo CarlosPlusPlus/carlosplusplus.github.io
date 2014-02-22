@@ -9,7 +9,7 @@
 	<meta name="author" content="Carlos Lazo">
 
 	
-	<meta name="description" content="Feb 1st, 2014 rails, rake, rspec, ruby, testing Comments Testing Rake Tasks With RSpec One of the projects I&rsquo;m currently supporting at work &hellip;">
+	<meta name="description" content="Feb 22nd, 2014 delayedjob, rails, ruby Comments Synchronous Ruby Processing With DelayedJob As promised in my previous entry, it&rsquo;s time to &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -129,6 +129,294 @@
   
 
 
+<time datetime="2014-02-22T12:00:00-05:00" data-updated="true" itemprop="datePublished">Feb 22<span>nd</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/delayedjob/'>delayedjob</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2014/02/22/synchronous-ruby-tasks-with-delayedjob/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/02/22/synchronous-ruby-tasks-with-delayedjob/" itemprop="url">Synchronous Ruby Processing With DelayedJob</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>As promised in my previous entry, it&rsquo;s time to talk about how one can better optimize asynchronous tasks in the Ruby programming language via <strong>DelayedJob</strong>. If you haven&rsquo;t already, I strongly recommend you read my <strong><a href="http://carlosplusplus.github.io/blog/2014/02/01/testing-rake-tasks-with-rspec/">last blog post</a></strong>, as I will be using the example presented there.</p>
+
+<p>So, what the deal with <em>synchronization</em> and why should we care?</p>
+
+<h2>Asynchronous&hellip; Synchronous&hellip; Huh?</h2>
+
+<p>Let&rsquo;s first take a look at what these two words mean, in their simplest forms:</p>
+
+<blockquote><p><strong>Asynchronous</strong> &ndash; NOT occurring at the same time.</p>
+
+<p><strong>Synchronous</strong> &ndash;  occurring at the same time.</p></blockquote>
+
+<p>When we first start learning Ruby, or most programming languages, we are taught to think of events as asynchronous. In other words, a program is:</p>
+
+<ol>
+<li>Executed in the order it is written.</li>
+<li>Run from top-to-bottom in a serial, non-parallel fashion.</li>
+<li>The next line runs after the previous completes.</li>
+</ol>
+
+
+<p>There are, however, situations where you may want to think synchronously. In other words, perhaps it may be preferable for events to happen at the same time, or more commonly, <strong>in the background</strong>. This would allow your web application to keep servicing operations while intense work was being performed elsewhere. A few uses cases for this may be:</p>
+
+<ul>
+<li>Batch imports of updates to your database.</li>
+<li>HTTP downloads (steaming intensive operations).</li>
+<li>Image resizing (size intensive operations).</li>
+<li>Sending mass emails (newsletters) to your user base.</li>
+</ul>
+
+
+<p>Let&rsquo;s explore the use case for batch updates as it relates to Rails rake tasks.</p>
+
+<h2>Issue with Previous Rake Task Implementation</h2>
+
+<p>As described in my <strong><a href="http://carlosplusplus.github.io/blog/2014/02/01/testing-rake-tasks-with-rspec/">last blog post</a></strong>, I implemented a set of Rake tasks that recomputed custom counter caches for some of my Rails models. While the solution certainly solved the problem, it was implemented in an asynchronous fashion. In other words, each <strong>unit of work</strong> needed to complete before the previous one. In this case, a unit of work was equal to one model having its counter caches recomputed.</p>
+
+<p>To highlight the severity of the issue, here&rsquo;s a look at what the full rake task does:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">namespace</span> <span class="ss">:mongo_import</span> <span class="k">do</span>
+</span><span class='line'>  <span class="no">MODELS</span>    <span class="o">||=</span> <span class="sx">%w(answer comment question resource)</span>
+</span><span class='line'>  <span class="no">WORK_SIZE</span> <span class="o">||=</span> <span class="mi">1000</span><span class="o">.</span><span class="n">freeze</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">desc</span> <span class="s1">&#39;Rebuilds ALL aggregation columns and counter caches.&#39;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:aggregation</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>    <span class="no">MODELS</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">model</span><span class="o">|</span> <span class="ss">Rake</span><span class="p">:</span><span class="ss">:Task</span><span class="o">[</span><span class="s2">&quot;mongo_import:aggregation_</span><span class="si">#{</span><span class="n">model</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">].</span><span class="n">invoke</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see, there are a total of four (4) rake tasks that will be run in sequence, each with varying levels of work based on the number of models present in the database and the amount of counter caches for each model. Given that this work needs to be done while the data set is in production, these rake tasks need to finish fast &ndash; this is impossible with the current implementation. Wouldn&rsquo;t it be great if there was a way to split up this work and run these tasks in parallel, or synchronously, in order to get the task done faster?</p>
+
+<p>Let&rsquo;s see what <code>DelayedJob</code> can do for us.</p>
+
+<h2>DelayedJob to the Rescue</h2>
+
+<p>For those who have never heard of or used <code>DelayedJob</code>, I recommend you check out the following resources: <strong><a href="https://github.com/collectiveidea/delayed_job">DelayedJob Github Repository</a></strong> and <strong><a href="http://railscasts.com/episodes/171-delayed-job">RailsCast on DelayedJob</a></strong>. DelayedJob integrates pretty seamlessly with Rails applications and different database configurations, like SQLite3 and MongoDB. The documentation provides great use cases for when / why you would want to use this service.</p>
+
+<h3>Background Process and Workers</h3>
+
+<p>I won&rsquo;t go into the specific implementation detail getting setup with DelayedJob (check out the documentation), but I do want to mention a few key concepts that are important:</p>
+
+<blockquote><p><strong>Enqueue</strong>: add unit of work to DelayedJob priority queue for processing.</p>
+
+<p><strong>Perform</strong>: method required for DelayedJob to recognize class as actionable.</p>
+
+<p><strong>Workers</strong>: specific background processes setup to handle <strong>units of work</strong>.</p></blockquote>
+
+<p>At the high level, your processing work flow will probably look something like this:</p>
+
+<ol>
+<li>Spin up an amount of workers based on (a) server capability and (b) need.</li>
+<li>Enqueue DelayedJobs whenever required (e.g. mass mailings and rake tasks).</li>
+<li>Workers will perform queued up jobs as soon as they are &lsquo;free&rsquo; for processing.</li>
+</ol>
+
+
+<p>Great &ndash; let&rsquo;s dive into some code and see how I re-did my rake task.</p>
+
+<h3>Plan of Attack</h3>
+
+<p>The following was the original <strong>asynchronous</strong> code. Notice how each individual model must be updated before the next one can be processed. This is a great time to think about <strong><a href="http://en.wikipedia.org/wiki/Big_O_notation">O(n)</a></strong> &ndash; in other words, how would this algorithm (loop) perform as <code>Question.all</code> gets infinitely large? With the current implementation, not too well &ndash; it would act as a bottleneck for the application, potentially halting other requests from being served:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">desc</span> <span class="s1">&#39;Aggregation Task for: Question&#39;</span>
+</span><span class='line'><span class="n">task</span> <span class="ss">:aggregation_question</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>  <span class="no">Question</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">batch_size</span><span class="p">(</span><span class="no">WORK_SIZE</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">q</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">attrs</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">answers_count</span>          <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">answers</span><span class="o">.</span><span class="n">count</span>
+</span><span class='line'>    <span class="n">approved_answers_count</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">answers</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">approved</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span><span class="o">.</span><span class="n">count</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">attrs</span><span class="o">[</span><span class="ss">:answers_count</span><span class="o">]</span>          <span class="o">=</span> <span class="n">answers_count</span>          <span class="k">unless</span> <span class="n">answers_count</span><span class="o">.</span><span class="n">zero?</span>
+</span><span class='line'>    <span class="n">attrs</span><span class="o">[</span><span class="ss">:approved_answers_count</span><span class="o">]</span> <span class="o">=</span> <span class="n">approved_answers_count</span> <span class="k">unless</span> <span class="n">approved_answers_count</span><span class="o">.</span><span class="n">zero?</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="no">Question</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="n">q</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span> <span class="k">unless</span> <span class="n">attrs</span><span class="o">.</span><span class="n">empty?</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What I want to do is abstract the computation itself to a <code>DelayedJob</code> task. Instead of processing on <code>Question.all</code> asynchronously, let&rsquo;s use the current <code>WORK_SIZE</code> constant to <code>slice</code> models in groups and <code>enqueue</code> them via DelayedJob. It&rsquo;s also important to be mindful of making optimized database calls, as you don&rsquo;t want to be slamming your database with unnecessary processing.</p>
+
+<p>Now with our plan of attack in place, let&rsquo;s get to work.</p>
+
+<h3>Rake Task Implementation via DelayedJob</h3>
+
+<p>Even though this blog post will only cover the rake task for the <code>Question</code> model, I know that I&rsquo;ll want to mimic this same structure for all four (4) of my rake tasks. Let&rsquo;s take advantage of some <strong>inheritance</strong> by creating a <code>AggregationRootJob</code> which will take care of our storing our id slices:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/mongo_migrator/aggregation_root_job.rb</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">MongoMigrator</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">AggregationRootJob</span>
+</span><span class='line'>    <span class="kp">attr_reader</span> <span class="ss">:ids</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">ids</span><span class="p">)</span>
+</span><span class='line'>      <span class="vi">@ids</span> <span class="o">=</span> <span class="n">ids</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Remember all that logic I used to have in my core rake task for the model?
+Let&rsquo;s abstract that out to a class, called <code>AggregationQuestionJob</code>, which uses the <code>ids</code> attribute from <code>AggregationRootJob</code> to perform work on specific models in the database.</p>
+
+<p>In order for this class to be recognized by DelayedJob, it must contain a <code>perform</code> method, which will be responsible for performing the specific unit of work:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">module</span> <span class="nn">MongoMigrator</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">AggregationQuestionJob</span> <span class="o">&lt;</span> <span class="no">AggregationRootJob</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">perform</span>
+</span><span class='line'>      <span class="no">Question</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:id</span><span class="o">.</span><span class="n">in</span> <span class="o">=&gt;</span> <span class="n">ids</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">q</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">attrs</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">answers_count</span>          <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">answers</span><span class="o">.</span><span class="n">count</span>
+</span><span class='line'>        <span class="n">approved_answers_count</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">answers</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">approved</span><span class="p">:</span> <span class="kp">true</span><span class="p">)</span><span class="o">.</span><span class="n">count</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="n">attrs</span><span class="o">[</span><span class="ss">:answers_count</span><span class="o">]</span>          <span class="o">=</span> <span class="n">answers_count</span>          <span class="k">unless</span> <span class="n">answers_count</span><span class="o">.</span><span class="n">zero?</span>
+</span><span class='line'>        <span class="n">attrs</span><span class="o">[</span><span class="ss">:approved_answers_count</span><span class="o">]</span> <span class="o">=</span> <span class="n">approved_answers_count</span> <span class="k">unless</span> <span class="n">approved_answers_count</span><span class="o">.</span><span class="n">zero?</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="no">Question</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">id</span><span class="p">:</span> <span class="n">q</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span> <span class="k">unless</span> <span class="n">attrs</span><span class="o">.</span><span class="n">empty?</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now with all this setup, we can finally rewrite our aggregation rake task as follows:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">desc</span> <span class="s1">&#39;Aggregation task for: Question&#39;</span>
+</span><span class='line'>  <span class="n">task</span> <span class="ss">:aggregation_question</span> <span class="o">=&gt;</span> <span class="ss">:environment</span> <span class="k">do</span>
+</span><span class='line'>    <span class="no">Question</span><span class="o">.</span><span class="n">only</span><span class="p">(</span><span class="ss">:id</span><span class="p">)</span><span class="o">.</span><span class="n">batch_size</span><span class="p">(</span><span class="no">WORK_SIZE</span><span class="p">)</span><span class="o">.</span><span class="n">each_slice</span><span class="p">(</span><span class="no">WORK_SIZE</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">batch</span><span class="o">|</span>
+</span><span class='line'>      <span class="ss">Delayed</span><span class="p">:</span><span class="ss">:Job</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="ss">MongoMigrator</span><span class="p">:</span><span class="ss">:AggregationQuestionJob</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">batch</span><span class="o">.</span><span class="n">collect</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:id</span><span class="p">)))</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Holy nested statements Batman!</strong> Let&rsquo;s break down what this is doing:</p>
+
+<ol>
+<li>Since I know I&rsquo;m iterating over my database, I&rsquo;ve optimized my Mongoid (MongoDB) query.
+
+<ul>
+<li>For each question, load only the <code>id</code> field, as that&rsquo;s all I need.</li>
+<li>Load models into memory in batches of 1000 via <code>each_slice</code> method.</li>
+</ul>
+</li>
+<li>For each batch, generate an array of all model id&rsquo;s via <code>collect(&amp;:id)</code>.</li>
+<li>Pass the id array into a new <code>AggregationQuestionJob</code> via <code>initialize</code> method.</li>
+<li>Enqueue the job via <code>Delayed::Job.enqueue</code> for workers to process when ready.</li>
+<li>Sit back, relax, and profit.</li>
+</ol>
+
+
+<p>Now, instead of processing each individual job one by one, a queue of DelayedJobs waiting to be processed by workers is built as fast as possible. Pretty awesome!</p>
+
+<h3>The Awesome Doesn&rsquo;t End Here!</h3>
+
+<p>It&rsquo;s also worth noting that <code>DelayedJob</code> gives you a some cool tricks via the <code>enqueue</code> method:</p>
+
+<blockquote><p><strong><a href="https://github.com/collectiveidea/delayed_job#hooks">Hooks</a></strong> &ndash; methods similar to ActiveRecord callbacks (e.g. after, before, failure, success).</p>
+
+<p><strong><a href="https://github.com/collectiveidea/delayed_job#named-queues">Named Queues</a></strong> &ndash; you can have multiple queues with custom worker assignments to each.</p>
+
+<p><strong><a href="https://github.com/collectiveidea/delayed_job#gory-details">Priority</a></strong> &ndash; set the relative priority of your Jobs for your worker processing.</p></blockquote>
+
+<p>I recommend checking these out and taking advantage of this customization!</p>
+
+<h2>Closing Thoughts</h2>
+
+<p>To give you an idea of how much this improved the rake task&rsquo;s performance &ndash; with 2 workers, from start to end, the time went from 200 minutes (~3hrs) to 20 minutes, a <strong>10x improvement</strong>! And this was only on my development server &ndash; me and my team are planning to spin up more workers in production to (1) improve performance and (2) decrease overall downtime while this migration is happening.</p>
+
+<p><code>DelayedJob</code> is an incredible tool you should definitely consider trying out.</p>
+
+<p>Keep calm and carry on!</p>
+
+<p>CJL</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2014-02-01T08:00:00-05:00" data-updated="true" itemprop="datePublished">Feb 1<span>st</span>, 2014</time></div>
 		<div class="tags">
 
@@ -222,9 +510,7 @@
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
-<span class='line-number'>18</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># lib/tasks/aggregation.rake</span>
-</span><span class='line'>
 </span><span class='line'><span class="no">WORK_SIZE</span> <span class="o">||=</span> <span class="mi">1000</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">desc</span> <span class="s1">&#39;Aggregation Task for: Question&#39;</span>
@@ -379,9 +665,7 @@
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-<span class='line-number'>20</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># spec/lib/aggregation_spec.rb</span>
-</span><span class='line'>
 </span><span class='line'><span class="n">describe</span> <span class="s1">&#39;aggregation_question&#39;</span> <span class="k">do</span>
 </span><span class='line'>  <span class="n">include_context</span> <span class="s1">&#39;aggregation&#39;</span>
 </span><span class='line'>
@@ -458,9 +742,7 @@
 <span class='line-number'>35</span>
 <span class='line-number'>36</span>
 <span class='line-number'>37</span>
-<span class='line-number'>38</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># spec/lib/aggregation_spec.rb</span>
-</span><span class='line'>
 </span><span class='line'><span class="n">describe</span> <span class="s1">&#39;aggregation_question&#39;</span> <span class="k">do</span>
 </span><span class='line'>  <span class="n">include_context</span> <span class="s1">&#39;aggregation&#39;</span>
 </span><span class='line'>
@@ -3063,208 +3345,6 @@ config.ru - allows you to run rackup command to launch web app.
 <p>As you can see, the organization of this Github repository allows for one to see exactly and precisely the files that construct a Sinatra folder structure. In fact, most Sinatra repositories are laid out the same way, allowing for standardization and for easy reading.</p>
 
 <p>Looking forward to doing my own Sinatra development in the near future!</p>
-
-<p>CJL</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-16T13:16:00-04:00" data-updated="true" itemprop="datePublished">Jun 16<span>th</span>, 2013</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/codetojoy/'>codetojoy</a>, <a class='category' href='/blog/categories/flatironschool/'>flatironschool</a>, <a class='category' href='/blog/categories/lovetocode/'>lovetocode</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
-
-
-</div>
-		
-			<span class="comments"><a href="/blog/2013/06/16/code-to-joy/#disqus_thread">Comments</a></span>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/06/16/code-to-joy/" itemprop="url">Code to Joy</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>In the search to educate myself a bit more on Ruby principles, both procedural and technical, I came upon a presentation by Avdi Grimm (<strong><a href="https://speakerdeck.com/avdi" title="SpeakerDeck Website for avdi">avdi</a></strong>) on <strong><a href="http://speaderdeck.com" title="SpeakerDeck">SpeakerDeck</a></strong>.</p>
-
-<p>These slide decks goes into things I&rsquo;m passionate about when it comes to programming:</p>
-
-<pre><code>- Sharing your happiness of coding with others.
-- Constantly exploring the possibilities of programming.
-- Trying new things and getting messy.
-</code></pre>
-
-<p>In this day and age, it is my firm belief that we, as programmers, are our own best source of motivation. Through constant exploration and profound expressiveness of programming languages, it is within our power to shape the world as we know it today.</p>
-
-<h2>Joyful, Joyful We Adore Thee (Ruby)</h2>
-
-<p>In <strong><a href="http://www.twitter.com/avdi" title="Avdi Grimm's Twitter">@avdi</a></strong>&rsquo;s slide deck, <strong>Code to Joy</strong>, he discusses many things about the Ruby programming language that he loves. He begins first by staying that both his job and that ruby is awesome, stating:</p>
-
-<blockquote><p style="text-align:center;">It (Ruby) still finds ways to make me smile after all these years.</p></blockquote>
-
-<p>Avdi then goes into the Ruby language and standard library, calling out a few of his favorite idioms and tools. Reading through these was a great learning experience (given my current n00b status with Ruby itself). Here&rsquo;s are a few things I learned:</p>
-
-<ul>
-<li>Functions can have multiple <code>return</code> values:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mo">001</span> <span class="o">&gt;</span> <span class="k">def</span> <span class="nf">sum_diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-</span><span class='line'><span class="mo">002</span><span class="o">?&gt;</span>   <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="o">-</span><span class="n">y</span>
-</span><span class='line'><span class="mo">003</span><span class="o">?&gt;</span>   <span class="k">end</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
-</span><span class='line'><span class="mo">004</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">sum_diff</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="o">]</span>
-</span><span class='line'><span class="mo">005</span> <span class="o">&gt;</span> <span class="n">a</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">8</span>
-</span><span class='line'><span class="mo">006</span> <span class="o">&gt;</span> <span class="n">b</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">2</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>The ability to access the local file structure:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mo">001</span> <span class="o">&gt;</span> <span class="nb">require</span> <span class="s1">&#39;pathname&#39;</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
-</span><span class='line'><span class="mo">002</span> <span class="o">&gt;</span> <span class="no">Dir</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/Users/carloslazo/Development/FlatironSchool&#39;</span><span class="p">)</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">0</span>
-</span><span class='line'><span class="mo">003</span> <span class="o">&gt;</span> <span class="no">Pathname</span><span class="o">.</span><span class="n">pwd</span><span class="o">.</span><span class="n">ascend</span><span class="p">{</span><span class="o">|</span><span class="n">dir</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">dir</span><span class="p">}</span>
-</span><span class='line'><span class="c1"># /Users/carloslazo/Development/FlatironSchool</span>
-</span><span class='line'><span class="c1"># /Users/carloslazo/Development</span>
-</span><span class='line'><span class="c1"># /Users/carloslazo</span>
-</span><span class='line'><span class="c1"># /Users</span>
-</span><span class='line'><span class="c1"># /</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>The concept of <code>ensure</code> in <code>enumerable lists</code>:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mo">001</span> <span class="o">&gt;</span> <span class="k">def</span> <span class="nf">names</span>
-</span><span class='line'><span class="mo">002</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Carlos&#39;</span>
-</span><span class='line'><span class="mo">003</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Dan&#39;</span>
-</span><span class='line'><span class="mo">004</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Sagar&#39;</span>
-</span><span class='line'><span class="mo">005</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Thomas&#39;</span>
-</span><span class='line'><span class="mo">006</span><span class="o">?&gt;</span>   <span class="k">ensure</span>
-</span><span class='line'><span class="mo">007</span> <span class="o">&gt;</span>     <span class="nb">puts</span> <span class="s2">&quot;Avi&quot;</span>
-</span><span class='line'><span class="mo">00</span><span class="mi">8</span><span class="o">?&gt;</span>   <span class="k">end</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
-</span><span class='line'><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span class='line'><span class="mo">010</span> <span class="o">&gt;</span> <span class="n">names</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
-</span><span class='line'><span class="mo">011</span> <span class="o">&gt;</span>     <span class="nb">puts</span> <span class="nb">name</span>
-</span><span class='line'><span class="mo">012</span><span class="o">?&gt;</span>   <span class="k">break</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span>
-</span><span class='line'><span class="mo">013</span><span class="o">?&gt;</span>   <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span class='line'><span class="mo">014</span><span class="o">?&gt;</span>   <span class="k">end</span>
-</span><span class='line'><span class="c1"># Carlos</span>
-</span><span class='line'><span class="c1"># Dan</span>
-</span><span class='line'><span class="c1"># Avi</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>The ability to <code>break</code> with a value:</li>
-</ul>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mo">001</span> <span class="o">&gt;</span> <span class="k">def</span> <span class="nf">names</span>
-</span><span class='line'><span class="mo">002</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Carlos&#39;</span>
-</span><span class='line'><span class="mo">003</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Dan&#39;</span>
-</span><span class='line'><span class="mo">004</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Sagar&#39;</span>
-</span><span class='line'><span class="mo">005</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Thomas&#39;</span>
-</span><span class='line'><span class="mo">006</span><span class="o">?&gt;</span>   <span class="k">end</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
-</span><span class='line'><span class="mo">007</span> <span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">names</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
-</span><span class='line'><span class="mo">00</span><span class="mi">8</span> <span class="o">&gt;</span>     <span class="k">break</span> <span class="nb">name</span> <span class="k">if</span> <span class="nb">name</span> <span class="o">=~</span> <span class="sr">/^S/</span>
-</span><span class='line'><span class="mo">00</span><span class="mi">9</span><span class="o">?&gt;</span>   <span class="k">end</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;Sagar&quot;</span>
-</span><span class='line'><span class="mo">010</span> <span class="o">&gt;</span> <span class="n">result</span>
-</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;Sagar&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Be Confident in your Ruby</h2>
-
-<p>The remainder of the technical topics went over my head, as my level of Ruby knowledge is not there yet.  One thing I <strong>can</strong> understand is the crux of Avdi&rsquo;s advice:</p>
-
-<blockquote><p style="text-align:center;">Practice joyful coding.</p></blockquote>
-
-<p>All in all, there is no rubric to tell you what is considered &ldquo;joyful coding&rdquo; in this world. Spread knowledge to those around you, always. Inspire through example and by teaching what you know. Cherish those &ldquo;A-HA&rdquo; moments, both when you have them and when you witness them in others. The world of coding, and the world in general, will be a better place for it.</p>
 
 <p>CJL</p>
 

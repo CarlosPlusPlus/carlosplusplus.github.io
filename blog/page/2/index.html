@@ -9,7 +9,7 @@
 	<meta name="author" content="Carlos Lazo">
 
 	
-	<meta name="description" content="Jun 13th, 2013 c++, flatironschool, proglang, ruby Comments The Road to Ruby From C++ Me, myself, and C++ &ndash; my &ldquo;first&rdquo; programming &hellip;">
+	<meta name="description" content="Jun 16th, 2013 codetojoy, flatironschool, lovetocode, ruby Comments Code to Joy In the search to educate myself a bit more on Ruby principles, both &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,6 +113,208 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-16T13:16:00-04:00" data-updated="true" itemprop="datePublished">Jun 16<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/codetojoy/'>codetojoy</a>, <a class='category' href='/blog/categories/flatironschool/'>flatironschool</a>, <a class='category' href='/blog/categories/lovetocode/'>lovetocode</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+
+
+</div>
+		
+			<span class="comments"><a href="/blog/2013/06/16/code-to-joy/#disqus_thread">Comments</a></span>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/06/16/code-to-joy/" itemprop="url">Code to Joy</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>In the search to educate myself a bit more on Ruby principles, both procedural and technical, I came upon a presentation by Avdi Grimm (<strong><a href="https://speakerdeck.com/avdi" title="SpeakerDeck Website for avdi">avdi</a></strong>) on <strong><a href="http://speaderdeck.com" title="SpeakerDeck">SpeakerDeck</a></strong>.</p>
+
+<p>These slide decks goes into things I&rsquo;m passionate about when it comes to programming:</p>
+
+<pre><code>- Sharing your happiness of coding with others.
+- Constantly exploring the possibilities of programming.
+- Trying new things and getting messy.
+</code></pre>
+
+<p>In this day and age, it is my firm belief that we, as programmers, are our own best source of motivation. Through constant exploration and profound expressiveness of programming languages, it is within our power to shape the world as we know it today.</p>
+
+<h2>Joyful, Joyful We Adore Thee (Ruby)</h2>
+
+<p>In <strong><a href="http://www.twitter.com/avdi" title="Avdi Grimm's Twitter">@avdi</a></strong>&rsquo;s slide deck, <strong>Code to Joy</strong>, he discusses many things about the Ruby programming language that he loves. He begins first by staying that both his job and that ruby is awesome, stating:</p>
+
+<blockquote><p style="text-align:center;">It (Ruby) still finds ways to make me smile after all these years.</p></blockquote>
+
+<p>Avdi then goes into the Ruby language and standard library, calling out a few of his favorite idioms and tools. Reading through these was a great learning experience (given my current n00b status with Ruby itself). Here&rsquo;s are a few things I learned:</p>
+
+<ul>
+<li>Functions can have multiple <code>return</code> values:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mo">001</span> <span class="o">&gt;</span> <span class="k">def</span> <span class="nf">sum_diff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span><span class='line'><span class="mo">002</span><span class="o">?&gt;</span>   <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="o">-</span><span class="n">y</span>
+</span><span class='line'><span class="mo">003</span><span class="o">?&gt;</span>   <span class="k">end</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'><span class="mo">004</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">sum_diff</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="o">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="o">]</span>
+</span><span class='line'><span class="mo">005</span> <span class="o">&gt;</span> <span class="n">a</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">8</span>
+</span><span class='line'><span class="mo">006</span> <span class="o">&gt;</span> <span class="n">b</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">2</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The ability to access the local file structure:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mo">001</span> <span class="o">&gt;</span> <span class="nb">require</span> <span class="s1">&#39;pathname&#39;</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">true</span>
+</span><span class='line'><span class="mo">002</span> <span class="o">&gt;</span> <span class="no">Dir</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/Users/carloslazo/Development/FlatironSchool&#39;</span><span class="p">)</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'><span class="mo">003</span> <span class="o">&gt;</span> <span class="no">Pathname</span><span class="o">.</span><span class="n">pwd</span><span class="o">.</span><span class="n">ascend</span><span class="p">{</span><span class="o">|</span><span class="n">dir</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">dir</span><span class="p">}</span>
+</span><span class='line'><span class="c1"># /Users/carloslazo/Development/FlatironSchool</span>
+</span><span class='line'><span class="c1"># /Users/carloslazo/Development</span>
+</span><span class='line'><span class="c1"># /Users/carloslazo</span>
+</span><span class='line'><span class="c1"># /Users</span>
+</span><span class='line'><span class="c1"># /</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The concept of <code>ensure</code> in <code>enumerable lists</code>:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mo">001</span> <span class="o">&gt;</span> <span class="k">def</span> <span class="nf">names</span>
+</span><span class='line'><span class="mo">002</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Carlos&#39;</span>
+</span><span class='line'><span class="mo">003</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Dan&#39;</span>
+</span><span class='line'><span class="mo">004</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Sagar&#39;</span>
+</span><span class='line'><span class="mo">005</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Thomas&#39;</span>
+</span><span class='line'><span class="mo">006</span><span class="o">?&gt;</span>   <span class="k">ensure</span>
+</span><span class='line'><span class="mo">007</span> <span class="o">&gt;</span>     <span class="nb">puts</span> <span class="s2">&quot;Avi&quot;</span>
+</span><span class='line'><span class="mo">00</span><span class="mi">8</span><span class="o">?&gt;</span>   <span class="k">end</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'><span class="mo">00</span><span class="mi">9</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'><span class="mo">010</span> <span class="o">&gt;</span> <span class="n">names</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'><span class="mo">011</span> <span class="o">&gt;</span>     <span class="nb">puts</span> <span class="nb">name</span>
+</span><span class='line'><span class="mo">012</span><span class="o">?&gt;</span>   <span class="k">break</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+</span><span class='line'><span class="mo">013</span><span class="o">?&gt;</span>   <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class='line'><span class="mo">014</span><span class="o">?&gt;</span>   <span class="k">end</span>
+</span><span class='line'><span class="c1"># Carlos</span>
+</span><span class='line'><span class="c1"># Dan</span>
+</span><span class='line'><span class="c1"># Avi</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>The ability to <code>break</code> with a value:</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="mo">001</span> <span class="o">&gt;</span> <span class="k">def</span> <span class="nf">names</span>
+</span><span class='line'><span class="mo">002</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Carlos&#39;</span>
+</span><span class='line'><span class="mo">003</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Dan&#39;</span>
+</span><span class='line'><span class="mo">004</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Sagar&#39;</span>
+</span><span class='line'><span class="mo">005</span><span class="o">?&gt;</span>   <span class="k">yield</span> <span class="s1">&#39;Thomas&#39;</span>
+</span><span class='line'><span class="mo">006</span><span class="o">?&gt;</span>   <span class="k">end</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="kp">nil</span>
+</span><span class='line'><span class="mo">007</span> <span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">names</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span>
+</span><span class='line'><span class="mo">00</span><span class="mi">8</span> <span class="o">&gt;</span>     <span class="k">break</span> <span class="nb">name</span> <span class="k">if</span> <span class="nb">name</span> <span class="o">=~</span> <span class="sr">/^S/</span>
+</span><span class='line'><span class="mo">00</span><span class="mi">9</span><span class="o">?&gt;</span>   <span class="k">end</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;Sagar&quot;</span>
+</span><span class='line'><span class="mo">010</span> <span class="o">&gt;</span> <span class="n">result</span>
+</span><span class='line'> <span class="o">=&gt;</span> <span class="s2">&quot;Sagar&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Be Confident in your Ruby</h2>
+
+<p>The remainder of the technical topics went over my head, as my level of Ruby knowledge is not there yet.  One thing I <strong>can</strong> understand is the crux of Avdi&rsquo;s advice:</p>
+
+<blockquote><p style="text-align:center;">Practice joyful coding.</p></blockquote>
+
+<p>All in all, there is no rubric to tell you what is considered &ldquo;joyful coding&rdquo; in this world. Spread knowledge to those around you, always. Inspire through example and by teaching what you know. Cherish those &ldquo;A-HA&rdquo; moments, both when you have them and when you witness them in others. The world of coding, and the world in general, will be a better place for it.</p>
+
+<p>CJL</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
