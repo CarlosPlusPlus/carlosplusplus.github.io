@@ -79,7 +79,33 @@ At the high level, your processing work flow will probably look something like t
 
 Great - let's dive into some code and see how I re-did my rake task.
 
-### Code Rewrite for Rake Task via DelayedJob
+### Plan of Attack
+
+The following was the original **asynchronous** code. Notice how each individual model must be updated before the next one can be processed. This is a great time to think about [O(n)](www.example.com) - in other words, how would this algorithm (loop) perform as `Question.all` gets infinitely large? With the current implementation, not too well - it would act as a bottleneck for the application, potentially halting other requets from being served:
+
+```ruby
+# lib/tasks/aggregation.rake
+desc 'Aggregation Task for: Question'
+task :aggregation_question => :environment do
+  Question.all.batch_size(WORK_SIZE).each do |q|
+    attrs = {}
+
+    answers_count          = q.answers.count
+    approved_answers_count = q.answers.where(approved: true).count
+
+    attrs[:answers_count]          = answers_count          unless answers_count.zero?
+    attrs[:approved_answers_count] = approved_answers_count unless approved_answers_count.zero?
+
+    Question.where(id: q.id).update(attrs) unless attrs.empty?
+  end
+end
+```
+
+What I want to do is abstract the computation itself to a `DelayedJob` task. Instead of processing on `Question.all` asynchronously, let us use the current `WORK_SIZE` constant to `slice` models in groups and `enqueue` them via DelayedJob. It's also important to be mindful of making optimized database calls, as you don't want to be slamming your database with unnecessary processing.
+
+Great - now with our plan of attack in place, let's get to work.
+
+### Rake Task Implementation via DelayedJob
 
 
 
