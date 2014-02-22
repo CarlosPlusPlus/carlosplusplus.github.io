@@ -40,7 +40,6 @@ As described in my **[last blog post](http://carlosplusplus.github.io/blog/2014/
 To further highlight the issue, here's a look at what the full rake task does:
 
 ```ruby
-# lib/tasks/aggregation.rake
 namespace :mongo_import do
   MODELS    ||= %w(answer comment question resource)
   WORK_SIZE ||= 1000.freeze
@@ -84,7 +83,6 @@ Great - let's dive into some code and see how I re-did my rake task.
 The following was the original **asynchronous** code. Notice how each individual model must be updated before the next one can be processed. This is a great time to think about [O(n)](www.example.com) - in other words, how would this algorithm (loop) perform as `Question.all` gets infinitely large? With the current implementation, not too well - it would act as a bottleneck for the application, potentially halting other requets from being served:
 
 ```ruby
-# lib/tasks/aggregation.rake
 desc 'Aggregation Task for: Question'
 task :aggregation_question => :environment do
   Question.all.batch_size(WORK_SIZE).each do |q|
@@ -103,14 +101,89 @@ end
 
 What I want to do is abstract the computation itself to a `DelayedJob` task. Instead of processing on `Question.all` asynchronously, let us use the current `WORK_SIZE` constant to `slice` models in groups and `enqueue` them via DelayedJob. It's also important to be mindful of making optimized database calls, as you don't want to be slamming your database with unnecessary processing.
 
-Great - now with our plan of attack in place, let's get to work.
+Now with our plan of attack in place, let's get to work.
 
 ### Rake Task Implementation via DelayedJob
 
+Even though this blog post will only cover the rake task for the `Question` model, I know that I'll want to mimic this same structure for all four (4) of my rake tasks. Let's take advantage of some **inheritance** by creating a `AggregationRootJob` which will take care of our storing our id slices:
 
+```ruby
+# lib/mongo_migrator/aggregation_root_job.rb
+module MongoMigrator
+  class AggregationRootJob
+    attr_reader :ids
 
-## Improvements and Closing Thoughts
+    def initialize(ids)
+      @ids = ids
+    end
+  end
+end
+```
 
-> Finalized Rake Tasks
-> Speed Increase
-> Other Great Use Cases for DelayedJob
+Remember all that logic I used to have in my core rake task for the model?
+Let's abstract that out to a class, called `AggregationQuestionJob`, which uses the `ids` attribute from `AggregationRootJob` to perform work on specific models in the database.
+
+In order for this class to be recognized by DelayedJob, it must contain a `perform` method, which will be responsible for performing the specific unit of work:
+
+```ruby
+module MongoMigrator
+  class AggregationQuestionJob < AggregationRootJob
+    def perform
+      Question.where(:id.in => ids).each do |q|
+        attrs = {}
+
+        answers_count          = q.answers.count
+        approved_answers_count = q.answers.where(approved: true).count
+
+        attrs[:answers_count]          = answers_count          unless answers_count.zero?
+        attrs[:approved_answers_count] = approved_answers_count unless approved_answers_count.zero?
+
+        Question.where(id: q.id).update(attrs) unless attrs.empty?
+      end
+    end
+  end
+end
+```
+
+Now with all this setup, we can finally rewrite our aggregation rake task as follows:
+
+```ruby
+desc 'Aggregation task for: Question'
+  task :aggregation_question => :environment do
+    Question.only(:id).batch_size(WORK_SIZE).each_slice(WORK_SIZE) do |batch|
+      Delayed::Job.enqueue(MongoMigrator::AggregationQuestionJob.new(batch.collect(&:id)))
+    end
+  end
+```
+
+**Holy nested statements Batman!** Let's break down what this is doing:
+
+1. Since I know I'm iterating over my database, I've optimized my Mongoid query.
+    - For each question, load only the `id` field, as that's all I need.
+    - Load models into memory in batches of 1000 via `each_slice` method.
+2. For each batch, generate an array of all model id's via `collect(&:id)`.
+3. Pass the id array into a new `AggregationQuestionJob` via `initialize` method.
+4. Enqueue the job via `Delayed::Job.enqueue` for workers to process when ready.
+5. Sit back, relax, and profit.
+
+Now, instead of processing each individual job one by one, a queue of DelayedJobs waiting to be processed by workers is built as fast as possible. Pretty awesome!
+
+### The Awesome Doesn't End Here!
+
+It's also worth noting that `DelayedJob` gives you a some cool tricks via the `enqueue` method:
+
+> **[Hooks](https://github.com/collectiveidea/delayed_job#hooks)** - methods similar to ActiveRecord callbacks (e.g. after, before, failure, success).  
+
+> **[Named Queues](https://github.com/collectiveidea/delayed_job#named-queues)** - you can have multiple queues with custom worker assignments to each.  
+
+> **[Priority](https://github.com/collectiveidea/delayed_job#gory-details)** - set the relative priority of your Jobs for your worker processing.  
+
+## Closing Thoughts
+
+To give you an idea of how much this improved the rask task's performance - with 2 workers, from start to end, the time went from 200 minutes (~3hrs) to 20 minutes, a **10x improvement**! And this was only on my development server - me and my team are planning to spin up more workers in production to (1) improve performance and (2) decrease overall downtime while this migration is happening.
+
+`DelayedJob` is an incredible tool you should definitely consider using based on your needs.
+
+Keep calm and carry on!  
+
+CJL
