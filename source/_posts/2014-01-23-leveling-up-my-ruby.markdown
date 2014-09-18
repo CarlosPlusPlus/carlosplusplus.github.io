@@ -34,7 +34,7 @@ end
 And here's how I wrote it a few days ago:
 
 ```ruby
-class StreetEasyScraper
+class Scraper
   attr_reader :type, # ...
 
   def initialize(browser)
