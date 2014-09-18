@@ -12,7 +12,7 @@ In an effort to share more with the world and write, I'm going to give this micr
 
 It's been about 6 months since I've started learning Ruby, and until recently, I didn't realize how much I had learned in such little time. Both at work and through self-study, I continue to build, define, and hone my programming knowledge. I've been investing a lot of time at work with Ruby / Rails / RSpec, and decided to mix it up with some Front-End skill development off hours. Whatever path you choose on your conquest to become a better developer, be receptive to learning and stay focused.
 
-It's a fun exercise to see how your programming skill evolves as a function of time. Recently, I was helping a friend write a scraper for the StreetEasy website. This is only a small sample of the overall code.
+It's a fun exercise to see how your programming skill evolves as a function of time. Recently, I was helping a friend write a web scraper. This is only a small sample of the overall code.
 
 This is how I would've written this portion a few months ago:
 
