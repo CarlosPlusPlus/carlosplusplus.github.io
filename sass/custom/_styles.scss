@@ -4,47 +4,47 @@
 // Reference _greyshade.scss for initial styling preferences.
 
 .container {
-	.mid-col {
-		.mid-col-container {
-			#content {
-				article {
-					padding: 40px 0px;
+  .mid-col {
+    .mid-col-container {
+      #content {
+        article {
+          padding: 40px 0px;
 
-					h1.title {
-							line-height: normal;
-					}
+          h1.title {
+            font-size: 2.5em;
+            line-height: normal;
+          }
 
-					.entry-content {
+          .entry-content {
+            p {
+              margin-top: 0px;
+              padding-top: 20px;
+            }
 
-						p {
-							margin-top: 0px;
-							padding-top: 20px;
-						}
+            blockquote p {
+              padding-top: 0px;
+            }
 
-						blockquote p {
-							padding-top: 0px;
-						}
+            h2 {
+              font-size: 1.75em;
+              border-bottom-width: 2px;
+              padding-bottom: 10px;
+              bottom: 15px;
+              font-variant: small-caps;
+            }
 
-						h2 {
-							font-size: 1.75em;
-							border-bottom-width: 2px;
-							padding-bottom: 10px;
-							bottom: 15px;
-							font-variant: small-caps;
-						}
+            h3 {
+              font-size: 1.2em;
+              font-style: italic;
+              margin-top: 15px;
+            }
 
-						h3 {
-							font-size: 1.2em;
-							font-style: italic;
-							margin-top: 15px;
-						}
-
-						h4 {
-							padding-top: 20px;	
-						}
-					}
-				}
-			}
-		}
-	}
+            h4 {
+              padding-top: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
