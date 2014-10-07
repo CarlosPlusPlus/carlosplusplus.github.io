@@ -4,7 +4,7 @@
   <title><![CDATA[My Adventure Through Code]]></title>
   <link href="http://carlosplusplus.github.io/atom.xml" rel="self"/>
   <link href="http://carlosplusplus.github.io/"/>
-  <updated>2014-09-17T21:58:23-04:00</updated>
+  <updated>2014-10-06T23:00:43-04:00</updated>
   <id>http://carlosplusplus.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MicroPost: Ruby's Integer #to_s Method]]></title>
+    <link href="http://carlosplusplus.github.io/blog/2014/10/06/micropost-ruby-number-to-s-method/"/>
+    <updated>2014-10-06T22:25:00-04:00</updated>
+    <id>http://carlosplusplus.github.io/blog/2014/10/06/micropost-ruby-number-to-s-method</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m GOING to make time for this blog. I&rsquo;ve found tech blogging so therapeutic in the past, and it really doesn&rsquo;t need to be a huge chore. Deciding to finally saddle up and do this MicroPost idea I&rsquo;ve had for quite some time. No huge, elaborate posts &ndash; instead, small little morsels of awesome.</p>
+
+<p>Alright, so here goes! First one is about Ruby&rsquo;s <strong>Integer#to_s</strong> (to string) method.</p>
+
+<h3>Ruby&rsquo;s Integer#to_s Method</h3>
+
+<p>As I continue to level up my Ruby, I continue to be amazed by the beauty of the language.</p>
+
+<p>I remember wayyyy back in High School and even in my Digital Logic Design college courses how I would constantly use binary (base 2), octal (base 8), and hexadecimal (base 16) number systems more than decimal (base 10). As I work through <strong><a href="http://www.projecteuler.net">Project Euler</a></strong> problems for coding practice, I saw Problem 36:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;&lt;-</span><span class="no">PROBLEM</span>
+</span><span class='line'>
+</span><span class='line'><span class="sh">The decimal number, 585 = 10010010012 (binary), is palindromic in both bases.</span>
+</span><span class='line'><span class="sh">Find the sum of all numbers, less than one million, which are palindromic in base 10 and base 2.</span>
+</span><span class='line'><span class="sh">(Please note that the palindromic number, in either base, may not include leading zeros.)</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">PROBLEM</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Awesome, makes sense &ndash; here&rsquo;s my solution first, with some cool points to follow:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">String</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">palindrome?</span>
+</span><span class='line'>    <span class="nb">self</span> <span class="o">==</span> <span class="nb">self</span><span class="o">.</span><span class="n">reverse</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">is_double_palindrome?</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">n</span><span class="o">.</span><span class="n">to_s</span><span class="o">.</span><span class="n">palindrome?</span> <span class="o">&amp;&amp;</span> <span class="n">n</span><span class="o">.</span><span class="n">to_s</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">palindrome?</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">solution</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">999999</span><span class="p">)</span><span class="o">.</span><span class="n">select</span> <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="n">is_double_palindrome?</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">}</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="ss">:+</span><span class="p">)</span>
+</span><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Sum of all numbers &lt; 1E6 which are palindromic in B10 &amp; B2 = </span><span class="si">#{</span><span class="n">solution</span><span class="si">}</span><span class="s2">&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>I <strong>love</strong> how Ruby lets you <strong><a href="http://en.wikipedia.org/wiki/Monkey_patch">monkey-patch</a></strong> base classes like <code>String</code>.</li>
+<li>Ruby&rsquo;s <code>Integer#to_s</code> <strong><a href="http://www.ruby-doc.org/core-2.1.3/Fixnum.html#method-i-to_s">method</a></strong> can take an argument, which does a numeric base conversion!</li>
+<li>Methods like <code>Enumerable#select</code> [<strong><a href="http://ruby-doc.org/core-2.1.3/Enumerable.html#method-i-select">link</a></strong>] and <code>Enumerable#inject</code> [<strong><a href="http://ruby-doc.org/core-2.1.3/Enumerable.html#method-i-inject">link</a></strong>] are <strong>so damn cool</strong>.</li>
+</ol>
+
+
+<p>No need for elaborate classes or modules &ndash; short, sweet, and to the point!</p>
+
+<br>
+
+
+<hr />
+
+<p>That&rsquo;s it for this post &ndash; until next time, keep being awesome.</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Synchronous Ruby Processing with DelayedJob]]></title>
