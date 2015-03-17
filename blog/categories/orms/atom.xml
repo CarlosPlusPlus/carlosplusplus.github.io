@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: orms | My Adventure Through Code]]></title>
+  <link href="http://carlosplusplus.github.io/blog/categories/orms/atom.xml" rel="self"/>
+  <link href="http://carlosplusplus.github.io/"/>
+  <updated>2015-03-17T11:41:53-04:00</updated>
+  <id>http://carlosplusplus.github.io/</id>
+  <author>
+    <name><![CDATA[Carlos Lazo]]></name>
+    <email><![CDATA[carlos.jose.lazo@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby ORMs and Thundercats]]></title>
+    <link href="http://carlosplusplus.github.io/blog/2015/03/17/ruby-orms-and-thundercats/"/>
+    <updated>2015-03-17T09:22:00-04:00</updated>
+    <id>http://carlosplusplus.github.io/blog/2015/03/17/ruby-orms-and-thundercats</id>
+    <content type="html"><![CDATA[<p>Sincerest apologies for spending so much time away! Needed a break, and now with the mental batteries recharged, it&rsquo;s time to get back to it. Excuses are easy, so need to be better and more consistent with my technical writing and this blog.</p>
+
+<p>Decided to try something completely new and made a ScreenCast almost two months ago regarding Ruby ORMs (<a href="http://en.wikipedia.org/wiki/Object-relational_mapping">Object Relational Mappings</a>) and <a href="http://en.wikipedia.org/wiki/ThunderCats_(1985_TV_series)">Thundercats</a>. Had a lot of fun doing this.</p>
+
+<p style="text-align:center;"><iframe width="480" height="385" src="http://www.youtube.com/embed/PjKtaQC4GLE?hd=1" frameborder="0" allowfullscreen></iframe></p>
+
+<p>Let me know what you think in the comments below.
+Looking forward to doing this again!</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
+  
+</feed>
