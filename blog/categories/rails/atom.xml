@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | My Adventure Through Code]]></title>
   <link href="http://carlosplusplus.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://carlosplusplus.github.io/"/>
-  <updated>2015-03-17T11:41:53-04:00</updated>
+  <updated>2015-03-22T17:28:15-04:00</updated>
   <id>http://carlosplusplus.github.io/</id>
   <author>
     <name><![CDATA[Carlos Lazo]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mini New Relic in Ruby]]></title>
+    <link href="http://carlosplusplus.github.io/blog/2015/03/22/mini-new-relic-in-ruby/"/>
+    <updated>2015-03-22T17:20:00-04:00</updated>
+    <id>http://carlosplusplus.github.io/blog/2015/03/22/mini-new-relic-in-ruby</id>
+    <content type="html"><![CDATA[<p>Another Ruby screencast coming your way!</p>
+
+<p>One of the downsides to working at large companies (1000+ employees) is that is generally takes longer to get things done. My work colleague and I were interested in using <a href="http://en.wikipedia.org/wiki/New_Relic">New Relic</a> to monitor the performance of our Rails applications in production, but the request was taking far too long and we were tired of waiting.</p>
+
+<p>We took matters into our own hands and wrote a quick Ruby script, our mini version of New Relic, to give us insight into how our APIs were being used. It&rsquo;s easy to forget that while Rails can do a lot for us, the Ruby programming language itself is powerful and can be used to drum up quick prototypes and scripts for a variety of uses.</p>
+
+<p>This is the quick and dirty script we came up with at work:</p>
+
+<p style="text-align:center;"><iframe width="480" height="385" src="http://www.youtube.com/embed/uiXdKmVthkY?hd=1" frameborder="0" allowfullscreen></iframe></p>
+
+<p>Here is a link to a GitHub gist that contains the code:
+<a href="https://gist.github.com/CarlosPlusPlus/e10ec08f52cda173eb24">log_counter.rb</a></p>
+
+<p>Hope you found this useful &ndash; until next time!</p>
+
+<p>CJL</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Synchronous Ruby Processing with DelayedJob]]></title>
